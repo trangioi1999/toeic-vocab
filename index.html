@@ -130,17 +130,19 @@ h3{font:600 12px var(--body);text-transform:uppercase;letter-spacing:.08em;color
 .flip{position:relative;height:340px;height:clamp(260px,46dvh,420px);transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.7,.2,1);cursor:pointer;-webkit-user-select:none;user-select:none;touch-action:pan-y;-webkit-touch-callout:none}
 .drag{transition:transform .25s ease}
 .flip.on{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:48px 28px 40px;text-align:center;overflow:auto}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;padding:50px 20px 34px;text-align:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.fc{margin:auto 0;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+.face .word.long,.face .mean.long,.qprompt .long{font-size:clamp(16px,2.6vw,20px);line-height:1.5;font-weight:500;text-align:left}
 .face.back{transform:rotateY(180deg);background:linear-gradient(180deg,var(--surface),var(--surface-2))}
 .face .lang{position:absolute;top:16px;right:18px;font:600 11px var(--mono);letter-spacing:.08em;color:var(--faint)}
 .face .st{position:absolute;top:14px;left:16px}
-.word{font:600 clamp(26px,5vw,40px)/1.2 var(--display);letter-spacing:-.02em;overflow-wrap:anywhere;white-space:pre-line;max-width:100%}
-.mean{font:500 clamp(20px,3.8vw,28px)/1.35 var(--display);overflow-wrap:anywhere;white-space:pre-line;max-width:100%}
+.word{font:600 clamp(26px,5vw,40px)/1.2 var(--display);letter-spacing:-.02em;overflow-wrap:break-word;hyphens:manual;white-space:pre-line;max-width:100%}
+.mean{font:500 clamp(20px,3.8vw,28px)/1.35 var(--display);overflow-wrap:break-word;white-space:pre-line;max-width:100%}
 .ipa{font:400 19px var(--ipa);color:var(--muted)}
 .ipa.sm{font-size:15px}
 .small-term{font-weight:600;color:var(--muted);font-size:14px}
-.say{display:flex;gap:8px;margin-top:6px}
-.sbtn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;color:var(--muted)}
+.say{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;justify-content:center}
+.sbtn{white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;color:var(--muted)}
 .sbtn:hover{color:var(--primary);border-color:var(--primary)}
 .hint{position:absolute;bottom:14px;font-size:12px;color:var(--faint)}
 .status{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:99px;font-size:12px;font-weight:600;background:var(--surface-2);color:var(--muted)}
@@ -154,7 +156,7 @@ h3{font:600 12px var(--body);text-transform:uppercase;letter-spacing:.08em;color
 kbd{font:500 11px var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 5px;background:var(--surface)}
 @media (max-width:640px){
   .search{order:3;flex-basis:100%}.top .wrap{row-gap:8px}
-  .tab{padding:9px 6px;font-size:13px}.tabs{overflow-x:visible}
+  .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible}.tab{min-width:0;padding:7px 2px;font-size:12.5px;line-height:1.2}
   .bar{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding-inline:16px;scrollbar-width:none}
   .bar::-webkit-scrollbar{display:none}.chips{flex-wrap:nowrap}.spacer{display:none}
   .chip,.opt{flex:none}
@@ -162,26 +164,17 @@ kbd{font:500 11px var(--mono);border:1px solid var(--line);border-bottom-width:2
   .prog{margin-bottom:6px}
   main{padding-bottom:24px}
   h1{font-size:22px}
+  #topstat{display:none}
+  .face{padding:46px 14px 30px}
 }
 @media (hover:none){.keys{display:none}.tile:hover,.row:hover{border-color:var(--line)}.btn:hover{border-color:var(--line)}.btn.primary:hover{filter:none}.sbtn:hover,.ib:hover{color:var(--muted);background:none;border-color:var(--line)}}
 @media (pointer:coarse){.chip,.opt{height:40px;padding:0 14px}.sbtn{height:42px;padding:0 14px}.ib{width:42px;height:42px}.sdot{width:42px;height:42px;margin-top:-8px}.ans{min-height:52px}.tab{min-height:40px}}
+.crumbs button{padding:8px 2px;margin:-8px 0}
+.brand{min-height:40px}
+
 .swipehint{display:none}@media (hover:none){.swipehint{display:block;text-align:center;font-size:12px;color:var(--faint);margin-top:6px}}
 
-function voicePanel(p){
-  loadV();
-  const sel=lang=>{const l=vlist(lang),cur=pickVoice(lang);
-    if(!l.length)return `<p class="vnote">${lang==='vi'?'Máy chưa có giọng tiếng Việt. iPhone/iPad/Mac: Cài đặt → Trợ năng → Nội dung được đọc → Giọng nói → Tiếng Việt. Windows: Cài đặt → Thời gian & ngôn ngữ → Giọng nói → thêm giọng Tiếng Việt.':'Máy chưa có giọng tiếng Anh.'}</p>`;
-    return `<select id="vs-${lang}" aria-label="Giọng ${lang==='en'?'tiếng Anh':'tiếng Việt'}">${[...l].sort((a,b)=>vscore(b)-vscore(a)).map(v=>`<option value="${esc(v.name)}" ${cur&&v.name===cur.name?'selected':''}>${esc(v.name)} (${esc(v.lang)})</option>`).join('')}</select>`};
-  const rate=(lang,val)=>`<label class="vrate">Tốc độ <input type="range" id="vr-${lang}" min="0.6" max="1.3" step="0.1" value="${val}"><span>${(+val).toFixed(1)}×</span></label>`;
-  p.innerHTML=`<div class="vrow"><b>Tiếng Anh</b>${sel('en')}${rate('en',PREF.rateEn||.9)}<button class="sbtn" type="button" data-t="en">${IC.spk}Nghe thử</button></div>
-  <div class="vrow"><b>Tiếng Việt</b>${sel('vi')}${rate('vi',PREF.rateVi||1)}<button class="sbtn" type="button" data-t="vi">${IC.spk}Nghe thử</button></div>
-  <p class="vnote">Giọng có chữ <i>Enhanced</i>, <i>Premium</i>, <i>Natural</i> hoặc <i>Google</i> thường nghe tự nhiên nhất.</p>`;
-  ['en','vi'].forEach(l=>{const s=$('#vs-'+l);if(s)s.onchange=()=>{PREF['voice_'+l]=s.value;savePref();say(l==='en'?'This is a sample sentence.':'Đây là giọng đọc tiếng Việt.',l)};
-    const r=$('#vr-'+l);r.oninput=()=>{PREF[l==='en'?'rateEn':'rateVi']=+r.value;r.nextElementSibling.textContent=(+r.value).toFixed(1)+'×';savePref()}});
-  p.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>say(b.dataset.t==='en'?'Please submit the report by Friday.':'Vui lòng nộp báo cáo trước thứ Sáu.',b.dataset.t));
-}
 
-/* quiz */
 .qcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
 .qtop{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font:600 12px var(--mono);color:var(--muted)}
 .qtop .g{color:var(--known)} .qtop .r{color:var(--bad)}
@@ -207,15 +200,15 @@ function voicePanel(p){
 .list{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .item{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr) auto;gap:14px;align-items:start;padding:12px 14px;border-bottom:1px solid var(--line)}
 .item:last-child{border-bottom:0}
-.item .t{font-weight:600;white-space:pre-line;overflow-wrap:anywhere}
-.item .m{white-space:pre-line;overflow-wrap:anywhere}
+.item .t{font-weight:600;white-space:pre-line;overflow-wrap:break-word}
+.item .m{white-space:pre-line;overflow-wrap:break-word}
 .item .from{display:block;font-size:12px;color:var(--faint);margin-top:2px}
 .item .acts{display:flex;gap:2px}
 .ib{width:32px;height:32px;display:grid;place-items:center;border-radius:8px;border:0;background:none;cursor:pointer;color:var(--muted)}
 .ib:hover{background:var(--surface-2);color:var(--primary)}
 .sdot{width:26px;height:26px;border-radius:50%;border:0;background:none;display:grid;place-items:center;cursor:pointer;margin-top:-2px}
 .sdot .dot{width:12px;height:12px}
-@media (max-width:640px){.item{grid-template-columns:auto minmax(0,1fr) auto}.item .m{grid-column:2/3}}
+@media (max-width:640px){.item{grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;padding:10px 8px 10px 4px}.item .m{grid-column:2/3;grid-row:2;color:var(--muted)}.item .acts{grid-column:3;grid-row:1/3;flex-direction:column;align-self:center}.item .sdot{grid-row:1/3;align-self:start}}
 .vpanel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:-4px 0 16px;display:grid;gap:12px}
 .vrow{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
 .vrow b{width:84px;font-size:14px}
@@ -223,11 +216,13 @@ function voicePanel(p){
 .vrate{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
 .vrate input{width:110px;accent-color:var(--primary)}
 .vrate span{font:500 12px var(--mono);width:34px}
-.vnote{margin:0;font-size:13px;color:var(--muted)}
+.vnote{margin:0;font-size:13px;color:var(--muted);flex:1;min-width:200px}
+.vnote.warn{color:var(--learn);background:var(--learn-soft);padding:8px 10px;border-radius:8px}
 .empty{padding:48px 16px;text-align:center;color:var(--muted)}
 
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:20;max-width:calc(100% - 32px);box-shadow:var(--shadow)}
+.toast{line-height:1.45;position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:20;max-width:calc(100% - 32px);box-shadow:var(--shadow)}
 @media (prefers-reduced-motion:reduce){.flip{transition:none}}
+@media (max-width:1400px){.bar .chip,.bar .opt{height:40px;padding:0 14px}.face .sbtn,.qcard .sbtn,.vrow .sbtn{height:42px;padding:0 14px}.list .ib{width:42px;height:42px}.list .sdot{width:42px;height:42px;margin-top:-8px}.answers .ans{min-height:52px}.tabs .tab{min-height:40px}.crumbs button{padding:12px 4px;margin:-12px 0}.vrate input{height:40px}}
 </style>
 
 <header class="top"><div class="wrap">
@@ -298,6 +293,12 @@ const groupItems=g=>g.sets.flatMap(s=>s.items);
 const isEn=s=>!!s&&/^[\x00-\x7F’‘–—…]*$/.test(s.replace(/\s/g,''));
 let voices=[];const loadV=()=>{try{voices=speechSynthesis.getVoices()}catch(e){}};loadV();try{speechSynthesis.onvoiceschanged=loadV}catch(e){}
 let warnedVi=false;
+const plat=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)?'ios':/Mac/.test(navigator.platform)?'mac':/Android/.test(navigator.userAgent)?'android':/Win/.test(navigator.platform)?'win':'other';
+const VI_HELP={ios:'Máy chưa có giọng tiếng Việt. Vào Cài đặt → Trợ năng → Nội dung được đọc → Giọng nói → Tiếng Việt → tải giọng Linh, rồi mở lại trang.',
+  mac:'Máy chưa có giọng tiếng Việt. Vào Cài đặt hệ thống → Trợ năng → Nội dung được đọc → Giọng hệ thống → Quản lý giọng… → Tiếng Việt → tải Linh, rồi tắt hẳn Chrome và mở lại.',
+  android:'Máy chưa có giọng tiếng Việt. Vào Cài đặt → Hỗ trợ tiếp cận → Chuyển văn bản thành giọng nói → Công cụ Google → tải dữ liệu Tiếng Việt.',
+  win:'Máy chưa có giọng tiếng Việt. Vào Settings → Time & language → Speech → Add voices → Vietnamese, rồi mở lại trình duyệt.',
+  other:'Máy chưa có giọng đọc tiếng Việt. Hãy cài giọng Vietnamese trong cài đặt hệ thống.'}[plat];
 const vlist=lang=>voices.filter(v=>v.lang&&v.lang.toLowerCase().replace('_','-').startsWith(lang));
 const vscore=v=>(/premium|natural|enhanced|neural|online/i.test(v.name)?3:0)+(/google/i.test(v.name)?2:0)+(/linh|samantha|ava|zoe|allison|aria|jenny|hoaimy|namminh/i.test(v.name)?1:0)+(/en-us/i.test(v.lang)?1:0);
 function pickVoice(lang){const l=vlist(lang);if(!l.length)return null;const want=PREF['voice_'+lang];return l.find(v=>v.name===want)||[...l].sort((a,b)=>vscore(b)-vscore(a))[0]}
@@ -312,19 +313,21 @@ function clean(t,lang){
 function say(text,lang){
   try{
     if(!text)return;lang=lang||(isEn(text)?'en':'vi');
+    if(!voices.length)loadV();
     const v=pickVoice(lang);
-    if(lang==='vi'&&!v&&voices.length&&!warnedVi){warnedVi=true;toast('Máy bạn chưa có giọng đọc tiếng Việt. Hãy cài thêm giọng "Vietnamese" trong cài đặt hệ thống.')}
+    if(lang==='vi'&&!v&&voices.length){noVi();return}
     const u=new SpeechSynthesisUtterance(clean(text,lang));u.lang=lang==='en'?'en-US':'vi-VN';if(v)u.voice=v;u.rate=lang==='en'?(PREF.rateEn||.9):(PREF.rateVi||1);
     speak([u]);
   }catch(e){}
 }
 function speak(us){const go=()=>us.forEach(u=>speechSynthesis.speak(u));if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(go,60)}else go()}
-function sayBoth(it){try{const [en,vi]=enVi(it);
+function noVi(){toast(VI_HELP)}
+function sayBoth(it){try{const [en,vi]=enVi(it);if(!voices.length)loadV();if(voices.length&&!pickVoice('vi')){say(en,'en');setTimeout(noVi,300);return}
   const a=new SpeechSynthesisUtterance(clean(en,'en'));a.lang='en-US';const va=pickVoice('en');if(va)a.voice=va;a.rate=PREF.rateEn||.9;
   const b=new SpeechSynthesisUtterance(clean(vi,'vi'));b.lang='vi-VN';const vb=pickVoice('vi');if(vb)b.voice=vb;b.rate=PREF.rateVi||1;
   speak([a,b])}catch(e){}}
 const enVi=it=>isEn(it.c[0])||!isEn(it.c[1])?[it.c[0],it.c[1]]:[it.c[1],it.c[0]];
-let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,4200)}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,Math.max(4200,m.length*55))}
 
 function topstat(){const c=counts(allItems());$('#topstat').innerHTML=`<span class="dot k"></span>${fmt(c[2])} / ${fmt(c[0]+c[1]+c[2])} đã thuộc`}
 const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
@@ -405,6 +408,7 @@ function render(){
 function refreshChips(){const c=counts(view.items);app.querySelectorAll('[data-f] .c').forEach((el,i)=>el.textContent=[view.items.length,c[0],c[1],c[2]][i])}
 const front=it=>{const [en,vi]=enVi(it);return PREF.front==='en'?{t:en,lang:'en'}:{t:vi,lang:'vi'}};
 const backOf=it=>{const [en,vi]=enVi(it);return PREF.front==='en'?{t:vi,lang:'vi'}:{t:en,lang:'en'}};
+const lg=t=>String(t||'').length>70?' long':'';
 const ipaOf=it=>it.c[2]?`/${it.c[2]}/`:'';
 
 function cards(){
@@ -412,15 +416,15 @@ function cards(){
   if(!o.length){p.innerHTML=`<p class="empty">Không có thẻ nào trong mục này.</p>`;return}
   const it=view.items[o[view.pos]],[en,vi]=enVi(it),st=stOf(it),f=front(it),b=backOf(it),ipa=ipaOf(it);
   p.innerHTML=`<div class="stage"><div class="flip ${view.flip?'on':''}" id="fl" tabindex="0" role="button" aria-label="Lật thẻ">
-    <div class="face front"><span class="st">${badge(st)}</span><span class="lang">${f.lang==='en'?'EN':'VI'}</span>
-      <div class="${f.lang==='en'?'word':'mean'}">${esc(f.t)||'—'}</div>${f.lang==='en'&&ipa?`<div class="ipa">${esc(ipa)}</div>`:''}
-      <div class="say"><button class="sbtn" type="button" data-say="${f.lang}">${IC.spk}${f.lang==='en'?'Nghe':'Đọc'}</button></div>
+    <div class="face front"><span class="st">${badge(st)}</span><span class="lang">${f.lang==='en'?'EN':'VI'}</span><div class="fc">
+      <div class="${f.lang==='en'?'word':'mean'}${lg(f.t)}">${esc(f.t)||'—'}</div>${f.lang==='en'&&ipa?`<div class="ipa">${esc(ipa)}</div>`:''}
+      <div class="say"><button class="sbtn" type="button" data-say="${f.lang}">${IC.spk}${f.lang==='en'?'Nghe':'Đọc'}</button></div></div>
       <span class="hint">Chạm để lật</span></div>
-    <div class="face back"><span class="st">${badge(st)}</span><span class="lang">${b.lang==='en'?'EN':'VI'}</span>
-      <div class="${b.lang==='en'?'word':'mean'}">${esc(b.t)||'—'}</div>${b.lang==='en'&&ipa?`<div class="ipa">${esc(ipa)}</div>`:''}
+    <div class="face back"><span class="st">${badge(st)}</span><span class="lang">${b.lang==='en'?'EN':'VI'}</span><div class="fc">
+      <div class="${b.lang==='en'?'word':'mean'}${lg(b.t)}">${esc(b.t)||'—'}</div>${b.lang==='en'&&ipa?`<div class="ipa">${esc(ipa)}</div>`:''}
       <div class="small-term">${esc(f.t)}${f.lang==='en'&&ipa?` <span class="ipa sm">${esc(ipa)}</span>`:''}</div>
       <div class="say"><button class="sbtn" type="button" data-say="en">${IC.spk}Tiếng Anh</button><button class="sbtn" type="button" data-say="vi">${IC.spk}Tiếng Việt</button><button class="sbtn" type="button" data-say="both">${IC.spk}Cả hai</button></div>
-    </div></div></div>
+    </div></div></div></div>
   <div class="prog"><i style="width:${(view.pos+1)/o.length*100}%"></i></div>
   <div class="ctl"><button class="btn" id="pv" type="button" aria-label="Thẻ trước" ${view.pos?'':'disabled'}>←</button>
     <button class="btn learn" id="mk1" type="button">Chưa thuộc</button><button class="btn known" id="mk2" type="button">Đã thuộc</button>
@@ -450,6 +454,20 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='s'||e.key==='S'){const [en]=enVi(it);say(en,'en')}
 });
 
+function voicePanel(p){
+  loadV();
+  const sel=lang=>{const l=vlist(lang),cur=pickVoice(lang);
+    if(!l.length)return `<p class="vnote warn">${lang==='vi'?esc(VI_HELP):'Máy chưa có giọng tiếng Anh.'}</p>`;
+    return `<select id="vs-${lang}" aria-label="Giọng ${lang==='en'?'tiếng Anh':'tiếng Việt'}">${[...l].sort((a,b)=>vscore(b)-vscore(a)).map(v=>`<option value="${esc(v.name)}" ${cur&&v.name===cur.name?'selected':''}>${esc(v.name)} (${esc(v.lang)})</option>`).join('')}</select>`};
+  const rate=(lang,val)=>`<label class="vrate">Tốc độ <input type="range" id="vr-${lang}" min="0.6" max="1.3" step="0.1" value="${val}"><span>${(+val).toFixed(1)}×</span></label>`;
+  p.innerHTML=`<div class="vrow"><b>Tiếng Anh</b>${sel('en')}${rate('en',PREF.rateEn||.9)}<button class="sbtn" type="button" data-t="en">${IC.spk}Nghe thử</button></div>
+  <div class="vrow"><b>Tiếng Việt</b>${sel('vi')}${rate('vi',PREF.rateVi||1)}<button class="sbtn" type="button" data-t="vi">${IC.spk}Nghe thử</button></div>
+  <p class="vnote">Giọng có chữ <i>Enhanced</i>, <i>Premium</i>, <i>Natural</i> hoặc <i>Google</i> thường nghe tự nhiên nhất.</p>`;
+  ['en','vi'].forEach(l=>{const s=$('#vs-'+l);if(s)s.onchange=()=>{PREF['voice_'+l]=s.value;savePref();say(l==='en'?'This is a sample sentence.':'Đây là giọng đọc tiếng Việt.',l)};
+    const r=$('#vr-'+l);r.oninput=()=>{PREF[l==='en'?'rateEn':'rateVi']=+r.value;r.nextElementSibling.textContent=(+r.value).toFixed(1)+'×';savePref()}});
+  p.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>say(b.dataset.t==='en'?'Please submit the report by Friday.':'Vui lòng nộp báo cáo trước thứ Sáu.',b.dataset.t));
+}
+
 /* quiz */
 function quiz(){
   const p=$('#pane');
@@ -461,7 +479,7 @@ function quiz(){
     for(let t=0;t<300&&w.length<3;t++){const x=backOf(pool[Math.random()*pool.length|0]).t;if(x&&!seen.has(x)){seen.add(x);w.push(x)}}
     S.opts=shuffle([ans,...w])}
   p.innerHTML=`<div class="qcard"><div class="qtop"><span>Câu ${S.i+1} / ${S.o.length}</span><span><span class="g">Đúng ${S.g}</span> · <span class="r">Sai ${S.r}</span></span></div>
-   <div class="qprompt"><div class="${f.lang==='en'?'word':'mean'}">${esc(f.t)}</div>${f.lang==='en'&&ipa?`<div class="ipa">${esc(ipa)}</div>`:''}</div>
+   <div class="qprompt"><div class="${f.lang==='en'?'word':'mean'}${lg(f.t)}">${esc(f.t)}</div>${f.lang==='en'&&ipa?`<div class="ipa">${esc(ipa)}</div>`:''}</div>
    <button class="sbtn" type="button" id="qs">${IC.spk}Nghe</button>
    <div class="answers">${S.opts.map((o,j)=>`<button class="ans" type="button" data-j="${j}"><span class="k">${'ABCD'[j]}</span><span>${esc(o)}</span></button>`).join('')}</div>
    <div class="qact" id="qa" hidden><button class="btn primary" id="qn" type="button">Câu tiếp →</button></div></div>`;
