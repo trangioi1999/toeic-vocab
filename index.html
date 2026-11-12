@@ -2,6 +2,14 @@
 <html lang="vi">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#3654F0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Từ TOEIC">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
 <title>Kho Từ TOEIC</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,18 +43,18 @@
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
-button{font:inherit;color:inherit}
+button{font:inherit;color:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 .wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
 /* top bar */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);background:color-mix(in srgb,var(--surface) 92%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:14px;padding-block:10px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;cursor:pointer;font:600 17px var(--display);letter-spacing:-.01em}
 .logo{width:30px;height:30px;border-radius:9px;background:var(--primary);color:var(--on-primary);display:grid;place-items:center;font:700 13px var(--display)}
 .search{flex:1;min-width:180px;position:relative}
 .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--faint)}
-.search input{width:100%;height:40px;padding:0 14px 0 38px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--ink);font:inherit}
+.search input{width:100%;height:40px;padding:0 14px 0 38px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--ink);font:16px var(--body);-webkit-appearance:none;appearance:none}
 .search input:focus{outline:none;border-color:var(--primary);background:var(--surface)}
 .pill{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--new)}
@@ -119,7 +127,8 @@ h3{font:600 12px var(--body);text-transform:uppercase;letter-spacing:.08em;color
 .opt svg{flex:none}
 
 .stage{perspective:1400px}
-.flip{position:relative;height:340px;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.7,.2,1);cursor:pointer}
+.flip{position:relative;height:340px;height:clamp(260px,46dvh,420px);transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.7,.2,1);cursor:pointer;-webkit-user-select:none;user-select:none;touch-action:pan-y;-webkit-touch-callout:none}
+.drag{transition:transform .25s ease}
 .flip.on{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:48px 28px 40px;text-align:center;overflow:auto}
 .face.back{transform:rotateY(180deg);background:linear-gradient(180deg,var(--surface),var(--surface-2))}
@@ -143,7 +152,20 @@ h3{font:600 12px var(--body);text-transform:uppercase;letter-spacing:.08em;color
 .count{text-align:center;font:600 13px var(--mono);color:var(--muted);margin-top:10px;font-variant-numeric:tabular-nums}
 .keys{text-align:center;font-size:12px;color:var(--faint);margin-top:8px}
 kbd{font:500 11px var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 5px;background:var(--surface)}
-@media (max-width:560px){.flip{height:300px}.keys{display:none}.search{order:3;flex-basis:100%}.top .wrap{row-gap:8px}.tab{padding:8px 8px;font-size:13px}.tabs{overflow-x:visible}}
+@media (max-width:640px){
+  .search{order:3;flex-basis:100%}.top .wrap{row-gap:8px}
+  .tab{padding:9px 6px;font-size:13px}.tabs{overflow-x:visible}
+  .bar{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding-inline:16px;scrollbar-width:none}
+  .bar::-webkit-scrollbar{display:none}.chips{flex-wrap:nowrap}.spacer{display:none}
+  .chip,.opt{flex:none}
+  .ctl{position:sticky;bottom:0;z-index:4;background:var(--bg);margin-inline:-16px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+  .prog{margin-bottom:6px}
+  main{padding-bottom:24px}
+  h1{font-size:22px}
+}
+@media (hover:none){.keys{display:none}.tile:hover,.row:hover{border-color:var(--line)}.btn:hover{border-color:var(--line)}.btn.primary:hover{filter:none}.sbtn:hover,.ib:hover{color:var(--muted);background:none;border-color:var(--line)}}
+@media (pointer:coarse){.chip,.opt{height:40px;padding:0 14px}.sbtn{height:42px;padding:0 14px}.ib{width:42px;height:42px}.sdot{width:42px;height:42px;margin-top:-8px}.ans{min-height:52px}.tab{min-height:40px}}
+.swipehint{display:none}@media (hover:none){.swipehint{display:block;text-align:center;font-size:12px;color:var(--faint);margin-top:6px}}
 
 /* quiz */
 .qcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
@@ -158,7 +180,7 @@ kbd{font:500 11px var(--mono);border:1px solid var(--line);border-bottom-width:2
 .ans.right{border-color:var(--known);background:var(--known-soft)} .ans.right .k{background:var(--known);color:var(--surface)}
 .ans.wrong{border-color:var(--bad);background:var(--bad-soft)} .ans.wrong .k{background:var(--bad);color:var(--surface)}
 .ans:disabled{cursor:default}
-.winput{width:100%;height:54px;padding:0 16px;font:500 18px var(--body);border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);margin-top:16px}
+.winput{width:100%;height:54px;padding:0 16px;font:500 18px var(--body);-webkit-appearance:none;appearance:none;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);margin-top:16px}
 .winput:focus{outline:none;border-color:var(--primary)}
 .fb{margin-top:12px;padding:12px 14px;border-radius:12px;font-weight:500}
 .fb.ok{background:var(--known-soft);color:var(--known)} .fb.bad{background:var(--bad-soft);color:var(--bad)}
@@ -261,13 +283,14 @@ function say(text,lang){
     const v=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith(lang)&&/natural|google|premium|enhanced/i.test(v.name))||voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith(lang));
     if(lang==='vi'&&!v&&voices.length&&!warnedVi){warnedVi=true;toast('Máy bạn chưa có giọng đọc tiếng Việt. Hãy cài thêm giọng "Vietnamese" trong cài đặt hệ thống.')}
     const u=new SpeechSynthesisUtterance(clean(text));u.lang=lang==='en'?'en-US':'vi-VN';if(v)u.voice=v;u.rate=lang==='en'?.9:1;
-    speechSynthesis.cancel();speechSynthesis.speak(u);
+    speak([u]);
   }catch(e){}
 }
-function sayBoth(it){try{const [en,vi]=enVi(it);speechSynthesis.cancel();
+function speak(us){const go=()=>us.forEach(u=>speechSynthesis.speak(u));if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(go,60)}else go()}
+function sayBoth(it){try{const [en,vi]=enVi(it);
   const a=new SpeechSynthesisUtterance(clean(en));a.lang='en-US';const va=voices.find(v=>v.lang?.toLowerCase().startsWith('en'));if(va)a.voice=va;a.rate=.9;
   const b=new SpeechSynthesisUtterance(clean(vi));b.lang='vi-VN';const vb=voices.find(v=>v.lang?.toLowerCase().startsWith('vi'));if(vb)b.voice=vb;
-  speechSynthesis.speak(a);speechSynthesis.speak(b)}catch(e){}}
+  speak([a,b])}catch(e){}}
 const enVi=it=>isEn(it.c[0])||!isEn(it.c[1])?[it.c[0],it.c[1]]:[it.c[1],it.c[0]];
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,4200)}
 
@@ -358,7 +381,7 @@ function cards(){
     <div class="face front"><span class="st">${badge(st)}</span><span class="lang">${f.lang==='en'?'EN':'VI'}</span>
       <div class="${f.lang==='en'?'word':'mean'}">${esc(f.t)||'—'}</div>${f.lang==='en'&&ipa?`<div class="ipa">${esc(ipa)}</div>`:''}
       <div class="say"><button class="sbtn" type="button" data-say="${f.lang}">${IC.spk}${f.lang==='en'?'Nghe':'Đọc'}</button></div>
-      <span class="hint">Chạm thẻ để lật</span></div>
+      <span class="hint">Chạm để lật</span></div>
     <div class="face back"><span class="st">${badge(st)}</span><span class="lang">${b.lang==='en'?'EN':'VI'}</span>
       <div class="${b.lang==='en'?'word':'mean'}">${esc(b.t)||'—'}</div>${b.lang==='en'&&ipa?`<div class="ipa">${esc(ipa)}</div>`:''}
       <div class="small-term">${esc(f.t)}${f.lang==='en'&&ipa?` <span class="ipa sm">${esc(ipa)}</span>`:''}</div>
@@ -368,9 +391,14 @@ function cards(){
   <div class="ctl"><button class="btn" id="pv" type="button" aria-label="Thẻ trước" ${view.pos?'':'disabled'}>←</button>
     <button class="btn learn" id="mk1" type="button">Chưa thuộc</button><button class="btn known" id="mk2" type="button">Đã thuộc</button>
     <button class="btn" id="nx" type="button" aria-label="Thẻ sau" ${view.pos<o.length-1?'':'disabled'}>→</button></div>
-  <div class="count">${view.pos+1} / ${o.length}</div>
+  <div class="count">${view.pos+1} / ${o.length}</div><p class="swipehint">Vuốt trái / phải để chuyển thẻ</p>
   <p class="keys"><kbd>Space</kbd> lật thẻ · <kbd>←</kbd><kbd>→</kbd> chuyển thẻ · <kbd>1</kbd> chưa thuộc · <kbd>2</kbd> đã thuộc · <kbd>S</kbd> nghe</p>`;
-  $('#fl').onclick=e=>{const s=e.target.closest('[data-say]');if(s){e.stopPropagation();const w=s.dataset.say;w==='both'?sayBoth(it):say(w==='en'?en:vi,w);return}flip()};
+  const fl=$('#fl');let sx=0,sy=0,dx=0,drag=false,moved=false;
+  fl.addEventListener('pointerdown',e=>{if(e.target.closest('[data-say]'))return;sx=e.clientX;sy=e.clientY;dx=0;drag=true;moved=false});
+  fl.addEventListener('pointermove',e=>{if(!drag)return;dx=e.clientX-sx;const dy=e.clientY-sy;if(Math.abs(dx)>10&&Math.abs(dx)>Math.abs(dy)){moved=true;fl.style.translate=dx*.6+'px 0'}});
+  const end=()=>{if(!drag)return;drag=false;fl.style.translate='';if(moved&&Math.abs(dx)>60){go(dx<0?1:-1)}};
+  fl.addEventListener('pointerup',end);fl.addEventListener('pointercancel',()=>{drag=false;fl.style.translate=''});
+  fl.onclick=e=>{const s=e.target.closest('[data-say]');if(s){e.stopPropagation();const w=s.dataset.say;w==='both'?sayBoth(it):say(w==='en'?en:vi,w);return}if(moved){moved=false;return}flip()};
   $('#pv').onclick=()=>go(-1);$('#nx').onclick=()=>go(1);
   $('#mk1').onclick=()=>mark(1);$('#mk2').onclick=()=>mark(2);
   if(PREF.auto&&!view.spoke){view.spoke=true;view.flip?say(b.t,b.lang):say(f.t,f.lang)}
@@ -480,6 +508,7 @@ function route(){
   home();window.scrollTo(0,0);
 }
 window.addEventListener('hashchange',route);
+try{if('serviceWorker' in navigator&&/github\.io$|localhost$/.test(location.hostname))navigator.serviceWorker.register('sw.js')}catch(e){}
 fetch('vocab.json').then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{prepare(d);topstat();route()})
   .catch(()=>{app.innerHTML='<p class="empty">Không tải được dữ liệu từ vựng. Tải lại trang để thử lần nữa.</p>'});
 })();
