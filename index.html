@@ -167,6 +167,20 @@ kbd{font:500 11px var(--mono);border:1px solid var(--line);border-bottom-width:2
 @media (pointer:coarse){.chip,.opt{height:40px;padding:0 14px}.sbtn{height:42px;padding:0 14px}.ib{width:42px;height:42px}.sdot{width:42px;height:42px;margin-top:-8px}.ans{min-height:52px}.tab{min-height:40px}}
 .swipehint{display:none}@media (hover:none){.swipehint{display:block;text-align:center;font-size:12px;color:var(--faint);margin-top:6px}}
 
+function voicePanel(p){
+  loadV();
+  const sel=lang=>{const l=vlist(lang),cur=pickVoice(lang);
+    if(!l.length)return `<p class="vnote">${lang==='vi'?'Máy chưa có giọng tiếng Việt. iPhone/iPad/Mac: Cài đặt → Trợ năng → Nội dung được đọc → Giọng nói → Tiếng Việt. Windows: Cài đặt → Thời gian & ngôn ngữ → Giọng nói → thêm giọng Tiếng Việt.':'Máy chưa có giọng tiếng Anh.'}</p>`;
+    return `<select id="vs-${lang}" aria-label="Giọng ${lang==='en'?'tiếng Anh':'tiếng Việt'}">${[...l].sort((a,b)=>vscore(b)-vscore(a)).map(v=>`<option value="${esc(v.name)}" ${cur&&v.name===cur.name?'selected':''}>${esc(v.name)} (${esc(v.lang)})</option>`).join('')}</select>`};
+  const rate=(lang,val)=>`<label class="vrate">Tốc độ <input type="range" id="vr-${lang}" min="0.6" max="1.3" step="0.1" value="${val}"><span>${(+val).toFixed(1)}×</span></label>`;
+  p.innerHTML=`<div class="vrow"><b>Tiếng Anh</b>${sel('en')}${rate('en',PREF.rateEn||.9)}<button class="sbtn" type="button" data-t="en">${IC.spk}Nghe thử</button></div>
+  <div class="vrow"><b>Tiếng Việt</b>${sel('vi')}${rate('vi',PREF.rateVi||1)}<button class="sbtn" type="button" data-t="vi">${IC.spk}Nghe thử</button></div>
+  <p class="vnote">Giọng có chữ <i>Enhanced</i>, <i>Premium</i>, <i>Natural</i> hoặc <i>Google</i> thường nghe tự nhiên nhất.</p>`;
+  ['en','vi'].forEach(l=>{const s=$('#vs-'+l);if(s)s.onchange=()=>{PREF['voice_'+l]=s.value;savePref();say(l==='en'?'This is a sample sentence.':'Đây là giọng đọc tiếng Việt.',l)};
+    const r=$('#vr-'+l);r.oninput=()=>{PREF[l==='en'?'rateEn':'rateVi']=+r.value;r.nextElementSibling.textContent=(+r.value).toFixed(1)+'×';savePref()}});
+  p.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>say(b.dataset.t==='en'?'Please submit the report by Friday.':'Vui lòng nộp báo cáo trước thứ Sáu.',b.dataset.t));
+}
+
 /* quiz */
 .qcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
 .qtop{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font:600 12px var(--mono);color:var(--muted)}
@@ -202,6 +216,14 @@ kbd{font:500 11px var(--mono);border:1px solid var(--line);border-bottom-width:2
 .sdot{width:26px;height:26px;border-radius:50%;border:0;background:none;display:grid;place-items:center;cursor:pointer;margin-top:-2px}
 .sdot .dot{width:12px;height:12px}
 @media (max-width:640px){.item{grid-template-columns:auto minmax(0,1fr) auto}.item .m{grid-column:2/3}}
+.vpanel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:-4px 0 16px;display:grid;gap:12px}
+.vrow{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.vrow b{width:84px;font-size:14px}
+.vrow select{flex:1;min-width:180px;max-width:100%;height:40px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--ink);font:16px var(--body);padding:0 10px}
+.vrate{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.vrate input{width:110px;accent-color:var(--primary)}
+.vrate span{font:500 12px var(--mono);width:34px}
+.vnote{margin:0;font-size:13px;color:var(--muted)}
 .empty{padding:48px 16px;text-align:center;color:var(--muted)}
 
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:20;max-width:calc(100% - 32px);box-shadow:var(--shadow)}
@@ -276,20 +298,30 @@ const groupItems=g=>g.sets.flatMap(s=>s.items);
 const isEn=s=>!!s&&/^[\x00-\x7F’‘–—…]*$/.test(s.replace(/\s/g,''));
 let voices=[];const loadV=()=>{try{voices=speechSynthesis.getVoices()}catch(e){}};loadV();try{speechSynthesis.onvoiceschanged=loadV}catch(e){}
 let warnedVi=false;
-function clean(t,en){t=String(t).replace(/\b(sb|sth|s\.o|Vo|Ving|V3\/ed)\b/gi,' ').replace(/[=#\/]/g,', ').replace(/\((n|v|adj|adv)\)/gi,'');return t.replace(/\s+/g,' ').trim()}
+const vlist=lang=>voices.filter(v=>v.lang&&v.lang.toLowerCase().replace('_','-').startsWith(lang));
+const vscore=v=>(/premium|natural|enhanced|neural|online/i.test(v.name)?3:0)+(/google/i.test(v.name)?2:0)+(/linh|samantha|ava|zoe|allison|aria|jenny|hoaimy|namminh/i.test(v.name)?1:0)+(/en-us/i.test(v.lang)?1:0);
+function pickVoice(lang){const l=vlist(lang);if(!l.length)return null;const want=PREF['voice_'+lang];return l.find(v=>v.name===want)||[...l].sort((a,b)=>vscore(b)-vscore(a))[0]}
+const hasVi=s=>/[À-ỹđĐ]/.test(s);
+function clean(t,lang){
+  t=String(t||'').replace(/\((n|v|adj|adv|prep|conj|n\/v|v\/n)\)/gi,' ').replace(/\.{2,}|…/g,' ');
+  let parts=t.split(/\s*(?:=|#|\/|:|;|\(|\)|\n)\s*/).map(x=>x.trim()).filter(Boolean);
+  if(lang==='vi'){const v=parts.filter(hasVi);if(v.length)parts=v}
+  else if(lang==='en'){const e=parts.filter(x=>!hasVi(x));if(e.length)parts=e.slice(0,4)}
+  return parts.join(', ').replace(/\b(sb|sth|s\.o|smt|Vo|Ving|V-ing|V3\/ed|V3)\b/gi,' ').replace(/\s+/g,' ').replace(/\s+,/g,',').trim();
+}
 function say(text,lang){
   try{
     if(!text)return;lang=lang||(isEn(text)?'en':'vi');
-    const v=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith(lang)&&/natural|google|premium|enhanced/i.test(v.name))||voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith(lang));
+    const v=pickVoice(lang);
     if(lang==='vi'&&!v&&voices.length&&!warnedVi){warnedVi=true;toast('Máy bạn chưa có giọng đọc tiếng Việt. Hãy cài thêm giọng "Vietnamese" trong cài đặt hệ thống.')}
-    const u=new SpeechSynthesisUtterance(clean(text));u.lang=lang==='en'?'en-US':'vi-VN';if(v)u.voice=v;u.rate=lang==='en'?.9:1;
+    const u=new SpeechSynthesisUtterance(clean(text,lang));u.lang=lang==='en'?'en-US':'vi-VN';if(v)u.voice=v;u.rate=lang==='en'?(PREF.rateEn||.9):(PREF.rateVi||1);
     speak([u]);
   }catch(e){}
 }
 function speak(us){const go=()=>us.forEach(u=>speechSynthesis.speak(u));if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(go,60)}else go()}
 function sayBoth(it){try{const [en,vi]=enVi(it);
-  const a=new SpeechSynthesisUtterance(clean(en));a.lang='en-US';const va=voices.find(v=>v.lang?.toLowerCase().startsWith('en'));if(va)a.voice=va;a.rate=.9;
-  const b=new SpeechSynthesisUtterance(clean(vi));b.lang='vi-VN';const vb=voices.find(v=>v.lang?.toLowerCase().startsWith('vi'));if(vb)b.voice=vb;
+  const a=new SpeechSynthesisUtterance(clean(en,'en'));a.lang='en-US';const va=pickVoice('en');if(va)a.voice=va;a.rate=PREF.rateEn||.9;
+  const b=new SpeechSynthesisUtterance(clean(vi,'vi'));b.lang='vi-VN';const vb=pickVoice('vi');if(vb)b.voice=vb;b.rate=PREF.rateVi||1;
   speak([a,b])}catch(e){}}
 const enVi=it=>isEn(it.c[0])||!isEn(it.c[1])?[it.c[0],it.c[1]]:[it.c[1],it.c[0]];
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,4200)}
@@ -359,13 +391,15 @@ function render(){
     <button class="opt" id="o-front" type="button" aria-pressed="${PREF.front==='vi'}" title="Đổi mặt trước">${IC.swap}${PREF.front==='en'?'Mặt trước: Anh':'Mặt trước: Việt'}</button>
     <button class="opt" id="o-auto" type="button" aria-pressed="${PREF.auto}" title="Tự đọc khi chuyển thẻ">${IC.auto}Tự đọc</button>
     <button class="opt" id="o-shuf" type="button">${IC.shuf}Trộn</button>
-  </div><div id="pane"></div>`;
+    <button class="opt" id="o-voice" type="button" aria-expanded="false">${IC.spk}Giọng đọc</button>
+  </div><div id="vpanel" class="vpanel" hidden></div><div id="pane"></div>`;
   bindCrumbs();
   app.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{view.mode=t.dataset.m;view.q=null;view.pos=Math.min(view.pos,Math.max(0,view.order.length-1));render()});
   app.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{view.filter=b.dataset.f;applyFilter(false);render()});
   $('#o-front').onclick=()=>{PREF.front=PREF.front==='en'?'vi':'en';savePref();view.q=null;render()};
   $('#o-auto').onclick=()=>{PREF.auto=!PREF.auto;savePref();render()};
   $('#o-shuf').onclick=()=>{applyFilter(true);render();toast('Đã trộn thứ tự thẻ')};
+  $('#o-voice').onclick=e=>{const p=$('#vpanel');p.hidden=!p.hidden;e.currentTarget.setAttribute('aria-expanded',!p.hidden);if(!p.hidden)voicePanel(p)};
   ({cards,quiz,write,list})[view.mode]();
 }
 function refreshChips(){const c=counts(view.items);app.querySelectorAll('[data-f] .c').forEach((el,i)=>el.textContent=[view.items.length,c[0],c[1],c[2]][i])}
