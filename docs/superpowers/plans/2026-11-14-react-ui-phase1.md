@@ -14,7 +14,8 @@
 
 - Không dịch vụ trả phí; giai đoạn 1 không gọi mạng ngoài trừ Google Fonts và `../vocab.json`.
 - Toàn bộ chữ trên giao diện bằng tiếng Việt.
-- Giữ hệ màu/kiểu chữ của `index.html` (biến `--bg --surface --primary --known --learn ...`, font Lexend / Be Vietnam Pro / Charis SIL / JetBrains Mono), sáng/tối theo hệ thống.
+- Giao diện theo bản phác thảo đã duyệt (https://claude.ai/artifact/4fmMfE21RTqViWVJRtEcfv), ý tưởng "phiếu tô đáp án": việc xong = ô tròn tô kín. Token sáng: `--paper #F3F5F1`, `--sheet #FFFFFF`, `--ink #1B2220` (graphite, ô đã tô), `--soft #56625D`, `--faint #6B7772`, `--rule #DAE0DB`, `--line-strong #C9D1CB`, `--guide #C93A66` (mực hồng: hôm nay, vạch 700, bỏ buổi), `--primary #2347D6` (nút chính, làm đề), `--known #1D7F53` (đã thuộc, ôn tập), `--learn #B86200` / `--learn-soft #FBEDDC` (đang học, chữa Listening). Tự định nghĩa bộ tối tương ứng. Font: Lexend (tiêu đề, số), Be Vietnam Pro (chữ), Charis SIL (IPA). Nút bo tròn hoàn toàn, khối nền trắng bo 18px, đường kẻ chấm hồng giữa các mục. Thanh tab dưới đáy trên điện thoại.
+- Không ghi tên cô ở bất kỳ đâu: lời chào của cô là "Chào bạn", tài khoản cô tên "Cô giáo".
 - Dùng tốt ở bề rộng 360px: nút ≥ 40px, không cuộn ngang.
 - Ngày "hôm nay" tính theo giờ máy (Việt Nam), dạng `YYYY-MM-DD`, không dùng `toISOString()`.
 - Khóa `localStorage` cũ giữ nguyên định dạng: `status` (`{"sid:i": 1|2}`), `known` (mảng cũ), `pref`, `toeic700-v3` (`{date: {done, l, r, parts}}`).
@@ -110,7 +111,7 @@ Routes: `/login`; học viên `/` (Hôm nay), `/vocab`, `/vocab/g/:gid`, `/vocab
 **Files:** Create `web/src/services/{auth,store}.js`, `web/src/hooks/{useAuth,useStore}.js`, `web/test/{auth,store}.test.js`.
 
 **Interfaces (Produces):**
-- `auth.js`: `login(email, password): Promise<User>` (sai → throw `Error('Sai email hoặc mật khẩu')`), `logout(): Promise<void>`, `currentUser(): User|null`, `onAuthChange(cb): unsubscribe`. `User = {uid, email, name, role: 'student'|'teacher'}` (`uid` học viên `'student-1'`, tên "Học viên"; cô `'teacher-1'`, tên "Cô Tịnh"). Phiên lưu ở khóa `auth-session`.
+- `auth.js`: `login(email, password): Promise<User>` (sai → throw `Error('Sai email hoặc mật khẩu')`), `logout(): Promise<void>`, `currentUser(): User|null`, `onAuthChange(cb): unsubscribe`. `User = {uid, email, name, role: 'student'|'teacher'}` (`uid` học viên `'student-1'`, tên "Học viên"; cô `'teacher-1'`, tên "Cô giáo"). Phiên lưu ở khóa `auth-session`.
 - `store.js` (mọi hàm ghi throw `Error('Tài khoản cô giáo chỉ được xem')` nếu `currentUser().role==='teacher'`; mọi thay đổi gọi listener):
   - Thẻ: `getCardStatus(): Record<string,1|2>` (đọc `status`, nếu chưa có thì dựng từ `known`), `setCardStatus(key, v)` (cũng ghi `activity[today]` vào tập khóa thẻ đã ôn).
   - `getPrefs()/setPrefs(patch)` (khóa `pref`).
@@ -162,7 +163,7 @@ Routes: `/login`; học viên `/` (Hôm nay), `/vocab`, `/vocab/g/:gid`, `/vocab
 
 - [ ] `Today.jsx`: lời chào + ngày; thẻ "Việc hôm nay" (`PlanTasks` có tick; trước 16/11 hiện "Còn N ngày nữa là bắt đầu lộ trình" và quy tắc 20 thẻ); số thẻ ôn hôm nay với vòng tiến độ tới 20 và nút "Ôn thẻ ngay" (`/vocab`); chuỗi ngày học + 7 ngày gần nhất dạng chấm (`dayStatus`); ô "Ghi chú gửi cô" và nút **Hoàn thành hôm nay** (vô hiệu + hiện `reason` khi `canComplete` chưa ok). Sau khi bấm: trạng thái "Đã hoàn thành lúc HH:MM · cô sẽ nhận thông báo", nút "Hoàn tác".
 - [ ] `Settings.jsx`: công tắc "Nhắc học mỗi ngày" + chọn giờ (mặc định 20:00); khối "Thông báo trên thiết bị này" với trạng thái quyền và nút "Bật thông báo" (`Notification.requestPermission()`, được thì hiện thông báo thử "Đã bật thông báo nhắc học"); hướng dẫn iPhone (Safari → Chia sẻ → Thêm vào MH chính); ghi chú "Gửi thông báo tự động sẽ có ở bản sau"; thông tin tài khoản + "Đăng xuất".
-- [ ] Playwright (360×780): trước khi tick, nút Hoàn thành bị khóa với lý do; ôn 20 thẻ (đặt sẵn `activity` hôm nay) → bấm được → trạng thái đã hoàn thành.
+- [ ] Playwright (360×780): trước khi tick, nút tròn Hoàn thành (viền tiến độ conic) bị khóa với lý do; ôn 20 thẻ (đặt sẵn `activity` hôm nay) → bấm được → trạng thái đã hoàn thành.
 - [ ] Commit "Student Today and Settings".
 
 ### Task 8: Cô giáo: Tổng quan, Chi tiết ngày, Cài đặt
@@ -171,7 +172,7 @@ Routes: `/login`; học viên `/` (Hôm nay), `/vocab`, `/vocab/g/:gid`, `/vocab
 
 **Interfaces:** `<MonthCalendar month={year,month0} statusOf={(iso)=>status} onPick={(iso)=>void}/>` dùng `monthGrid`; màu: done=`--known`, missed=`--bad`, rest=`--new`, pending=viền `--primary`, future=mờ.
 
-- [ ] `Overview.jsx`: thẻ học viên (tên, hôm nay: đã/chưa hoàn thành + giờ); 4 số: chuỗi ngày, tỉ lệ hoàn thành các ngày làm việc đã qua, thẻ đã thuộc, điểm gần nhất; lịch tháng có chuyển tháng (mặc định tháng hiện tại; từ 11/2026 tới 03/2027) + chú thích; biểu đồ điểm (`ScoreChart`); danh sách 7 hoạt động gần nhất (check-in kèm ghi chú). Không có control ghi.
+- [ ] `Overview.jsx`: lời chào "Chào bạn" + ngày; khối nền graphite trạng thái hôm nay; thẻ học viên (tên, hôm nay: đã/chưa hoàn thành + giờ); 4 số: chuỗi ngày, tỉ lệ hoàn thành các ngày làm việc đã qua, thẻ đã thuộc, điểm gần nhất; lịch tháng có chuyển tháng (mặc định tháng hiện tại; từ 11/2026 tới 03/2027) + chú thích; biểu đồ điểm (`ScoreChart`); danh sách 7 hoạt động gần nhất (check-in kèm ghi chú). Không có control ghi.
 - [ ] `DayDetail.jsx` (`/teacher/day/:date`): tiêu đề ngày + trạng thái; việc lộ trình (`PlanTasks readOnly`), số thẻ ôn, giờ hoàn thành, ghi chú học viên, điểm + thanh Part nếu là ngày đề.
 - [ ] `TeacherSettings.jsx`: 2 công tắc "Báo khi học viên hoàn thành", "Báo lúc 23:00 nếu hôm nay chưa học"; nút "Bật thông báo"; "Đăng xuất".
 - [ ] Playwright: học viên hoàn thành hôm nay → đăng xuất → đăng nhập cô → ô hôm nay màu xanh, bấm vào thấy ghi chú.
