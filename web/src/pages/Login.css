@@ -1,0 +1,26 @@
+.login { min-height: 100dvh; display: flex; justify-content: center; padding: max(28px, env(safe-area-inset-top)) 20px 28px; }
+.login-inner { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 22px; }
+.login .brand-row { display: flex; align-items: center; gap: 10px; font: 600 17px var(--display); }
+.omr {
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r-sheet);
+  padding: 18px 18px 16px; transform: rotate(-1.2deg); box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.omr-head { display: flex; justify-content: space-between; font: 500 12px var(--body); color: var(--guide); }
+.omr-grid { display: grid; grid-template-columns: 34px repeat(4, minmax(0, 1fr)); gap: 8px 6px; align-items: center; }
+.omr-grid .q { font: 600 13px var(--display); color: var(--guide); }
+.omr-b { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--guide); display: grid; place-items: center; font: 500 11px var(--display); color: var(--guide); }
+.omr-b.fill { background: var(--ink); border-color: var(--ink); width: 28px; height: 28px; animation: pencil .5s ease-out .35s both; }
+.omr-b.ask { border-style: dashed; }
+@keyframes pencil { from { transform: scale(.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.login h1 { font-size: 30px; line-height: 1.15; }
+.login form { display: flex; flex-direction: column; gap: 14px; }
+.pw { position: relative; }
+.pw .input { padding-right: 52px; }
+.pw .input:focus { padding-right: 51px; }
+.pw button { position: absolute; right: 3px; top: 3px; }
+.form-error { color: var(--guide-strong); background: var(--guide-tint); border-radius: 12px; padding: 10px 12px; font-size: 14px; }
+.demo { margin-top: auto; border: 1.5px dashed var(--line-strong); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.demo span { font-size: 13px; color: var(--soft); }
+.demo-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.hint { font-size: 13px; color: var(--soft); text-align: center; }
