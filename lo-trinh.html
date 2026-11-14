@@ -196,8 +196,8 @@ ul.tasks li::marker{color:var(--k)}
       <h2>Đồng bộ điểm từ study4</h2>
       <ol>
         <li>Kéo nút bên phải lên thanh dấu trang (bookmarks bar) của Chrome. Chỉ cần làm một lần.</li>
-        <li>Làm đề ở chế độ <b>Làm full test</b>, nộp bài, mở trang Kết quả của đề đó.</li>
-        <li>Bấm dấu trang "Đồng bộ TOEIC". Trang này mở ra với điểm Nghe, Đọc và số câu đúng từng Part đã điền sẵn.</li>
+        <li>Làm đề trên study4 ở chế độ <b>Làm full test</b> và nộp bài.</li>
+        <li>Ở bất kỳ trang nào của study4 (đã đăng nhập), bấm dấu trang "Đồng bộ TOEIC". Nó đọc toàn bộ bài làm trong Thống kê kết quả, rồi mở trang này với điểm Nghe, Đọc và số câu đúng từng Part của mọi đề đã điền sẵn.</li>
       </ol>
     </div>
     <div style="display:grid;gap:8px;justify-items:start">
@@ -368,21 +368,26 @@ function drawChart(pts) {
 
 // ---- study4 sync ----
 const PLAN_URL = "https://trangioi1999.github.io/toeic-vocab/lo-trinh.html";
-function bmFn(){
-  const m=location.pathname.match(/\/tests\/(\d+)\/[^/]+\/results\//);
-  if(!m){alert('Hãy mở trang Kết quả của một đề trên study4 rồi bấm lại.');return}
-  const T=document.body.innerText;
+async function bmFn(){
+  if(!/study4\.com$/.test(location.hostname)){alert('Hãy bấm dấu trang này khi đang mở study4.com (đã đăng nhập).');return}
   const R={1:[1,6],2:[7,31],3:[32,70],4:[71,100],5:[101,130],6:[131,146],7:[147,200]};
-  const q=new Map();
-  const re=/(?:^|\n)\s*(\d{1,3})\s*\n?\s*([A-D])\s*:\s*\n?\s*([A-D]|chưa trả lời)/g;
-  let a;
-  while((a=re.exec(T))){const n=+a[1];if(n>=1&&n<=200&&!q.has(n))q.set(n,a[2]===a[3])}
-  if(!q.size){alert('Không đọc được đáp án trên trang này.');return}
-  const parts={};
-  q.forEach((ok,n)=>{for(const p in R){if(n>=R[p][0]&&n<=R[p][1]){parts[p]=parts[p]||[0,0];parts[p][1]++;if(ok)parts[p][0]++}}});
-  const g=r=>{const x=T.match(r);return x?+x[1]:null};
-  const o={tid:+m[1],name:(document.title.split(':')[1]||'').split(' - ')[0].trim(),l:g(/Listening[^\d]{0,60}?(\d{1,3})\s*\/\s*495/i),r:g(/Reading[^\d]{0,60}?(\d{1,3})\s*\/\s*495/i),parts};
-  window.open('__PLAN__#s4='+btoa(unescape(encodeURIComponent(JSON.stringify(o)))),'_blank');
+  const parse=(doc,url)=>{const m=url.match(/\/tests\/(\d+)\/[^/]+\/results\/(\d+)/);if(!m)return null;const parts={};let n=0;
+    doc.querySelectorAll('.result-answers-item').forEach(it=>{const x=it.textContent.replace(/\s+/g,' ').match(/(\d{1,3})\s*([A-D])\s*:\s*([A-D]|chưa trả lời)/);if(!x)return;const q=+x[1];n++;for(const p in R){if(q>=R[p][0]&&q<=R[p][1]){parts[p]=parts[p]||[0,0];parts[p][1]++;if(x[2]===x[3])parts[p][0]++}}});
+    const box=(doc.querySelector('.result-score-details')||doc.body).textContent.replace(/\s+/g,' ');
+    const g=r=>{const y=box.match(r);return y?+y[1]:null};
+    return {tid:+m[1],rid:+m[2],full:!doc.querySelector('.result-badge-practice'),l:g(/Listening[^\d]{0,80}?(\d{1,3})\s*\/\s*495/i),r:g(/Reading[^\d]{0,80}?(\d{1,3})\s*\/\s*495/i),n,parts}};
+  const tip=document.createElement('div');tip.style.cssText='position:fixed;top:16px;right:16px;z-index:99999;background:#17201d;color:#fff;padding:12px 16px;border-radius:10px;font:14px sans-serif';tip.textContent='Đang đọc kết quả study4…';document.body.appendChild(tip);
+  try{
+    const a=await fetch('/tests/analytics/?exam=1&qdays=all').then(r=>r.text());
+    const ad=new DOMParser().parseFromString(a,'text/html');
+    const links=[...new Set([...ad.querySelectorAll('a[href*="/results/"]')].map(x=>x.getAttribute('href')))];
+    if(/\/results\//.test(location.pathname)&&!links.includes(location.pathname))links.unshift(location.pathname);
+    const out=[];
+    for(const l of links){tip.textContent='Đang đọc '+(out.length+1)+'/'+links.length+' bài làm…';const h=await fetch(l).then(r=>r.text());const o=parse(new DOMParser().parseFromString(h,'text/html'),l);if(o&&o.n)out.push(o)}
+    tip.remove();
+    if(!out.length){alert('Chưa thấy bài làm TOEIC nào trong Thống kê kết quả của bạn.');return}
+    window.open('__PLAN__#s4='+btoa(unescape(encodeURIComponent(JSON.stringify(out)))),'_blank');
+  }catch(e){tip.textContent='Không đọc được kết quả: '+e;setTimeout(()=>tip.remove(),5000)}
 }
 const BM = "(" + bmFn.toString().replace("__PLAN__", PLAN_URL) + ")()";
 document.getElementById("bm").href = "javascript:" + encodeURIComponent(BM);
@@ -397,17 +402,26 @@ function toast(msg) {
 }
 function importFromHash() {
   if (!location.hash.startsWith("#s4=")) return;
-  let o; try { o = JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(4))))); } catch (e) { toast("Dữ liệu đồng bộ bị lỗi. Bấm lại dấu trang trên trang Kết quả của study4."); return; }
+  let list; try { list = JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(4))))); } catch (e) { toast("Dữ liệu đồng bộ bị lỗi. Bấm lại dấu trang khi đang mở study4."); return; }
   try { history.replaceState(null, "", location.pathname); } catch (e) {}
-  const d = testDay(o.tid);
-  const c = Object.values(o.parts || {}); const right = c.reduce((a,x)=>a+x[0],0), all = c.reduce((a,x)=>a+x[1],0);
-  if (!d) { toast(`Đề ${o.name || o.tid} không có trong lộ trình. Kết quả: đúng ${right}/${all} câu.`); return; }
-  const s = state[d.date] = {...(state[d.date]||{}), parts:o.parts, done:true};
-  if (o.l) s.l = String(o.l); if (o.r) s.r = String(o.r);
-  save(); sel = weekOf(d.date);
-  const sc = (o.l && o.r) ? `${o.l + o.r} điểm (Nghe ${o.l}, Đọc ${o.r})` : `đúng ${right}/${all} câu. Study4 chỉ quy ra điểm khi làm ở chế độ Làm full test, bạn có thể tự nhập điểm`;
-  toast(`Đã đồng bộ ${d.test}: ${sc}.`);
-  setTimeout(() => { const el = document.getElementById("d-" + d.date); if (el) el.scrollIntoView({block:"center"}); }, 50);
+  if (!Array.isArray(list)) list = [list];
+  // newest attempt first; a full test beats a part practice of the same test
+  const best = new Map();
+  list.forEach(o => { const cur = best.get(o.tid); if (!cur || (o.full && !cur.full) || (o.full === cur.full && o.rid > cur.rid)) best.set(o.tid, o); });
+  let ok = [], skip = 0, firstDate = null;
+  best.forEach(o => {
+    const d = testDay(o.tid); if (!d) { skip++; return; }
+    const s = state[d.date] = {...(state[d.date]||{}), parts: o.parts};
+    if (o.full) s.done = true;
+    if (o.l) s.l = String(o.l); if (o.r) s.r = String(o.r);
+    ok.push(d.test.replace("TOEIC LR ", "") + (o.l && o.r ? ` (${o.l + o.r})` : o.full ? "" : " (luyện từng Part)"));
+    if (!firstDate || d.date < firstDate) firstDate = d.date;
+  });
+  save();
+  if (firstDate) sel = weekOf(firstDate);
+  toast(ok.length ? `Đã đồng bộ ${ok.length} đề: ${ok.join(", ")}.` + (skip ? ` Bỏ qua ${skip} đề không có trong lộ trình.` : "")
+                  : `Chưa có đề nào trong lộ trình được làm trên study4. Bỏ qua ${skip} đề khác.`);
+  if (firstDate) setTimeout(() => { const el = document.getElementById("d-" + firstDate); if (el) el.scrollIntoView({block:"center"}); }, 50);
 }
 window.addEventListener("hashchange", () => { if (location.hash.startsWith("#s4=")) { importFromHash(); renderAll(); } });
 
