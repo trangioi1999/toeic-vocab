@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PlanTasks from '../../components/PlanTasks.jsx';
 import { useToast } from '../../components/Toast.jsx';
 import { useStore } from '../../hooks/useStore.js';
+import { useToday } from '../../hooks/useToday.js';
 import { getPlanState, getCheckins, getActivity, setPlanTask, completeDay, undoCheckin } from '../../services/store.js';
 import { dayOf, KIND, PLAN_START, PLAN_END } from '../../lib/plan.js';
 import { canComplete, streak, dayStatus, tasksDone, isWorkDay, REQUIRED_CARDS } from '../../lib/progress.js';
@@ -13,7 +14,7 @@ const KVAR = { test: 'var(--primary)', fixr: 'var(--guide)', fixl: 'var(--learn)
 const SHORT = { 'Chủ nhật': 'CN', 'Thứ 2': 'T2', 'Thứ 3': 'T3', 'Thứ 4': 'T4', 'Thứ 5': 'T5', 'Thứ 6': 'T6', 'Thứ 7': 'T7' };
 
 export default function Today() {
-  const today = todayISO();
+  const today = useToday();
   const plan = useStore(getPlanState);
   const checkins = useStore(getCheckins);
   const activity = useStore(getActivity);
@@ -36,7 +37,9 @@ export default function Today() {
   else { tag = 'Sau lộ trình'; title = today > PLAN_END ? 'Lộ trình đã xong. Ôn từ mỗi ngày để giữ phong độ.' : 'Ôn từ hôm nay'; }
 
   const finish = () => {
-    try { completeDay(today, { note }); setNote(''); toast('Đã hoàn thành hôm nay. Cô sẽ nhận được thông báo.'); }
+    const now = todayISO();
+    if (now !== today) { window.dispatchEvent(new Event('focus')); toast('Đã sang ngày mới. Trang vừa được cập nhật, hãy kiểm tra lại rồi bấm Hoàn thành.'); return; }
+    try { completeDay(now, { note }); setNote(''); toast('Đã hoàn thành hôm nay. Cô sẽ nhận được thông báo.'); }
     catch (e) { toast(e.message); }
   };
 
@@ -59,7 +62,7 @@ export default function Today() {
       {day && day.kind !== 'off' && (
         <section className="sheet" style={{ padding: '16px 16px 4px' }}>
           <div className="section-head"><h2>Việc hôm nay</h2><span className="num" style={{ color: 'var(--soft)', fontWeight: 600 }}>{done}/{day.tasks.length}</span></div>
-          <PlanTasks day={day} entry={entry} onToggle={(i, v) => setPlanTask(today, i, v)} readOnly={!!check} />
+          <PlanTasks day={day} entry={entry} onToggle={(i, v) => { if (todayISO() === today) setPlanTask(today, i, v); else { window.dispatchEvent(new Event('focus')); toast('Đã sang ngày mới. Trang vừa được cập nhật.'); } }} readOnly={!!check} />
         </section>
       )}
 

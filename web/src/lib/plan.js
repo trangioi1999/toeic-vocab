@@ -33,5 +33,7 @@ export function currentWeekIndex(today) {
   const i = weeks.findIndex(w => w.days.some(d => d.date >= today));
   return i < 0 ? weeks.length - 1 : i;
 }
+/** Digits only, at most 495 (max per Listening/Reading section). */
+export const cleanScore = v => { const d = String(v || '').replace(/\D/g, '').slice(0, 3); return d === '' ? '' : String(Math.min(495, +d)); };
 /** Short label used in tight places: "Collection 1 Test 6". */
 export const shortTest = t => String(t || '').replace(/^TOEIC LR /, '');

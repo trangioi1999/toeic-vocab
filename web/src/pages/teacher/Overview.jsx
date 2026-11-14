@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import MonthCalendar from '../../components/MonthCalendar.jsx';
 import ScoreChart from '../../components/ScoreChart.jsx';
 import { useStore } from '../../hooks/useStore.js';
+import { useToday } from '../../hooks/useToday.js';
 import { getCheckins, getPlanState, getActivity, getCardStatus } from '../../services/store.js';
 import { dayOf, DAYS, PLAN_START, PLAN_END, shortTest } from '../../lib/plan.js';
 import { streak, dayStatus, planStats, isWorkDay, tasksDone, REQUIRED_CARDS } from '../../lib/progress.js';
@@ -12,7 +13,7 @@ import './teacher.css';
 const monthKey = iso => +iso.slice(0, 4) * 12 + (+iso.slice(5, 7) - 1);
 
 export default function Overview() {
-  const today = todayISO();
+  const today = useToday();
   const checkins = useStore(getCheckins);
   const plan = useStore(getPlanState);
   const activity = useStore(getActivity);

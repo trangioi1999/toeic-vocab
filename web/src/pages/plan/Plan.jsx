@@ -6,9 +6,10 @@ import PlanTasks from '../../components/PlanTasks.jsx';
 import PartBars, { worstPart } from '../../components/PartBars.jsx';
 import { useToast } from '../../components/Toast.jsx';
 import { useStore } from '../../hooks/useStore.js';
+import { useToday } from '../../hooks/useToday.js';
 import { getPlanState, setPlanEntry, setPlanTask, replacePlanState } from '../../services/store.js';
-import { DAYS, KIND, DOW, weeks, weekName, weekIndexOf, currentWeekIndex, testDay, shortTest, PLAN_START } from '../../lib/plan.js';
-import { planStats, isWorkDay } from '../../lib/progress.js';
+import { DAYS, KIND, DOW, weeks, weekName, weekIndexOf, currentWeekIndex, testDay, shortTest, PLAN_START, cleanScore } from '../../lib/plan.js';
+import { planStats, isWorkDay, tasksDone } from '../../lib/progress.js';
 import { todayISO, dm, daysBetween } from '../../lib/dates.js';
 import { decodeS4, mergeStudy4, bookmarkletHref, bookmarkletCode } from '../../lib/study4.js';
 import './plan.css';
@@ -30,8 +31,8 @@ function DayCard({ d, s, today, open, onToggle }) {
   const parts = src ? (getPlanState()[src.date] || {}).parts : null;
   const want = d.kind === 'fixr' ? [5, 6, 7] : d.kind === 'fixl' ? [1, 2, 3, 4] : [1, 2, 3, 4, 5, 6, 7];
   const worst = d.kind !== 'test' ? worstPart(parts, want) : null;
-  const done = d.tasks.filter((_, i) => (s.tasks ? s.tasks[i] : s.done)).length;
-  const score = (k, v) => setPlanEntry(d.date, { [k]: v.replace(/\D/g, '').slice(0, 3) });
+  const done = tasksDone(d, s);
+  const score = (k, v) => setPlanEntry(d.date, { [k]: cleanScore(v) });
   return (
     <article id={'d-' + d.date} className={`day k-${d.kind}${s.done ? ' done' : ''}${d.date === today ? ' is-today' : ''}`}>
       <button type="button" className="day-row" aria-expanded={open} onClick={onToggle}>
@@ -97,7 +98,7 @@ function Study4Sync() {
 
 export default function Plan() {
   const state = useStore(getPlanState);
-  const today = todayISO();
+  const today = useToday();
   const toast = useToast();
   const navigate = useNavigate();
   const [params] = useSearchParams();

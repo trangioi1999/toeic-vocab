@@ -1,10 +1,11 @@
 import { rewritePlanLinks } from '../lib/legacyHash.js';
+import { ticksOf } from '../lib/progress.js';
 
 const stripLinks = html => html.replace(/<\/?a\b[^>]*>/g, '');
 
 /** The day's to-do list; each task is a bubble you fill in. */
 export default function PlanTasks({ day, entry, onToggle, readOnly, noLinks }) {
-  const ticks = day.tasks.map((_, i) => (entry && entry.tasks ? !!entry.tasks[i] : !!(entry && entry.done)));
+  const ticks = ticksOf(day, entry);
   return (
     <ul className="ptasks">
       {day.tasks.map((t, i) => {

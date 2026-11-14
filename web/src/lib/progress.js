@@ -6,12 +6,13 @@ export const isWorkDay = day => !!day && (day.kind === 'test' || day.kind === 'f
 /** Days that are allowed to pass without a check-in (Sunday review is optional, rest days are rest). */
 const isOptionalDay = day => !!day && (day.kind === 'off' || day.kind === 'review');
 
-export function tasksDone(day, planEntry) {
-  if (!day) return 0;
-  if (planEntry && planEntry.done) return day.tasks.length;
-  const t = (planEntry && planEntry.tasks) || [];
-  return day.tasks.filter((_, i) => t[i]).length;
+/** Per-task ticks; a day marked done counts every task as ticked (study4 import and the old "Xong" box set only done). */
+export function ticksOf(day, planEntry) {
+  if (!day) return [];
+  const e = planEntry || {};
+  return day.tasks.map((_, i) => !!(e.done || (e.tasks && e.tasks[i])));
 }
+export const tasksDone = (day, planEntry) => ticksOf(day, planEntry).filter(Boolean).length;
 
 export function canComplete({ day, planEntry, cardsToday }) {
   if (isWorkDay(day)) {

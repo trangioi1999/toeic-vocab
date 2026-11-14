@@ -18,7 +18,7 @@ Mở tại https://trangioi1999.github.io/toeic-vocab/app/
 - Đăng nhập, đăng xuất, hai vai trò: **học viên** (Hôm nay, Kho từ, Lộ trình, Cài đặt) và **cô giáo** (Tổng quan, chi tiết từng ngày, Cài đặt).
 - Tài khoản dùng thử: `hocvien@demo.vn` và `co@demo.vn`, mật khẩu `123456`.
 - Bản này **chưa có máy chủ**: đăng nhập và dữ liệu là giả lập, lưu trong trình duyệt. Cô chỉ thấy tiến độ khi đăng nhập trên cùng trình duyệt với học viên. Giai đoạn 2 sẽ nối Firebase (đăng nhập thật, dữ liệu dùng chung, thông báo nhắc học và báo cho cô).
-- App mới dùng chung dữ liệu với `index.html` và `lo-trinh.html` (cùng khóa `localStorage`), nên tiến độ cũ hiện ngay và hai bên luôn đồng bộ.
+- App mới dùng chung dữ liệu với `index.html` và `lo-trinh.html` (cùng khóa `localStorage`), nên tiến độ cũ hiện ngay trong app. Trang cũ chỉ đọc dữ liệu lúc mở: nếu đang mở trang cũ ở tab khác, hãy tải lại nó sau khi dùng app để không ghi đè. Thẻ ôn ở trang cũ không được tính vào mục "thẻ đã ôn hôm nay".
 
 Phát triển:
 

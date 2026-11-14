@@ -3,6 +3,7 @@ import Icon from '../../components/Icon.jsx';
 import PlanTasks from '../../components/PlanTasks.jsx';
 import PartBars, { worstPart } from '../../components/PartBars.jsx';
 import { useStore } from '../../hooks/useStore.js';
+import { useToday } from '../../hooks/useToday.js';
 import { getCheckins, getPlanState, getActivity } from '../../services/store.js';
 import { dayOf, KIND, shortTest } from '../../lib/plan.js';
 import { dayStatus, tasksDone } from '../../lib/progress.js';
@@ -16,8 +17,8 @@ export default function DayDetail() {
   const checkins = useStore(getCheckins);
   const plan = useStore(getPlanState);
   const activity = useStore(getActivity);
+  const today = useToday();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date || '')) return <Navigate to="/teacher" replace />;
-  const today = todayISO();
   const day = dayOf(date), c = checkins[date], p = plan[date] || {};
   const s = dayStatus(date, { checkins, today });
   const cards = c ? c.cards : (activity[date] || []).length;

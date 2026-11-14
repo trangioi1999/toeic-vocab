@@ -6,7 +6,7 @@
 import { currentUser } from './auth.js';
 import { todayISO, nowLocalISO } from '../lib/dates.js';
 import { dayOf } from '../lib/plan.js';
-import { canComplete } from '../lib/progress.js';
+import { canComplete, ticksOf } from '../lib/progress.js';
 
 const K = { status: 'status', known: 'known', pref: 'pref', plan: 'toeic700-v3', activity: 'activity', checkins: 'checkins', settings: 'settings' };
 const READ_ONLY = 'Tài khoản cô giáo chỉ được xem';
@@ -71,7 +71,7 @@ export const getActivity = () => read(K.activity, EMPTY);
 
 /* ---------- prefs ---------- */
 export const getPrefs = () => read(K.pref, DEFAULT_PREFS);
-export function setPrefs(patch) { write(K.pref, { ...getPrefs(), ...patch }); }
+export function setPrefs(patch) { assertStudent(); write(K.pref, { ...getPrefs(), ...patch }); }
 
 /* ---------- plan ---------- */
 export const getPlanState = () => read(K.plan, EMPTY);
@@ -89,7 +89,7 @@ export function setPlanTask(date, idx, value) {
   if (!day) return;
   const state = getPlanState();
   const cur = state[date] || {};
-  const tasks = day.tasks.map((_, i) => (cur.tasks ? !!cur.tasks[i] : !!cur.done));
+  const tasks = ticksOf(day, cur);
   tasks[idx] = !!value;
   write(K.plan, { ...state, [date]: { ...cur, tasks, done: tasks.every(Boolean) } });
 }
