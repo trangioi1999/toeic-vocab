@@ -1,0 +1,44 @@
+/* Answer-sheet identity: finished work is a filled pencil bubble; pink drop-out ink marks guides
+   (today, the 700 goal, missed days); blue is the action colour. */
+:root {
+  --paper: #F3F5F1; --sheet: #FFFFFF; --sheet-2: #EEF1ED;
+  --ink: #1B2220; --on-ink: #FFFFFF; --ink-soft: #3A4542;
+  --soft: #56625D; --faint: #6B7772; --rule: #DAE0DB; --line-strong: #C9D1CB; --track: #DDE3DE;
+  --guide: #C93A66; --guide-strong: #A82C53; --guide-tint: #FBE8EE; --guide-rule: #E7C3CF;
+  --primary: #2347D6; --primary-hover: #1A36A8; --on-primary: #FFFFFF; --primary-soft: #E5EBFC;
+  --known: #1D7F53; --known-soft: #DDF2E6;
+  --learn: #B86200; --learn-ink: #8F4A00; --learn-soft: #FBEDDC;
+  --new: #9AA59F;
+  --shadow: 0 18px 36px -24px rgba(27, 34, 32, .45);
+  --display: "Lexend", "Be Vietnam Pro", system-ui, sans-serif;
+  --body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ipa: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", "Segoe UI", serif;
+  --r-sheet: 18px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121715; --sheet: #1A201E; --sheet-2: #222A27;
+    --ink: #E8EEEA; --on-ink: #121715; --ink-soft: #B9C3BE;
+    --soft: #A3AFA9; --faint: #8C9893; --rule: #2C3532; --line-strong: #3A4542; --track: #2E3734;
+    --guide: #F07B9B; --guide-strong: #F59AB3; --guide-tint: #3A1F28; --guide-rule: #4A2C36;
+    --primary: #8AA1FF; --primary-hover: #A9BAFF; --on-primary: #0E1430; --primary-soft: #1F2A55;
+    --known: #4FD394; --known-soft: #14352A;
+    --learn: #F2B84B; --learn-ink: #F2B84B; --learn-soft: #3A2E14;
+    --new: #5C6763;
+    --shadow: 0 18px 36px -24px rgba(0, 0, 0, .8);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121715; --sheet: #1A201E; --sheet-2: #222A27;
+  --ink: #E8EEEA; --on-ink: #121715; --ink-soft: #B9C3BE;
+  --soft: #A3AFA9; --faint: #8C9893; --rule: #2C3532; --line-strong: #3A4542; --track: #2E3734;
+  --guide: #F07B9B; --guide-strong: #F59AB3; --guide-tint: #3A1F28; --guide-rule: #4A2C36;
+  --primary: #8AA1FF; --primary-hover: #A9BAFF; --on-primary: #0E1430; --primary-soft: #1F2A55;
+  --known: #4FD394; --known-soft: #14352A;
+  --learn: #F2B84B; --learn-ink: #F2B84B; --learn-soft: #3A2E14;
+  --new: #5C6763;
+  --shadow: 0 18px 36px -24px rgba(0, 0, 0, .8);
+  color-scheme: dark;
+}

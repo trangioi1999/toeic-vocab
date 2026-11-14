@@ -1,0 +1,1850 @@
+[
+ {
+  "date": "2026-11-16",
+  "dow": "T2",
+  "phase": "Làm quen đề",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-516980414\" target=\"_blank\" rel=\"noopener\">Thẻ 1</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-516981110\" target=\"_blank\" rel=\"noopener\">Thẻ 2</a> + ôn thẻ hôm trước",
+   "Đề đầu vào: <a href=\"https://study4.com/tests/6853/toeic-lr-collection-1-test-2/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 2</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "Điểm đầu vào",
+  "test": "TOEIC LR Collection 1 Test 2",
+  "url": "https://study4.com/tests/6853/toeic-lr-collection-1-test-2/",
+  "tid": 6853,
+  "week": 1
+ },
+ {
+  "date": "2026-11-17",
+  "dow": "T3",
+  "phase": "Làm quen đề",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-517825368\" target=\"_blank\" rel=\"noopener\">Thẻ 3</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-517850168\" target=\"_blank\" rel=\"noopener\">Thẻ 4</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/6853/toeic-lr-collection-1-test-2/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 2</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 2",
+  "url": "https://study4.com/tests/6853/toeic-lr-collection-1-test-2/",
+  "tid": 6853,
+  "week": 1
+ },
+ {
+  "date": "2026-11-18",
+  "dow": "T4",
+  "phase": "Làm quen đề",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-517850264\" target=\"_blank\" rel=\"noopener\">Thẻ 5</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-518130693\" target=\"_blank\" rel=\"noopener\">Thẻ 5 (bản 2)</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/6853/toeic-lr-collection-1-test-2/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 2</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 2",
+  "url": "https://study4.com/tests/6853/toeic-lr-collection-1-test-2/",
+  "tid": 6853,
+  "week": 1
+ },
+ {
+  "date": "2026-11-19",
+  "dow": "T5",
+  "phase": "Làm quen đề",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-518130819\" target=\"_blank\" rel=\"noopener\">Thẻ 6</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514462369\" target=\"_blank\" rel=\"noopener\">Thẻ 7</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/6854/toeic-lr-collection-1-test-3/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 3</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 3",
+  "url": "https://study4.com/tests/6854/toeic-lr-collection-1-test-3/",
+  "tid": 6854,
+  "week": 1
+ },
+ {
+  "date": "2026-11-20",
+  "dow": "T6",
+  "phase": "Làm quen đề",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514695706\" target=\"_blank\" rel=\"noopener\">Thẻ 8</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514695424\" target=\"_blank\" rel=\"noopener\">Thẻ 9</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/6854/toeic-lr-collection-1-test-3/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 3</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 3",
+  "url": "https://study4.com/tests/6854/toeic-lr-collection-1-test-3/",
+  "tid": 6854,
+  "week": 1
+ },
+ {
+  "date": "2026-11-21",
+  "dow": "T7",
+  "phase": "Làm quen đề",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514695170\" target=\"_blank\" rel=\"noopener\">Thẻ 10</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514694885\" target=\"_blank\" rel=\"noopener\">Thẻ 11</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/6854/toeic-lr-collection-1-test-3/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 3</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 3",
+  "url": "https://study4.com/tests/6854/toeic-lr-collection-1-test-3/",
+  "tid": 6854,
+  "week": 1
+ },
+ {
+  "date": "2026-11-22",
+  "dow": "CN",
+  "phase": "Làm quen đề",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 1
+ },
+ {
+  "date": "2026-11-23",
+  "dow": "T2",
+  "phase": "Làm quen đề",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514694647\" target=\"_blank\" rel=\"noopener\">Thẻ 12</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514694154\" target=\"_blank\" rel=\"noopener\">Thẻ 13</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/6855/toeic-lr-collection-1-test-4/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 4</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 4",
+  "url": "https://study4.com/tests/6855/toeic-lr-collection-1-test-4/",
+  "tid": 6855,
+  "week": 2
+ },
+ {
+  "date": "2026-11-24",
+  "dow": "T3",
+  "phase": "Làm quen đề",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514693095\" target=\"_blank\" rel=\"noopener\">Thẻ 14</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514692648\" target=\"_blank\" rel=\"noopener\">Thẻ 15</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/6855/toeic-lr-collection-1-test-4/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 4</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 4",
+  "url": "https://study4.com/tests/6855/toeic-lr-collection-1-test-4/",
+  "tid": 6855,
+  "week": 2
+ },
+ {
+  "date": "2026-11-25",
+  "dow": "T4",
+  "phase": "Làm quen đề",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514692139\" target=\"_blank\" rel=\"noopener\">Thẻ 16</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514684713\" target=\"_blank\" rel=\"noopener\">Thẻ 17</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/6855/toeic-lr-collection-1-test-4/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 4</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 4",
+  "url": "https://study4.com/tests/6855/toeic-lr-collection-1-test-4/",
+  "tid": 6855,
+  "week": 2
+ },
+ {
+  "date": "2026-11-26",
+  "dow": "T5",
+  "phase": "Làm quen đề",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514683417\" target=\"_blank\" rel=\"noopener\">Thẻ 18</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514682809\" target=\"_blank\" rel=\"noopener\">Thẻ 19</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/6856/toeic-lr-collection-1-test-5/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 5</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 5",
+  "url": "https://study4.com/tests/6856/toeic-lr-collection-1-test-5/",
+  "tid": 6856,
+  "week": 2
+ },
+ {
+  "date": "2026-11-27",
+  "dow": "T6",
+  "phase": "Làm quen đề",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-514623207\" target=\"_blank\" rel=\"noopener\">Thẻ 20</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-530443117\" target=\"_blank\" rel=\"noopener\">Thẻ 21</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/6856/toeic-lr-collection-1-test-5/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 5</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 5",
+  "url": "https://study4.com/tests/6856/toeic-lr-collection-1-test-5/",
+  "tid": 6856,
+  "week": 2
+ },
+ {
+  "date": "2026-11-28",
+  "dow": "T7",
+  "phase": "Làm quen đề",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-530443570\" target=\"_blank\" rel=\"noopener\">Thẻ 22</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-530444477\" target=\"_blank\" rel=\"noopener\">Thẻ 23</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/6856/toeic-lr-collection-1-test-5/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 5</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 5",
+  "url": "https://study4.com/tests/6856/toeic-lr-collection-1-test-5/",
+  "tid": 6856,
+  "week": 2
+ },
+ {
+  "date": "2026-11-29",
+  "dow": "CN",
+  "phase": "Làm quen đề",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 2
+ },
+ {
+  "date": "2026-11-30",
+  "dow": "T2",
+  "phase": "Làm quen đề",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-530448797\" target=\"_blank\" rel=\"noopener\">Thẻ 24</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-530449125\" target=\"_blank\" rel=\"noopener\">Thẻ 25</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/6857/toeic-lr-collection-1-test-6/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 6</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 6",
+  "url": "https://study4.com/tests/6857/toeic-lr-collection-1-test-6/",
+  "tid": 6857,
+  "week": 3
+ },
+ {
+  "date": "2026-12-01",
+  "dow": "T3",
+  "phase": "Làm quen đề",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-532045387\" target=\"_blank\" rel=\"noopener\">Thẻ 26</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-532045812\" target=\"_blank\" rel=\"noopener\">Thẻ 27</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/6857/toeic-lr-collection-1-test-6/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 6</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 6",
+  "url": "https://study4.com/tests/6857/toeic-lr-collection-1-test-6/",
+  "tid": 6857,
+  "week": 3
+ },
+ {
+  "date": "2026-12-02",
+  "dow": "T4",
+  "phase": "Làm quen đề",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-532045964\" target=\"_blank\" rel=\"noopener\">Thẻ 28</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-532046137\" target=\"_blank\" rel=\"noopener\">Thẻ 29</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/6857/toeic-lr-collection-1-test-6/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 6</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 6",
+  "url": "https://study4.com/tests/6857/toeic-lr-collection-1-test-6/",
+  "tid": 6857,
+  "week": 3
+ },
+ {
+  "date": "2026-12-03",
+  "dow": "T5",
+  "phase": "Làm quen đề",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-532046293\" target=\"_blank\" rel=\"noopener\">Thẻ 30</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-535011720\" target=\"_blank\" rel=\"noopener\">Thẻ 31</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/6858/toeic-lr-collection-1-test-7/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 7</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 7",
+  "url": "https://study4.com/tests/6858/toeic-lr-collection-1-test-7/",
+  "tid": 6858,
+  "week": 3
+ },
+ {
+  "date": "2026-12-04",
+  "dow": "T6",
+  "phase": "Làm quen đề",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-535011849\" target=\"_blank\" rel=\"noopener\">Thẻ 32</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-535011979\" target=\"_blank\" rel=\"noopener\">Thẻ 33</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/6858/toeic-lr-collection-1-test-7/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 7</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 7",
+  "url": "https://study4.com/tests/6858/toeic-lr-collection-1-test-7/",
+  "tid": 6858,
+  "week": 3
+ },
+ {
+  "date": "2026-12-05",
+  "dow": "T7",
+  "phase": "Làm quen đề",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-535012094\" target=\"_blank\" rel=\"noopener\">Thẻ 34</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-535013060\" target=\"_blank\" rel=\"noopener\">Thẻ 35</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/6858/toeic-lr-collection-1-test-7/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 7</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 7",
+  "url": "https://study4.com/tests/6858/toeic-lr-collection-1-test-7/",
+  "tid": 6858,
+  "week": 3
+ },
+ {
+  "date": "2026-12-06",
+  "dow": "CN",
+  "phase": "Làm quen đề",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 3
+ },
+ {
+  "date": "2026-12-07",
+  "dow": "T2",
+  "phase": "Làm quen đề",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-535013530\" target=\"_blank\" rel=\"noopener\">Thẻ 36</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-537421568\" target=\"_blank\" rel=\"noopener\">Thẻ 37</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/6859/toeic-lr-collection-1-test-8/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 8</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 8",
+  "url": "https://study4.com/tests/6859/toeic-lr-collection-1-test-8/",
+  "tid": 6859,
+  "week": 4
+ },
+ {
+  "date": "2026-12-08",
+  "dow": "T3",
+  "phase": "Làm quen đề",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-537421671\" target=\"_blank\" rel=\"noopener\">Thẻ 38</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-537422787\" target=\"_blank\" rel=\"noopener\">Thẻ 39</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/6859/toeic-lr-collection-1-test-8/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 8</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 8",
+  "url": "https://study4.com/tests/6859/toeic-lr-collection-1-test-8/",
+  "tid": 6859,
+  "week": 4
+ },
+ {
+  "date": "2026-12-09",
+  "dow": "T4",
+  "phase": "Làm quen đề",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-537423070\" target=\"_blank\" rel=\"noopener\">Thẻ 40</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-539064212\" target=\"_blank\" rel=\"noopener\">Thẻ 41</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/6859/toeic-lr-collection-1-test-8/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 8</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 8",
+  "url": "https://study4.com/tests/6859/toeic-lr-collection-1-test-8/",
+  "tid": 6859,
+  "week": 4
+ },
+ {
+  "date": "2026-12-10",
+  "dow": "T5",
+  "phase": "Làm quen đề",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-539064393\" target=\"_blank\" rel=\"noopener\">Thẻ 42</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-539064527\" target=\"_blank\" rel=\"noopener\">Thẻ 43</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/6860/toeic-lr-collection-1-test-9/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 9</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "Mốc 1: ~550",
+  "test": "TOEIC LR Collection 1 Test 9",
+  "url": "https://study4.com/tests/6860/toeic-lr-collection-1-test-9/",
+  "tid": 6860,
+  "week": 4
+ },
+ {
+  "date": "2026-12-11",
+  "dow": "T6",
+  "phase": "Làm quen đề",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-539490557\" target=\"_blank\" rel=\"noopener\">Thẻ 44</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-539490773\" target=\"_blank\" rel=\"noopener\">Thẻ 45</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/6860/toeic-lr-collection-1-test-9/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 9</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 9",
+  "url": "https://study4.com/tests/6860/toeic-lr-collection-1-test-9/",
+  "tid": 6860,
+  "week": 4
+ },
+ {
+  "date": "2026-12-12",
+  "dow": "T7",
+  "phase": "Làm quen đề",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-539491402\" target=\"_blank\" rel=\"noopener\">Thẻ 46</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-539494475\" target=\"_blank\" rel=\"noopener\">Thẻ 47</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/6860/toeic-lr-collection-1-test-9/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 9</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 9",
+  "url": "https://study4.com/tests/6860/toeic-lr-collection-1-test-9/",
+  "tid": 6860,
+  "week": 4
+ },
+ {
+  "date": "2026-12-13",
+  "dow": "CN",
+  "phase": "Làm quen đề",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 4
+ },
+ {
+  "date": "2026-12-14",
+  "dow": "T2",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-539494581\" target=\"_blank\" rel=\"noopener\">Thẻ 48</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-539495811\" target=\"_blank\" rel=\"noopener\">Thẻ 49</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/6861/toeic-lr-collection-1-test-10/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 10</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 10",
+  "url": "https://study4.com/tests/6861/toeic-lr-collection-1-test-10/",
+  "tid": 6861,
+  "week": 5
+ },
+ {
+  "date": "2026-12-15",
+  "dow": "T3",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-540376494\" target=\"_blank\" rel=\"noopener\">Thẻ 50</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-540376831\" target=\"_blank\" rel=\"noopener\">Thẻ 51</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/6861/toeic-lr-collection-1-test-10/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 10</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 10",
+  "url": "https://study4.com/tests/6861/toeic-lr-collection-1-test-10/",
+  "tid": 6861,
+  "week": 5
+ },
+ {
+  "date": "2026-12-16",
+  "dow": "T4",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-540377045\" target=\"_blank\" rel=\"noopener\">Thẻ 52</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-542189499\" target=\"_blank\" rel=\"noopener\">Thẻ 53</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/6861/toeic-lr-collection-1-test-10/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 1 Test 10</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 1 Test 10",
+  "url": "https://study4.com/tests/6861/toeic-lr-collection-1-test-10/",
+  "tid": 6861,
+  "week": 5
+ },
+ {
+  "date": "2026-12-17",
+  "dow": "T5",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-542189594\" target=\"_blank\" rel=\"noopener\">Thẻ 54</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-542189774\" target=\"_blank\" rel=\"noopener\">Thẻ 55</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/7000/toeic-lr-collection-2-test-1/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 1</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 1",
+  "url": "https://study4.com/tests/7000/toeic-lr-collection-2-test-1/",
+  "tid": 7000,
+  "week": 5
+ },
+ {
+  "date": "2026-12-18",
+  "dow": "T6",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-542436819\" target=\"_blank\" rel=\"noopener\">Thẻ 56</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-542436879\" target=\"_blank\" rel=\"noopener\">Thẻ 57</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7000/toeic-lr-collection-2-test-1/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 1</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 1",
+  "url": "https://study4.com/tests/7000/toeic-lr-collection-2-test-1/",
+  "tid": 7000,
+  "week": 5
+ },
+ {
+  "date": "2026-12-19",
+  "dow": "T7",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-542436950\" target=\"_blank\" rel=\"noopener\">Thẻ 58</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-543319374\" target=\"_blank\" rel=\"noopener\">Thẻ 59</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7000/toeic-lr-collection-2-test-1/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 1</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 1",
+  "url": "https://study4.com/tests/7000/toeic-lr-collection-2-test-1/",
+  "tid": 7000,
+  "week": 5
+ },
+ {
+  "date": "2026-12-20",
+  "dow": "CN",
+  "phase": "Tăng tốc",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 5
+ },
+ {
+  "date": "2026-12-21",
+  "dow": "T2",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-543319561\" target=\"_blank\" rel=\"noopener\">Thẻ 60</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-543319686\" target=\"_blank\" rel=\"noopener\">Thẻ 61</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/7001/toeic-lr-collection-2-test-2/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 2</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 2",
+  "url": "https://study4.com/tests/7001/toeic-lr-collection-2-test-2/",
+  "tid": 7001,
+  "week": 6
+ },
+ {
+  "date": "2026-12-22",
+  "dow": "T3",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-543321794\" target=\"_blank\" rel=\"noopener\">Thẻ 62</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-543321994\" target=\"_blank\" rel=\"noopener\">Thẻ 63</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7001/toeic-lr-collection-2-test-2/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 2</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 2",
+  "url": "https://study4.com/tests/7001/toeic-lr-collection-2-test-2/",
+  "tid": 7001,
+  "week": 6
+ },
+ {
+  "date": "2026-12-23",
+  "dow": "T4",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-543322124\" target=\"_blank\" rel=\"noopener\">Thẻ 64</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-543324047\" target=\"_blank\" rel=\"noopener\">Thẻ 65</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7001/toeic-lr-collection-2-test-2/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 2</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 2",
+  "url": "https://study4.com/tests/7001/toeic-lr-collection-2-test-2/",
+  "tid": 7001,
+  "week": 6
+ },
+ {
+  "date": "2026-12-24",
+  "dow": "T5",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-543324213\" target=\"_blank\" rel=\"noopener\">Thẻ 66</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-543324333\" target=\"_blank\" rel=\"noopener\">Thẻ 67</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/7002/toeic-lr-collection-2-test-3/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 3</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 3",
+  "url": "https://study4.com/tests/7002/toeic-lr-collection-2-test-3/",
+  "tid": 7002,
+  "week": 6
+ },
+ {
+  "date": "2026-12-25",
+  "dow": "T6",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-545415623\" target=\"_blank\" rel=\"noopener\">Thẻ 68</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-545422257\" target=\"_blank\" rel=\"noopener\">Thẻ 69</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7002/toeic-lr-collection-2-test-3/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 3</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 3",
+  "url": "https://study4.com/tests/7002/toeic-lr-collection-2-test-3/",
+  "tid": 7002,
+  "week": 6
+ },
+ {
+  "date": "2026-12-26",
+  "dow": "T7",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-545430845\" target=\"_blank\" rel=\"noopener\">Thẻ 70</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-545438699\" target=\"_blank\" rel=\"noopener\">Thẻ 71</a> + ôn thẻ hôm trước",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7002/toeic-lr-collection-2-test-3/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 3</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 3",
+  "url": "https://study4.com/tests/7002/toeic-lr-collection-2-test-3/",
+  "tid": 7002,
+  "week": 6
+ },
+ {
+  "date": "2026-12-27",
+  "dow": "CN",
+  "phase": "Tăng tốc",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 6
+ },
+ {
+  "date": "2026-12-28",
+  "dow": "T2",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-545441268\" target=\"_blank\" rel=\"noopener\">Thẻ 72</a>, <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-545443796\" target=\"_blank\" rel=\"noopener\">Thẻ 73</a> + ôn thẻ hôm trước",
+   "Đề full: <a href=\"https://study4.com/tests/7003/toeic-lr-collection-2-test-4/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 4</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 4",
+  "url": "https://study4.com/tests/7003/toeic-lr-collection-2-test-4/",
+  "tid": 7003,
+  "week": 7
+ },
+ {
+  "date": "2026-12-29",
+  "dow": "T3",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: học <a href=\"https://trangioi1999.github.io/toeic-vocab/#set-545446097\" target=\"_blank\" rel=\"noopener\">Thẻ 74</a> + ôn thẻ hôm trước",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7003/toeic-lr-collection-2-test-4/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 4</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 4",
+  "url": "https://study4.com/tests/7003/toeic-lr-collection-2-test-4/",
+  "tid": 7003,
+  "week": 7
+ },
+ {
+  "date": "2026-12-30",
+  "dow": "T4",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7003/toeic-lr-collection-2-test-4/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 4</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 4",
+  "url": "https://study4.com/tests/7003/toeic-lr-collection-2-test-4/",
+  "tid": 7003,
+  "week": 7
+ },
+ {
+  "date": "2026-12-31",
+  "dow": "T5",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7004/toeic-lr-collection-2-test-5/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 5</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 5",
+  "url": "https://study4.com/tests/7004/toeic-lr-collection-2-test-5/",
+  "tid": 7004,
+  "week": 7
+ },
+ {
+  "date": "2027-01-01",
+  "dow": "T6",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7004/toeic-lr-collection-2-test-5/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 5</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 5",
+  "url": "https://study4.com/tests/7004/toeic-lr-collection-2-test-5/",
+  "tid": 7004,
+  "week": 7
+ },
+ {
+  "date": "2027-01-02",
+  "dow": "T7",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7004/toeic-lr-collection-2-test-5/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 5</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 5",
+  "url": "https://study4.com/tests/7004/toeic-lr-collection-2-test-5/",
+  "tid": 7004,
+  "week": 7
+ },
+ {
+  "date": "2027-01-03",
+  "dow": "CN",
+  "phase": "Tăng tốc",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 7
+ },
+ {
+  "date": "2027-01-04",
+  "dow": "T2",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7005/toeic-lr-collection-2-test-6/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 6</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 6",
+  "url": "https://study4.com/tests/7005/toeic-lr-collection-2-test-6/",
+  "tid": 7005,
+  "week": 8
+ },
+ {
+  "date": "2027-01-05",
+  "dow": "T3",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7005/toeic-lr-collection-2-test-6/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 6</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 6",
+  "url": "https://study4.com/tests/7005/toeic-lr-collection-2-test-6/",
+  "tid": 7005,
+  "week": 8
+ },
+ {
+  "date": "2027-01-06",
+  "dow": "T4",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7005/toeic-lr-collection-2-test-6/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 6</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 6",
+  "url": "https://study4.com/tests/7005/toeic-lr-collection-2-test-6/",
+  "tid": 7005,
+  "week": 8
+ },
+ {
+  "date": "2027-01-07",
+  "dow": "T5",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7006/toeic-lr-collection-2-test-7/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 7</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 7",
+  "url": "https://study4.com/tests/7006/toeic-lr-collection-2-test-7/",
+  "tid": 7006,
+  "week": 8
+ },
+ {
+  "date": "2027-01-08",
+  "dow": "T6",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7006/toeic-lr-collection-2-test-7/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 7</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 7",
+  "url": "https://study4.com/tests/7006/toeic-lr-collection-2-test-7/",
+  "tid": 7006,
+  "week": 8
+ },
+ {
+  "date": "2027-01-09",
+  "dow": "T7",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7006/toeic-lr-collection-2-test-7/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 7</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 7",
+  "url": "https://study4.com/tests/7006/toeic-lr-collection-2-test-7/",
+  "tid": 7006,
+  "week": 8
+ },
+ {
+  "date": "2027-01-10",
+  "dow": "CN",
+  "phase": "Tăng tốc",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 8
+ },
+ {
+  "date": "2027-01-11",
+  "dow": "T2",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7007/toeic-lr-collection-2-test-8/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 8</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 8",
+  "url": "https://study4.com/tests/7007/toeic-lr-collection-2-test-8/",
+  "tid": 7007,
+  "week": 9
+ },
+ {
+  "date": "2027-01-12",
+  "dow": "T3",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7007/toeic-lr-collection-2-test-8/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 8</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 8",
+  "url": "https://study4.com/tests/7007/toeic-lr-collection-2-test-8/",
+  "tid": 7007,
+  "week": 9
+ },
+ {
+  "date": "2027-01-13",
+  "dow": "T4",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7007/toeic-lr-collection-2-test-8/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 8</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 8",
+  "url": "https://study4.com/tests/7007/toeic-lr-collection-2-test-8/",
+  "tid": 7007,
+  "week": 9
+ },
+ {
+  "date": "2027-01-14",
+  "dow": "T5",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7008/toeic-lr-collection-2-test-9/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 9</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 9",
+  "url": "https://study4.com/tests/7008/toeic-lr-collection-2-test-9/",
+  "tid": 7008,
+  "week": 9
+ },
+ {
+  "date": "2027-01-15",
+  "dow": "T6",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7008/toeic-lr-collection-2-test-9/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 9</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 9",
+  "url": "https://study4.com/tests/7008/toeic-lr-collection-2-test-9/",
+  "tid": 7008,
+  "week": 9
+ },
+ {
+  "date": "2027-01-16",
+  "dow": "T7",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7008/toeic-lr-collection-2-test-9/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 9</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 9",
+  "url": "https://study4.com/tests/7008/toeic-lr-collection-2-test-9/",
+  "tid": 7008,
+  "week": 9
+ },
+ {
+  "date": "2027-01-17",
+  "dow": "CN",
+  "phase": "Tăng tốc",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 9
+ },
+ {
+  "date": "2027-01-18",
+  "dow": "T2",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7009/toeic-lr-collection-2-test-10/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 10</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 10",
+  "url": "https://study4.com/tests/7009/toeic-lr-collection-2-test-10/",
+  "tid": 7009,
+  "week": 10
+ },
+ {
+  "date": "2027-01-19",
+  "dow": "T3",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7009/toeic-lr-collection-2-test-10/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 10</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 10",
+  "url": "https://study4.com/tests/7009/toeic-lr-collection-2-test-10/",
+  "tid": 7009,
+  "week": 10
+ },
+ {
+  "date": "2027-01-20",
+  "dow": "T4",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7009/toeic-lr-collection-2-test-10/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 2 Test 10</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 2 Test 10",
+  "url": "https://study4.com/tests/7009/toeic-lr-collection-2-test-10/",
+  "tid": 7009,
+  "week": 10
+ },
+ {
+  "date": "2027-01-21",
+  "dow": "T5",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7050/toeic-lr-collection-3-test-1/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 1</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 1",
+  "url": "https://study4.com/tests/7050/toeic-lr-collection-3-test-1/",
+  "tid": 7050,
+  "week": 10
+ },
+ {
+  "date": "2027-01-22",
+  "dow": "T6",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7050/toeic-lr-collection-3-test-1/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 1</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 1",
+  "url": "https://study4.com/tests/7050/toeic-lr-collection-3-test-1/",
+  "tid": 7050,
+  "week": 10
+ },
+ {
+  "date": "2027-01-23",
+  "dow": "T7",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7050/toeic-lr-collection-3-test-1/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 1</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 1",
+  "url": "https://study4.com/tests/7050/toeic-lr-collection-3-test-1/",
+  "tid": 7050,
+  "week": 10
+ },
+ {
+  "date": "2027-01-24",
+  "dow": "CN",
+  "phase": "Tăng tốc",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 10
+ },
+ {
+  "date": "2027-01-25",
+  "dow": "T2",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7051/toeic-lr-collection-3-test-2/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 2</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 2",
+  "url": "https://study4.com/tests/7051/toeic-lr-collection-3-test-2/",
+  "tid": 7051,
+  "week": 11
+ },
+ {
+  "date": "2027-01-26",
+  "dow": "T3",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7051/toeic-lr-collection-3-test-2/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 2</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 2",
+  "url": "https://study4.com/tests/7051/toeic-lr-collection-3-test-2/",
+  "tid": 7051,
+  "week": 11
+ },
+ {
+  "date": "2027-01-27",
+  "dow": "T4",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7051/toeic-lr-collection-3-test-2/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 2</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 2",
+  "url": "https://study4.com/tests/7051/toeic-lr-collection-3-test-2/",
+  "tid": 7051,
+  "week": 11
+ },
+ {
+  "date": "2027-01-28",
+  "dow": "T5",
+  "phase": "Tăng tốc",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7052/toeic-lr-collection-3-test-3/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 3</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "Mốc 2: ~650",
+  "test": "TOEIC LR Collection 3 Test 3",
+  "url": "https://study4.com/tests/7052/toeic-lr-collection-3-test-3/",
+  "tid": 7052,
+  "week": 11
+ },
+ {
+  "date": "2027-01-29",
+  "dow": "T6",
+  "phase": "Tăng tốc",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7052/toeic-lr-collection-3-test-3/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 3</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 3",
+  "url": "https://study4.com/tests/7052/toeic-lr-collection-3-test-3/",
+  "tid": 7052,
+  "week": 11
+ },
+ {
+  "date": "2027-01-30",
+  "dow": "T7",
+  "phase": "Tăng tốc",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7052/toeic-lr-collection-3-test-3/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 3</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 3",
+  "url": "https://study4.com/tests/7052/toeic-lr-collection-3-test-3/",
+  "tid": 7052,
+  "week": 11
+ },
+ {
+  "date": "2027-01-31",
+  "dow": "CN",
+  "phase": "Tăng tốc",
+  "kind": "review",
+  "hours": "2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Tổng kết trước Tết: đọc lại toàn bộ sổ lỗi sai, chọn 3 lỗi hay gặp nhất",
+   "Xem biểu đồ điểm và điểm từng Part, ghi Part cần ưu tiên sau Tết"
+  ],
+  "note": "Nghỉ Tết từ mai",
+  "week": 11
+ },
+ {
+  "date": "2027-02-01",
+  "dow": "T2",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-02",
+  "dow": "T3",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-03",
+  "dow": "T4",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-04",
+  "dow": "T5",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-05",
+  "dow": "T6",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-06",
+  "dow": "T7",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-07",
+  "dow": "CN",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-08",
+  "dow": "T2",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-09",
+  "dow": "T3",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-10",
+  "dow": "T4",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-11",
+  "dow": "T5",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-12",
+  "dow": "T6",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-13",
+  "dow": "T7",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-14",
+  "dow": "CN",
+  "phase": "Nghỉ Tết",
+  "kind": "off",
+  "hours": "15'",
+  "tasks": [
+   "Ôn lại vài thẻ cũ trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (không bắt buộc)"
+  ],
+  "note": "",
+  "week": "Tết"
+ },
+ {
+  "date": "2027-02-15",
+  "dow": "T2",
+  "phase": "Nước rút",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7053/toeic-lr-collection-3-test-4/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 4</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 4",
+  "url": "https://study4.com/tests/7053/toeic-lr-collection-3-test-4/",
+  "tid": 7053,
+  "week": 12
+ },
+ {
+  "date": "2027-02-16",
+  "dow": "T3",
+  "phase": "Nước rút",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7053/toeic-lr-collection-3-test-4/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 4</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 4",
+  "url": "https://study4.com/tests/7053/toeic-lr-collection-3-test-4/",
+  "tid": 7053,
+  "week": 12
+ },
+ {
+  "date": "2027-02-17",
+  "dow": "T4",
+  "phase": "Nước rút",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7053/toeic-lr-collection-3-test-4/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 4</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 4",
+  "url": "https://study4.com/tests/7053/toeic-lr-collection-3-test-4/",
+  "tid": 7053,
+  "week": 12
+ },
+ {
+  "date": "2027-02-18",
+  "dow": "T5",
+  "phase": "Nước rút",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7054/toeic-lr-collection-3-test-5/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 5</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 5",
+  "url": "https://study4.com/tests/7054/toeic-lr-collection-3-test-5/",
+  "tid": 7054,
+  "week": 12
+ },
+ {
+  "date": "2027-02-19",
+  "dow": "T6",
+  "phase": "Nước rút",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7054/toeic-lr-collection-3-test-5/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 5</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 5",
+  "url": "https://study4.com/tests/7054/toeic-lr-collection-3-test-5/",
+  "tid": 7054,
+  "week": 12
+ },
+ {
+  "date": "2027-02-20",
+  "dow": "T7",
+  "phase": "Nước rút",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7054/toeic-lr-collection-3-test-5/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 5</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 5",
+  "url": "https://study4.com/tests/7054/toeic-lr-collection-3-test-5/",
+  "tid": 7054,
+  "week": 12
+ },
+ {
+  "date": "2027-02-21",
+  "dow": "CN",
+  "phase": "Nước rút",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 12
+ },
+ {
+  "date": "2027-02-22",
+  "dow": "T2",
+  "phase": "Nước rút",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7055/toeic-lr-collection-3-test-6/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 6</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 6",
+  "url": "https://study4.com/tests/7055/toeic-lr-collection-3-test-6/",
+  "tid": 7055,
+  "week": 13
+ },
+ {
+  "date": "2027-02-23",
+  "dow": "T3",
+  "phase": "Nước rút",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7055/toeic-lr-collection-3-test-6/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 6</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 6",
+  "url": "https://study4.com/tests/7055/toeic-lr-collection-3-test-6/",
+  "tid": 7055,
+  "week": 13
+ },
+ {
+  "date": "2027-02-24",
+  "dow": "T4",
+  "phase": "Nước rút",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7055/toeic-lr-collection-3-test-6/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 6</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 6",
+  "url": "https://study4.com/tests/7055/toeic-lr-collection-3-test-6/",
+  "tid": 7055,
+  "week": 13
+ },
+ {
+  "date": "2027-02-25",
+  "dow": "T5",
+  "phase": "Nước rút",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7056/toeic-lr-collection-3-test-7/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 7</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "Mốc cuối: 700+",
+  "test": "TOEIC LR Collection 3 Test 7",
+  "url": "https://study4.com/tests/7056/toeic-lr-collection-3-test-7/",
+  "tid": 7056,
+  "week": 13
+ },
+ {
+  "date": "2027-02-26",
+  "dow": "T6",
+  "phase": "Nước rút",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7056/toeic-lr-collection-3-test-7/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 7</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 7",
+  "url": "https://study4.com/tests/7056/toeic-lr-collection-3-test-7/",
+  "tid": 7056,
+  "week": 13
+ },
+ {
+  "date": "2027-02-27",
+  "dow": "T7",
+  "phase": "Nước rút",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7056/toeic-lr-collection-3-test-7/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 7</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 7",
+  "url": "https://study4.com/tests/7056/toeic-lr-collection-3-test-7/",
+  "tid": 7056,
+  "week": 13
+ },
+ {
+  "date": "2027-02-28",
+  "dow": "CN",
+  "phase": "Nước rút",
+  "kind": "review",
+  "hours": "1–2h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a> (tuỳ chọn)",
+   "Đọc lại sổ lỗi sai của tuần (tuỳ chọn)"
+  ],
+  "note": "Không bắt buộc",
+  "week": 13
+ },
+ {
+  "date": "2027-03-01",
+  "dow": "T2",
+  "phase": "Dự phòng (thi đầu T3)",
+  "kind": "test",
+  "hours": "2.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đề full: <a href=\"https://study4.com/tests/7057/toeic-lr-collection-3-test-8/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 8</a> – chế độ Làm full test, bấm giờ 120', làm liền một mạch",
+   "Nộp bài xong bấm nút đồng bộ để đưa điểm về đây (hoặc tự nhập)"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 8",
+  "url": "https://study4.com/tests/7057/toeic-lr-collection-3-test-8/",
+  "tid": 7057,
+  "week": 14
+ },
+ {
+  "date": "2027-03-02",
+  "dow": "T3",
+  "phase": "Dự phòng (thi đầu T3)",
+  "kind": "fixr",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Reading (Part 5–7) của <a href=\"https://study4.com/tests/7057/toeic-lr-collection-3-test-8/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 8</a>: mở Xem chi tiết đáp án, làm lại câu sai trước khi xem giải thích",
+   "Part 5–6: ghi chủ điểm ngữ pháp/từ vựng của từng câu sai",
+   "Part 7: tìm câu trong bài chứa đáp án, ghi lý do đọc sai",
+   "Ghi mọi câu sai vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 8",
+  "url": "https://study4.com/tests/7057/toeic-lr-collection-3-test-8/",
+  "tid": 7057,
+  "week": 14
+ },
+ {
+  "date": "2027-03-03",
+  "dow": "T4",
+  "phase": "Dự phòng (thi đầu T3)",
+  "kind": "fixl",
+  "hours": "2–3h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chữa Listening (Part 1–4) của <a href=\"https://study4.com/tests/7057/toeic-lr-collection-3-test-8/\" target=\"_blank\" rel=\"noopener\">TOEIC LR Collection 3 Test 8</a>: nghe lại từng câu sai, đọc transcript rồi nghe lại lần nữa",
+   "Shadowing 15': nhại theo 1 đoạn Part 3 hoặc Part 4 vừa sai",
+   "Ghi từ/cụm nghe không ra vào sổ lỗi sai"
+  ],
+  "note": "",
+  "test": "TOEIC LR Collection 3 Test 8",
+  "url": "https://study4.com/tests/7057/toeic-lr-collection-3-test-8/",
+  "tid": 7057,
+  "week": 14
+ },
+ {
+  "date": "2027-03-04",
+  "dow": "T5",
+  "phase": "Dự phòng (thi đầu T3)",
+  "kind": "review",
+  "hours": "1.5h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Đọc lại sổ lỗi sai, làm lại các câu đánh dấu đỏ"
+  ],
+  "note": "Giảm tải",
+  "week": 14
+ },
+ {
+  "date": "2027-03-05",
+  "dow": "T6",
+  "phase": "Dự phòng (thi đầu T3)",
+  "kind": "review",
+  "hours": "1h",
+  "tasks": [
+   "Từ vựng: ôn các thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Nghe nhẹ 1 bộ Part 2, không làm đề mới"
+  ],
+  "note": "Giảm tải",
+  "week": 14
+ },
+ {
+  "date": "2027-03-06",
+  "dow": "T7",
+  "phase": "Dự phòng (thi đầu T3)",
+  "kind": "off",
+  "hours": "30'",
+  "tasks": [
+   "Lướt lại thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chuẩn bị giấy tờ, ngủ sớm"
+  ],
+  "note": "Trước ngày thi",
+  "week": 14
+ },
+ {
+  "date": "2027-03-07",
+  "dow": "CN",
+  "phase": "Dự phòng (thi đầu T3)",
+  "kind": "off",
+  "hours": "30'",
+  "tasks": [
+   "Lướt lại thẻ chưa thuộc trên <a href=\"https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic\" target=\"_blank\" rel=\"noopener\">Kho Từ</a>",
+   "Chuẩn bị giấy tờ, ngủ sớm"
+  ],
+  "note": "",
+  "week": 14
+ }
+]
