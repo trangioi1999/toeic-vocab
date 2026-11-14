@@ -115,9 +115,14 @@ export function undoCheckin(date) {
 }
 
 /* ---------- settings ---------- */
+const settingsCache = {};
 export const getSettings = role => {
   const all = read(K.settings, EMPTY);
-  return { ...DEFAULT_SETTINGS[role], ...(all[role] || {}) };
+  const c = settingsCache[role];
+  if (c && c.src === all) return c.value;
+  const value = { ...DEFAULT_SETTINGS[role], ...(all[role] || {}) };
+  settingsCache[role] = { src: all, value };
+  return value;
 };
 export function setSettings(role, patch) {
   const u = currentUser();

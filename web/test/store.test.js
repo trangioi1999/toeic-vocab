@@ -80,3 +80,14 @@ describe('subscribe', () => {
     expect(store.getCardStatus()).not.toBe(a);
   });
 });
+
+describe('settings snapshot', () => {
+  it('returns the same settings object until settings change', () => {
+    const a = store.getSettings('student');
+    expect(store.getSettings('student')).toBe(a);
+    store.setSettings('student', { reminderTime: '21:00' });
+    const b = store.getSettings('student');
+    expect(b).not.toBe(a);
+    expect(b.reminderTime).toBe('21:00');
+  });
+});
