@@ -36,6 +36,13 @@ describe('rewritePlanLinks', () => {
   });
   it('rewrites group links', () => {
     expect(rewritePlanLinks('<a href="https://trangioi1999.github.io/toeic-vocab/#g-tu-vung-toeic" target="_blank" rel="noopener">Kho Từ</a>'))
-      .toBe('<a href="/vocab/g/tu-vung-toeic">Kho Từ</a>');
+      .toBe('<a href="/vocab/g/tu-vung-toeic" data-inapp="">Kho Từ</a>');
+  });
+});
+
+describe('in-app plan links', () => {
+  it('marks rewritten vocab links so the plan view can route them without a reload', () => {
+    expect(rewritePlanLinks('<a href="https://trangioi1999.github.io/toeic-vocab/#set-516980414" target="_blank">Thẻ 1</a>'))
+      .toBe('<a href="/vocab/set/516980414" data-inapp="">Thẻ 1</a>');
   });
 });

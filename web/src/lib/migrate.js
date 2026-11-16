@@ -76,6 +76,7 @@ export function mergeInto(storage, data) {
       for (const [key, val] of Object.entries(inc)) {
         if (!(key in next)) { next[key] = val; added++; continue; }
         if (k === 'status' && typeof val === 'number' && val > next[key]) next[key] = val;
+        else if ((k === 'toeic700-v3' || k === 'checkins') && isObj(val) && isObj(next[key])) next[key] = { ...val, ...next[key] };
         else if (k === 'activity' && Array.isArray(val) && Array.isArray(next[key])) {
           const merged = [...next[key]];
           for (const x of val) if (!merged.includes(x)) merged.push(x);
@@ -84,6 +85,13 @@ export function mergeInto(storage, data) {
       }
     }
     storage.setItem(k, JSON.stringify(next));
+  }
+  // The app reads the legacy known list only while there is no status map; once status exists, fold it in.
+  const status = parse(storage.getItem('status'));
+  const known = parse(storage.getItem('known'));
+  if ('known' in data && isObj(status) && Array.isArray(known)) {
+    for (const key of known) if (status[key] !== 2) status[key] = 2;
+    storage.setItem('status', JSON.stringify(status));
   }
   return { added };
 }

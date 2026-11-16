@@ -11,10 +11,9 @@ import { getPlanState, setPlanEntry, setPlanTask, replacePlanState } from '../..
 import { DAYS, KIND, DOW, weeks, weekName, weekIndexOf, currentWeekIndex, testDay, shortTest, PLAN_START, cleanScore } from '../../lib/plan.js';
 import { planStats, isWorkDay, tasksDone } from '../../lib/progress.js';
 import { todayISO, dm, daysBetween } from '../../lib/dates.js';
-import { decodeS4, mergeStudy4, bookmarkletHref, bookmarkletCode } from '../../lib/study4.js';
+import { decodeS4, mergeStudy4, bookmarkletHref, bookmarkletCode, SYNC_URL } from '../../lib/study4.js';
 import './plan.css';
 
-export const APP_URL = 'https://trangioi1999.github.io/toeic-vocab/app/';
 const COLS = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
 function cellState(d, s, today) {
@@ -74,9 +73,9 @@ function DayCard({ d, s, today, open, onToggle }) {
 function Study4Sync() {
   const toast = useToast();
   const ref = useRef();
-  useEffect(() => { if (ref.current) ref.current.setAttribute('href', bookmarkletHref(APP_URL)); }, []);
+  useEffect(() => { if (ref.current) ref.current.setAttribute('href', bookmarkletHref(SYNC_URL)); }, []);
   const copy = async () => {
-    try { await navigator.clipboard.writeText('javascript:' + bookmarkletCode(APP_URL)); toast('Đã sao chép. Tạo dấu trang mới trong Chrome, dán mã này vào ô URL.'); }
+    try { await navigator.clipboard.writeText('javascript:' + bookmarkletCode(SYNC_URL)); toast('Đã sao chép. Tạo dấu trang mới trong Chrome, dán mã này vào ô URL.'); }
     catch (e) { toast('Trình duyệt không cho sao chép ở đây. Hãy kéo nút Đồng bộ TOEIC lên thanh dấu trang.'); }
   };
   return (

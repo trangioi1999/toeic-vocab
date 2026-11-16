@@ -15,6 +15,6 @@ export function legacyToPath(hash) {
 }
 
 const OLD = /<a href="https:\/\/trangioi1999\.github\.io\/toeic-vocab\/#(set|g)-([\w-]+)"[^>]*>/g;
-/** Plan task HTML links to the old vocab page; point them at the in-app routes instead. */
+/** Plan task HTML links to the old vocab page; point them at in-app routes (data-inapp: routed without a reload). */
 export const rewritePlanLinks = html =>
-  String(html).replace(OLD, (_, kind, id) => `<a href="/vocab/${kind === 'set' ? 'set' : 'g'}/${id}">`);
+  String(html).replace(OLD, (_, kind, id) => `<a href="/vocab/${kind === 'set' ? 'set' : 'g'}/${id}" data-inapp="">`);

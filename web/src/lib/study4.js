@@ -1,3 +1,7 @@
+import { APP_URL } from '../brand.js';
+
+/** study4 bookmarklet opens this page with #s4=…; main.jsx turns that into /plan?s4=…. */
+export const SYNC_URL = APP_URL + '/plan';
 import { testDay } from './plan.js';
 
 export const encodeS4 = list => btoa(unescape(encodeURIComponent(JSON.stringify(list))));

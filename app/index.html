@@ -4,8 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kho Từ TOEIC đã chuyển nhà</title>
-<meta http-equiv="refresh" content="0; url=../chuyen-nha.html">
-<script>location.replace('../chuyen-nha.html');</script>
+<script>
+// study4 bookmarklets made in the first app still open this page with #s4=…: forward the scores to the new app.
+var NEW_APP = 'https://kho-tu-toeic.pages.dev';
+if (location.hash.indexOf('#s4=') === 0) location.replace(NEW_APP + '/plan' + location.hash);
+else location.replace('../chuyen-nha.html');
+</script>
 </head>
 <body style="font-family:system-ui,sans-serif;padding:24px">
 <p>App đã chuyển sang địa chỉ mới. <a href="../chuyen-nha.html">Bấm vào đây để chuyển tiến độ học</a>.</p>

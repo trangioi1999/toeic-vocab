@@ -74,3 +74,19 @@ describe('mergeInto', () => {
     expect(JSON.parse(localStorage.getItem('status'))).toEqual({ 'a:1': 2 });
   });
 });
+
+describe('legacy known list', () => {
+  it('folds known cards into status so they still count when status exists', () => {
+    localStorage.setItem('status', JSON.stringify({ 'x:1': 1 }));
+    mergeInto(localStorage, { known: JSON.stringify(['a:1', 'x:1']) });
+    expect(JSON.parse(localStorage.getItem('status'))).toEqual({ 'x:1': 2, 'a:1': 2 });
+  });
+});
+
+describe('same-day records', () => {
+  it('keeps existing fields and adds the missing ones from the old site', () => {
+    localStorage.setItem('toeic700-v3', JSON.stringify({ '2026-11-16': { tasks: [true, false, false] } }));
+    mergeInto(localStorage, { 'toeic700-v3': JSON.stringify({ '2026-11-16': { tasks: [true, true, true], done: true, l: '340', r: '280' } }) });
+    expect(JSON.parse(localStorage.getItem('toeic700-v3'))).toEqual({ '2026-11-16': { tasks: [true, false, false], done: true, l: '340', r: '280' } });
+  });
+});

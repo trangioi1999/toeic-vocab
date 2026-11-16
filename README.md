@@ -19,7 +19,7 @@ Chạy trên Cloudflare Pages, link gọn: `https://kho-tu-toeic.pages.dev` (tê
 - Vai trò đi theo tài khoản: **người học** vào `/today`, `/vocab`, `/plan`, `/settings`; **người kèm** vào `/coach`, `/coach/day/<ngày>`, `/coach/settings`. Không có nút chọn vai trò.
 - Tài khoản dùng thử (không hiện trên trang): `hocvien@demo.vn` và `co@demo.vn`, mật khẩu `123456`.
 - Bản này **chưa có máy chủ**: đăng nhập và dữ liệu là giả lập, lưu trong trình duyệt. Giai đoạn 2 nối Firebase (tài khoản thật, ô `role` đặt tay trong Firebase là `student` hoặc `coach`, dữ liệu dùng chung, thông báo).
-- Tên sản phẩm và địa chỉ app nằm ở `web/src/brand.js`. Đổi địa chỉ thì sửa cả `APP_URL` trong `chuyen-nha.html`.
+- Tên sản phẩm và địa chỉ app nằm ở `web/src/brand.js`. Đổi địa chỉ thì sửa cả `APP_URL` trong `chuyen-nha.html` và `NEW_APP` trong `app/index.html`. Nút "Đồng bộ TOEIC" (study4) cũ vẫn chạy nhờ `app/index.html` chuyển tiếp, nhưng nên kéo lại nút mới từ trang Lộ trình.
 
 ### Cài Cloudflare Pages (làm một lần, miễn phí)
 

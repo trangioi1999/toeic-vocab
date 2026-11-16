@@ -94,13 +94,19 @@ export default function AuthDialog({ mode, opener }) {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Esc closes from anywhere, even after a click on plain text moved focus to <body>.
+  useEffect(() => {
+    const onEsc = e => { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onEsc);
+    return () => document.removeEventListener('keydown', onEsc);
+  }); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     const first = box.current.querySelector('[data-autofocus]') || box.current.querySelector(FOCUSABLE);
     if (first) first.focus({ preventScroll: true });
   }, [mode]);
 
   const onKeyDown = e => {
-    if (e.key === 'Escape') { e.stopPropagation(); close(); return; }
     if (e.key !== 'Tab') return;
     const items = [...box.current.querySelectorAll(FOCUSABLE)].filter(el => el.offsetParent !== null);
     if (!items.length) return;

@@ -30,3 +30,13 @@ describe('decodeS4', () => {
     expect(decodeS4('%%%')).toBe(null);
   });
 });
+
+describe('sync target after the move to Cloudflare', () => {
+  it('opens the new app plan page, which turns #s4= into ?s4=', async () => {
+    const { SYNC_URL, bookmarkletCode: code } = await import('../src/lib/study4.js');
+    const { APP_URL } = await import('../src/brand.js');
+    expect(SYNC_URL).toBe(APP_URL + '/plan');
+    expect(code(SYNC_URL)).toContain("'" + APP_URL + "/plan#s4='");
+    expect(code(SYNC_URL)).not.toContain('github.io');
+  });
+});
