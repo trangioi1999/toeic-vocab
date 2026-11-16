@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 
-// In dev, serve ../vocab.json (and icons) from the repo root so fetch('../vocab.json') works.
+// vocab.json stays at the repo root (the old pages read it too). Serve it in dev, copy it into dist on build.
 const serveRepoRoot = {
   name: 'serve-repo-root',
   configureServer(server) {
@@ -21,9 +21,15 @@ const serveRepoRoot = {
   },
 };
 
+const copyVocab = {
+  name: 'copy-vocab',
+  apply: 'build',
+  closeBundle() { fs.copyFileSync(path.join(repoRoot, 'vocab.json'), path.join(repoRoot, 'web', 'dist', 'vocab.json')); },
+};
+
 export default defineConfig({
   base: '/',
-  plugins: [react(), serveRepoRoot],
+  plugins: [react(), serveRepoRoot, copyVocab],
   build: { outDir: 'dist', emptyOutDir: true },
   test: { environment: 'jsdom' },
 });

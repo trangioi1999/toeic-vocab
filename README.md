@@ -13,21 +13,40 @@ Chạy cục bộ: `python3 -m http.server` rồi mở http://localhost:8000
 
 ## App mới (React, giai đoạn 1: giao diện)
 
-Mở tại https://trangioi1999.github.io/toeic-vocab/app/
+Chạy trên Cloudflare Pages, link gọn: `https://kho-tu-toeic.pages.dev` (tên thật tùy tên project bạn đặt trên Cloudflare).
 
-- Đăng nhập, đăng xuất, hai vai trò: **học viên** (Hôm nay, Kho từ, Lộ trình, Cài đặt) và **cô giáo** (Tổng quan, chi tiết từng ngày, Cài đặt).
-- Tài khoản dùng thử: `hocvien@demo.vn` và `co@demo.vn`, mật khẩu `123456`.
-- Bản này **chưa có máy chủ**: đăng nhập và dữ liệu là giả lập, lưu trong trình duyệt. Cô chỉ thấy tiến độ khi đăng nhập trên cùng trình duyệt với học viên. Giai đoạn 2 sẽ nối Firebase (đăng nhập thật, dữ liệu dùng chung, thông báo nhắc học và báo cho cô).
-- App mới dùng chung dữ liệu với `index.html` và `lo-trinh.html` (cùng khóa `localStorage`), nên tiến độ cũ hiện ngay trong app. Trang cũ chỉ đọc dữ liệu lúc mở: nếu đang mở trang cũ ở tab khác, hãy tải lại nó sau khi dùng app để không ghi đè. Thẻ ôn ở trang cũ không được tính vào mục "thẻ đã ôn hôm nay".
+- `/` là trang giới thiệu. `/login` và `/signup` mở hộp thoại đăng nhập / đăng ký (đăng ký đang khóa, mở bằng `SIGNUP_OPEN` trong `web/src/brand.js`).
+- Vai trò đi theo tài khoản: **người học** vào `/today`, `/vocab`, `/plan`, `/settings`; **người kèm** vào `/coach`, `/coach/day/<ngày>`, `/coach/settings`. Không có nút chọn vai trò.
+- Tài khoản dùng thử (không hiện trên trang): `hocvien@demo.vn` và `co@demo.vn`, mật khẩu `123456`.
+- Bản này **chưa có máy chủ**: đăng nhập và dữ liệu là giả lập, lưu trong trình duyệt. Giai đoạn 2 nối Firebase (tài khoản thật, ô `role` đặt tay trong Firebase là `student` hoặc `coach`, dữ liệu dùng chung, thông báo).
+- Tên sản phẩm và địa chỉ app nằm ở `web/src/brand.js`. Đổi địa chỉ thì sửa cả `APP_URL` trong `chuyen-nha.html`.
 
-Phát triển:
+### Cài Cloudflare Pages (làm một lần, miễn phí)
+
+1. Tạo tài khoản ở dash.cloudflare.com, vào **Workers & Pages → Create → Pages → Connect to Git**, chọn repo `toeic-vocab`.
+2. Project name: `kho-tu-toeic` (thành `kho-tu-toeic.pages.dev`). Production branch: `main`.
+3. Build settings: Framework preset **None**, Root directory **`web`**, Build command **`npm run build`**, Build output directory **`dist`**.
+4. Bấm Deploy. Từ đó mỗi lần đẩy code lên `main`, Cloudflare tự build và đăng.
+5. Khóa bí mật (Firebase…) sau này đặt ở **Settings → Variables and Secrets** của project, không để trong repo.
+
+### Chuyển dữ liệu từ GitHub Pages
+
+Tiến độ cũ nằm trong trình duyệt theo từng địa chỉ web, nên phải chuyển một lần trên mỗi máy:
+
+1. Mở trang cũ `https://trangioi1999.github.io/toeic-vocab/` (có dải thông báo ở đầu) hoặc thẳng `.../chuyen-nha.html`.
+2. Bấm **Chuyển sang app mới**. App mới mở trang `/import`, gộp dữ liệu (không ghi đè thứ đã có) rồi báo đã chuyển xong.
+3. Nếu nút không mở được: bấm **Sao chép mã**, mở app mới → Cài đặt → **Nhập dữ liệu từ bản cũ**, dán vào.
+4. Chuyển xong trên mọi máy thì tắt GitHub Pages: repo → Settings → Pages → Source: **None**.
+
+### Phát triển
 
 ```
 cd web
 npm install
-npm run dev     # http://localhost:5173
-npm test        # kiểm thử logic
-npm run build   # ghi bản build ra ../app (commit thư mục app/)
+npm run dev      # http://localhost:5173
+npm test         # kiểm thử logic
+npm run build    # ra web/dist (Cloudflare tự chạy lệnh này, không commit dist)
+npm run preview  # xem bản build ở http://localhost:4173
 ```
 
-Mã nguồn ở `web/src`: `services/` (đăng nhập, dữ liệu – chỗ sẽ thay bằng Firebase), `lib/` (logic thuần), `pages/` (màn hình).
+Mã nguồn ở `web/src`: `services/` (đăng nhập, dữ liệu – chỗ sẽ thay bằng Firebase), `lib/` (logic thuần), `pages/` (màn hình), `brand.js` (tên, địa chỉ, công tắc đăng ký).
