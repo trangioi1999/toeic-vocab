@@ -11,14 +11,14 @@ Chạy cục bộ: `python3 -m http.server` rồi mở http://localhost:8000
 
 `lo-trinh.html` – lộ trình TOEIC 700 (16/11/2026 → 03/2027): một ngày làm đề full trên study4, một ngày chữa đề, kèm link thẻ từ vựng cho từng ngày. Mở tại https://trangioi1999.github.io/toeic-vocab/lo-trinh.html
 
-## App mới (React, giai đoạn 1: giao diện)
+## App mới (React)
 
 Chạy trên Cloudflare Workers (static assets), link gọn dạng `https://kho-tu-toeic.<tên-tài-khoản>.workers.dev` hoặc tên miền riêng.
 
 - `/` là trang giới thiệu. `/login` và `/signup` mở hộp thoại đăng nhập / đăng ký (đăng ký đang khóa, mở bằng `SIGNUP_OPEN` trong `web/src/brand.js`).
 - Vai trò đi theo tài khoản: **người học** vào `/today`, `/vocab`, `/plan`, `/settings`; **người kèm** vào `/coach`, `/coach/day/<ngày>`, `/coach/settings`. Không có nút chọn vai trò.
 - Tài khoản dùng thử (không hiện trên trang): `hocvien@demo.vn` và `co@demo.vn`, mật khẩu `123456`.
-- Bản này **chưa có máy chủ**: đăng nhập và dữ liệu là giả lập, lưu trong trình duyệt. Giai đoạn 2 nối Firebase (tài khoản thật, ô `role` đặt tay trong Firebase là `student` hoặc `coach`, dữ liệu dùng chung, thông báo).
+- Hai chế độ, tự chọn lúc mở app: **chưa có khóa Firebase** trên Cloudflare thì dùng tài khoản giả lập, dữ liệu trong trình duyệt; **có khóa** thì dùng tài khoản Firebase thật, dữ liệu chung trên Firestore, có thông báo. Không cần sửa code hay build lại. Cách bật: mục *Bật Firebase* bên dưới.
 - Tên sản phẩm và địa chỉ app nằm ở `web/src/brand.js`. Đổi địa chỉ thì sửa cả `APP_URL` trong `chuyen-nha.html` và `NEW_APP` trong `app/index.html`. Nút "Đồng bộ TOEIC" (study4) cũ vẫn chạy nhờ `app/index.html` chuyển tiếp, nhưng nên kéo lại nút mới từ trang Lộ trình.
 
 ### Deploy lên Cloudflare Workers
@@ -46,6 +46,58 @@ Mỗi lần code vào `main` là tự deploy. Link mặc định dạng `kho-tu-
 
 Kiểm tra trên máy: `cd web && npm run build && npx wrangler deploy --dry-run` (hoặc `npx wrangler dev` để chạy thử).
 
+### Bật Firebase (tài khoản thật, dữ liệu chung, thông báo) — khoảng 20 phút, miễn phí
+
+Không cần thẻ: gói Spark của Firebase và gói Free của Cloudflare là đủ.
+
+**A. Tạo project Firebase** (console.firebase.google.com)
+
+1. **Add project**, đặt tên (ví dụ `kho-tu-toeic`). Google Analytics: tắt cũng được.
+2. **Build → Authentication → Get started → Sign-in method → Email/Password → Enable → Save.**
+3. **Authentication → Users → Add user**: tạo tài khoản cho bạn và cho người kèm (email + mật khẩu). Chép lại **User UID** của từng người.
+4. **Build → Firestore Database → Create database**, vị trí `asia-southeast1` (Singapore), chọn **Production mode**.
+5. **Firestore → Rules**: xóa hết, dán nội dung file `firebase/firestore.rules` trong repo, bấm **Publish**.
+6. **Firestore → Data → Start collection** tên `users`, tạo 2 document (Document ID = UID ở bước 3):
+
+   | Document ID | Trường (kiểu string) |
+   |---|---|
+   | UID của bạn | `role` = `student`, `name` = tên bạn |
+   | UID người kèm | `role` = `coach`, `learnerUid` = UID của bạn, `name` = tên người kèm |
+
+   Vai trò chỉ đổi được ở đây; app không cho ai tự sửa.
+7. **Project settings (bánh răng) → General → Your apps → biểu tượng Web `</>`** → đặt tên, không cần Hosting → **Register app**. Chép 4 giá trị trong `firebaseConfig`: `apiKey`, `projectId`, `appId`, `messagingSenderId`.
+8. **Project settings → Cloud Messaging → Web Push certificates → Generate key pair**. Chép chuỗi khóa (VAPID key).
+9. **Project settings → Service accounts → Generate new private key** → tải về một file `.json`. Giữ kín file này.
+10. **Authentication → Settings → Authorized domains → Add domain**: tên miền của app trên Cloudflare (ví dụ `kho-tu-toeic.<tên-tài-khoản>.workers.dev`).
+
+**B. Dán khóa vào Cloudflare** (Workers & Pages → `kho-tu-toeic` → **Settings → Variables and Secrets → Add**)
+
+| Tên | Kiểu | Giá trị |
+|---|---|---|
+| `FIREBASE_API_KEY` | Text | `apiKey` |
+| `FIREBASE_PROJECT_ID` | Text | `projectId` |
+| `FIREBASE_APP_ID` | Text | `appId` |
+| `FIREBASE_MESSAGING_SENDER_ID` | Text | `messagingSenderId` |
+| `FIREBASE_VAPID_KEY` | Text | khóa ở bước A8 |
+| `FIREBASE_SERVICE_ACCOUNT` | **Secret** | toàn bộ nội dung file `.json` ở bước A9 |
+
+Bấm **Deploy** để áp dụng. `wrangler.toml` có `keep_vars = true` nên các lần deploy sau không xóa những biến này.
+
+**C. Dùng thử**
+
+1. Mở app, đăng nhập bằng email của bạn. Tiến độ đang có trong trình duyệt đó tự được đưa lên Firebase (một lần, không ghi đè gì).
+2. **Cài đặt → Bật thông báo** trên từng máy muốn nhận. iPhone: mở bằng Safari → Chia sẻ → **Thêm vào MH chính**, mở app từ màn hình chính rồi mới bật.
+3. Người kèm đăng nhập trên máy của họ, bật thông báo. Khi bạn bấm **Hoàn thành hôm nay**, họ nhận thông báo ngay.
+4. Kiểm tra: Firestore → Data có `learners/<UID của bạn>/data/...`.
+
+Thông báo tự động (máy chủ Cloudflare kiểm tra 10 phút một lần, theo giờ Việt Nam): nhắc người học từ giờ đã đặt (mặc định 20:00) nếu hôm đó chưa xong; 23:00 báo người kèm nếu hôm có bài trong lộ trình mà chưa học. Mỗi loại tối đa một lần một ngày.
+
+Sự cố hay gặp:
+- **"Tài khoản chưa được cấp quyền"**: thiếu document `users/<UID>` hoặc sai `role` / `learnerUid` (bước A6).
+- **Đăng nhập báo lỗi tên miền**: chưa thêm tên miền ở bước A10.
+- **Không nhận thông báo**: chưa bật ở Cài đặt trên máy đó, hoặc thiếu `FIREBASE_VAPID_KEY` / `FIREBASE_SERVICE_ACCOUNT`.
+- Muốn quay lại chế độ giả lập: xóa các biến `FIREBASE_*` rồi deploy lại.
+
 ### Chuyển dữ liệu từ GitHub Pages
 
 Tiến độ cũ nằm trong trình duyệt theo từng địa chỉ web, nên phải chuyển một lần trên mỗi máy:
@@ -68,4 +120,4 @@ npm run build:only  # build không chạy test
 npm run preview  # xem bản build ở http://localhost:4173
 ```
 
-Mã nguồn ở `web/src`: `services/` (đăng nhập, dữ liệu – chỗ sẽ thay bằng Firebase), `lib/` (logic thuần), `pages/` (màn hình), `brand.js` (tên, địa chỉ, công tắc đăng ký).
+Mã nguồn: `web/src/services/` (đăng nhập và dữ liệu: `auth.js`, `store.js`, `kv.js`; chế độ Firebase ở `firebase.js`, `cloudKv.js`, `config.js`), `web/src/lib/` (logic thuần), `web/src/pages/` (màn hình), `web/worker/` (máy chủ Cloudflare: cấu hình, khóa từ vựng, thông báo), `firebase/firestore.rules` (quy tắc bảo mật), `web/src/brand.js` (tên, địa chỉ, công tắc đăng ký).
