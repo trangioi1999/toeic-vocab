@@ -1,3 +1,4 @@
+import { getIdToken } from '../services/auth.js';
 export const GROUPS = [
   { id: 'tu-vung-toeic', name: 'Từ vựng TOEIC theo thẻ', desc: 'Bộ thẻ 1 – 74, mỗi thẻ 20 từ', test: t => /^T[ỪU]\s*V[ỰƯU]NG\s*TOEIC/iu.test(t) || /^thẻ\s*\d+$/iu.test(t) },
   { id: 'listening', name: 'Từ vựng Listening', desc: 'Danh sách từ vựng phần nghe', test: t => /^LIST\s/i.test(t) },
@@ -54,7 +55,9 @@ export function searchItems(all, q, limit = 300) {
 let promise = null;
 export function loadVocab() {
   if (!promise) {
-    promise = fetch('/vocab.json').then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); }).then(prepare);
+    promise = getIdToken()
+      .then(t => fetch('/vocab.json', t ? { headers: { Authorization: 'Bearer ' + t } } : undefined))
+      .then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); }).then(prepare);
     promise.catch(() => { promise = null; });
   }
   return promise;

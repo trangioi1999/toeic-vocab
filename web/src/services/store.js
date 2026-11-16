@@ -3,7 +3,7 @@
  * pages (status, known, pref, toeic700-v3). Mock mode keeps them in localStorage; Firebase mode swaps the
  * kv backend for a Firestore-synced cache. Getters return the same object until the stored string changes.
  */
-import { currentUser } from './auth.js';
+import { currentUser, afterCheckin } from './auth.js';
 import { kv } from './kv.js';
 import { todayISO, nowLocalISO } from '../lib/dates.js';
 import { dayOf } from '../lib/plan.js';
@@ -103,6 +103,7 @@ export function completeDay(date, { note } = {}) {
   if (!r.ok) throw new Error(r.reason);
   const c = { at: nowLocalISO(), cards, note: String(note || '').trim(), planTitle: day ? day.title : '' };
   write(K.checkins, { ...getCheckins(), [date]: c });
+  afterCheckin(date);
   return c;
 }
 export function undoCheckin(date) {

@@ -1,6 +1,6 @@
 /*
- * Mock authentication (phase 1). Phase 2 replaces the body of these functions with Firebase Auth;
- * the exported API stays the same.
+ * Auth facade. The mock backend (phase 1 accounts in localStorage) runs until main.jsx switches to the
+ * Firebase backend (services/firebase.js) when /api/config says Firebase is configured.
  */
 import { normalizeRole } from '../lib/roles.js';
 
@@ -10,10 +10,10 @@ const ACCOUNTS = [
   { email: 'co@demo.vn', password: '123456', user: { uid: 'coach-1', email: 'co@demo.vn', name: 'Người kèm', role: 'coach' } },
 ];
 
-const listeners = new Set();
+const mockListeners = new Set();
 let cached = { raw: undefined, user: null };
 
-export function currentUser() {
+function mockCurrent() {
   let raw = null;
   try { raw = localStorage.getItem(KEY); } catch (e) { /* storage blocked */ }
   if (raw !== cached.raw) {
@@ -25,23 +25,38 @@ export function currentUser() {
   }
   return cached.user;
 }
+const mockEmit = () => { const u = mockCurrent(); mockListeners.forEach(cb => cb(u)); };
+if (typeof window !== 'undefined') window.addEventListener('storage', e => { if (e.key === KEY || e.key === null) mockEmit(); });
 
-function emit() { const u = currentUser(); listeners.forEach(cb => cb(u)); }
+export const mockBackend = {
+  mode: 'mock',
+  currentUser: mockCurrent,
+  onAuthChange(cb) { mockListeners.add(cb); return () => mockListeners.delete(cb); },
+  async login(email, password) {
+    const e = String(email || '').trim().toLowerCase();
+    const acc = ACCOUNTS.find(a => a.email === e && a.password === password);
+    if (!acc) throw new Error('Sai email hoặc mật khẩu');
+    try { localStorage.setItem(KEY, JSON.stringify(acc.user)); } catch (err) { /* ignore */ }
+    mockEmit();
+    return acc.user;
+  },
+  async logout() {
+    try { localStorage.removeItem(KEY); } catch (e) { /* ignore */ }
+    mockEmit();
+  },
+  async getIdToken() { return null; },
+  afterCheckin() {},
+};
 
-export async function login(email, password) {
-  const e = String(email || '').trim().toLowerCase();
-  const acc = ACCOUNTS.find(a => a.email === e && a.password === password);
-  if (!acc) throw new Error('Sai email hoặc mật khẩu');
-  try { localStorage.setItem(KEY, JSON.stringify(acc.user)); } catch (err) { /* ignore */ }
-  emit();
-  return acc.user;
-}
+let backend = mockBackend;
+export function setAuthBackend(b) { backend = b; }
+export const authMode = () => backend.mode;
 
-export async function logout() {
-  try { localStorage.removeItem(KEY); } catch (e) { /* ignore */ }
-  emit();
-}
-
-export function onAuthChange(cb) { listeners.add(cb); return () => listeners.delete(cb); }
-
-if (typeof window !== 'undefined') window.addEventListener('storage', e => { if (e.key === KEY || e.key === null) emit(); });
+export const currentUser = () => backend.currentUser();
+export const onAuthChange = cb => backend.onAuthChange(cb);
+export const login = (email, password) => backend.login(email, password);
+export const logout = () => backend.logout();
+/** Firebase ID token for Worker requests, or null in mock mode / signed out. */
+export const getIdToken = () => backend.getIdToken();
+/** Called after the learner completes a day (Firebase mode tells the coach). Never throws. */
+export function afterCheckin(date) { try { Promise.resolve(backend.afterCheckin(date)).catch(() => {}); } catch (e) { /* ignore */ } }
