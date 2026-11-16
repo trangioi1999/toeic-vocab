@@ -1,0 +1,106 @@
+/*
+ * Firebase-mode pieces that need no Firebase SDK, so they are unit-tested with a fake document API.
+ * createCloudKv: the kv backend in Firebase mode. Memory first (synchronous getters), cached per uid in
+ * localStorage for offline starts, synced with Firestore through an injected `docs` adapter:
+ *   docs.listen(path, cb(raw|null)) → unsubscribe;  docs.write(path, raw) → Promise
+ */
+import { normalizeRole } from '../lib/roles.js';
+import { collect, mergeInto } from '../lib/migrate.js';
+
+export const LEARNER_KEYS = ['status', 'known', 'pref', 'toeic700-v3', 'activity', 'checkins'];
+export const NOT_ALLOWED = 'Tài khoản chưa được cấp quyền. Nhờ người quản lý thêm vai trò trong Firebase.';
+
+export function pathOf(key, { uid, learnerUid }) {
+  if (LEARNER_KEYS.includes(key)) return `learners/${learnerUid}/data/${key}`;
+  if (key === 'settings') return `userSettings/${uid}`;
+  return null;
+}
+
+export function createCloudKv({ uid, learnerUid, docs, cache = localStorage, debounceMs = 300, startTimeoutMs = 4000 }) {
+  const ids = { uid, learnerUid };
+  const keys = [...LEARNER_KEYS, 'settings'];
+  const cacheKey = k => `cloud:${uid}:${k}`;
+  const mem = new Map();
+  const subs = new Set();
+  const pending = new Map(); // key → timer
+  const offs = [];
+  const emit = () => subs.forEach(cb => cb());
+
+  for (const k of keys) {
+    try { const v = cache.getItem(cacheKey(k)); if (v != null) mem.set(k, v); } catch (e) { /* ignore */ }
+  }
+  const remember = (k, v) => {
+    if (v == null) mem.delete(k); else mem.set(k, v);
+    try { if (v == null) cache.removeItem(cacheKey(k)); else cache.setItem(cacheKey(k), v); } catch (e) { /* ignore */ }
+  };
+  const send = k => {
+    clearTimeout(pending.get(k));
+    pending.delete(k);
+    return docs.write(pathOf(k, ids), mem.get(k)).catch(() => {});
+  };
+
+  return {
+    getItem: k => (mem.has(k) ? mem.get(k) : null),
+    setItem(k, v) {
+      const path = pathOf(k, ids);
+      if (!path) { mem.set(k, v); emit(); return; }
+      remember(k, v);
+      emit();
+      clearTimeout(pending.get(k));
+      pending.set(k, setTimeout(() => send(k), debounceMs));
+    },
+    subscribe(cb) { subs.add(cb); return () => subs.delete(cb); },
+    /** Listen to every document; resolves once each has answered (or after a timeout when offline). */
+    start() {
+      return new Promise(resolve => {
+        const waiting = new Set(keys);
+        const timer = setTimeout(resolve, startTimeoutMs);
+        for (const k of keys) {
+          offs.push(docs.listen(pathOf(k, ids), raw => {
+            if (!pending.has(k) && raw !== (mem.has(k) ? mem.get(k) : null)) { remember(k, raw); emit(); }
+            waiting.delete(k);
+            if (!waiting.size) { clearTimeout(timer); resolve(); }
+          }));
+        }
+      });
+    },
+    async stop() {
+      offs.splice(0).forEach(off => off());
+      await Promise.all([...pending.keys()].map(send));
+    },
+  };
+}
+
+/** Once per account: merge the progress kept in this browser (mock mode / old pages) into the cloud. */
+export function firstUpload(kv, legacy, uid, flags = legacy) {
+  const flag = `uploaded:${uid}`;
+  try { if (flags.getItem(flag)) return 0; } catch (e) { return 0; }
+  const { added } = mergeInto(kv, collect(legacy));
+  try { flags.setItem(flag, new Date().toISOString()); } catch (e) { /* ignore */ }
+  return added;
+}
+
+/** users/{uid} profile → app user. Throws NOT_ALLOWED when the account has no usable role. */
+export function toUser(uid, email, profile) {
+  const role = profile ? normalizeRole(profile.role) : null;
+  if (!role) throw new Error(NOT_ALLOWED);
+  if (role === 'coach' && !(typeof profile.learnerUid === 'string' && profile.learnerUid)) throw new Error(NOT_ALLOWED);
+  return {
+    uid,
+    email: email || '',
+    name: typeof profile.name === 'string' && profile.name.trim() ? profile.name.trim() : role === 'coach' ? 'Người kèm' : 'Người học',
+    role,
+    learnerUid: role === 'coach' ? profile.learnerUid : uid,
+  };
+}
+
+export function authError(code) {
+  switch (code) {
+    case 'auth/invalid-credential': case 'auth/wrong-password': case 'auth/user-not-found': case 'auth/invalid-email': case 'auth/missing-password':
+      return 'Sai email hoặc mật khẩu';
+    case 'auth/too-many-requests': return 'Đăng nhập sai nhiều lần. Thử lại sau ít phút';
+    case 'auth/network-request-failed': return 'Không có mạng. Kiểm tra kết nối rồi thử lại';
+    case 'auth/user-disabled': return 'Tài khoản này đã bị khoá';
+    default: return 'Không đăng nhập được. Thử lại sau';
+  }
+}
