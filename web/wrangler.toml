@@ -1,6 +1,6 @@
 # Cloudflare Worker for the app. Workers Builds: root directory "web", build command "npm ci",
 # deploy command "npx wrangler deploy" (wrangler runs [build] below first, so dist/ always exists).
-name = "kho-tu-toeic"
+name = "toeic-vocab"
 main = "worker/index.js"
 compatibility_date = "2026-11-01"
 # Keep the variables and secrets set in the dashboard (Firebase keys) when deploying from the repo.

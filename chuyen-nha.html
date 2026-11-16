@@ -56,7 +56,7 @@ textarea { width: 100%; min-height: 84px; border-radius: 12px; border: 1px solid
 </main>
 <script>
 // Same format as web/src/lib/migrate.js (encodeData): base64url of UTF-8 JSON {v:1, data:{key: rawString}}.
-var APP_URL = 'https://kho-tu-toeic.pages.dev';
+var APP_URL = 'https://toeic-vocab.gioitv-dev.workers.dev';
 var KEYS = ['status', 'known', 'pref', 'toeic700-v3', 'activity', 'checkins', 'settings'];
 var data = {};
 KEYS.forEach(function (k) { try { var v = localStorage.getItem(k); if (v != null) data[k] = v; } catch (e) {} });

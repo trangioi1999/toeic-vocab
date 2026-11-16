@@ -70,3 +70,10 @@
 .who-card .tx span { font-size: 13px; color: var(--soft); overflow-wrap: anywhere; }
 .import-box { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
 .import-box .field { width: 100%; }
+
+/* Giao diện: three-way choice; wraps under the label on narrow phones. */
+.theme-row { flex-wrap: wrap; }
+.theme-seg { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--sheet-2); border: 1px solid var(--rule); }
+.theme-seg button { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 12px; border: 0; border-radius: 999px; background: none; color: var(--soft); font: 500 14px var(--body); }
+.theme-seg button[aria-checked="true"] { background: var(--ink); color: var(--on-ink); }
+.theme-seg button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Icon from '../../components/Icon.jsx';
 import { APP_NAME } from '../../brand.js';
 import AuthDialog from './AuthDialog.jsx';
+import { ThemeButton } from '../../components/ThemeControls.jsx';
 import './landing.css';
 
 const WEEK = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
@@ -97,6 +98,7 @@ export default function Landing() {
               <a href="#cach-dung">Cách dùng</a>
               <a href="#hoi-dap">Hỏi đáp</a>
             </nav>
+            <ThemeButton className="lp-theme" />
             <Link className="btn primary lp-login" to="/login" onClick={remember}>Đăng nhập</Link>
           </div>
         </header>

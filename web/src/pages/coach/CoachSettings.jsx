@@ -1,4 +1,5 @@
 import NotifyCard from '../../components/NotifyCard.jsx';
+import { ThemePicker } from '../../components/ThemeControls.jsx';
 import { useStore } from '../../hooks/useStore.js';
 import { getSettings, setSettings } from '../../services/store.js';
 import { Switch, AccountCard } from '../student/Settings.jsx';
@@ -19,6 +20,7 @@ export default function CoachSettings() {
           <Switch label="Báo lúc 23:00 nếu hôm nay chưa học" checked={s.notifyMissed} onChange={v => setSettings('coach', { notifyMissed: v })} />
         </div>
       </section>
+      <ThemePicker />
       <NotifyCard />
       <AccountCard />
     </div>

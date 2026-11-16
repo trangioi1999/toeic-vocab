@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NotifyCard from '../../components/NotifyCard.jsx';
+import { ThemePicker } from '../../components/ThemeControls.jsx';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useStore } from '../../hooks/useStore.js';
 import { getSettings, setSettings } from '../../services/store.js';
@@ -63,6 +64,7 @@ export default function Settings() {
           <input type="time" value={s.reminderTime} disabled={!s.reminder} onChange={e => e.target.value && setSettings('student', { reminderTime: e.target.value })} />
         </label>
       </section>
+      <ThemePicker />
       <NotifyCard />
       <ImportBox />
       <AccountCard />

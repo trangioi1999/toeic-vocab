@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, Link, Outlet, useNavigate } from 'react-router-dom';
 import Icon from './Icon.jsx';
+import { ThemeButton } from './ThemeControls.jsx';
 import { useAuth } from '../hooks/useAuth.js';
 import { APP_NAME } from '../brand.js';
 import './AppShell.css';
@@ -60,6 +61,7 @@ export default function AppShell() {
             ))}
           </nav>
           <span className="top-spacer" />
+          <ThemeButton />
           <AccountMenu user={user} onLogout={doLogout} />
         </div>
       </header>

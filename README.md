@@ -13,7 +13,7 @@ Chạy cục bộ: `python3 -m http.server` rồi mở http://localhost:8000
 
 ## App mới (React)
 
-Chạy trên Cloudflare Workers (static assets), link gọn dạng `https://kho-tu-toeic.<tên-tài-khoản>.workers.dev` hoặc tên miền riêng.
+Chạy trên Cloudflare Workers (static assets), link gọn dạng `https://toeic-vocab.gioitv-dev.workers.dev` (Worker tên `toeic-vocab`) hoặc tên miền riêng.
 
 - `/` là trang giới thiệu. `/login` và `/signup` mở hộp thoại đăng nhập / đăng ký (đăng ký đang khóa, mở bằng `SIGNUP_OPEN` trong `web/src/brand.js`).
 - Vai trò đi theo tài khoản: **người học** vào `/today`, `/vocab`, `/plan`, `/settings`; **người kèm** vào `/coach`, `/coach/day/<ngày>`, `/coach/settings`. Không có nút chọn vai trò.
@@ -27,7 +27,7 @@ App React build ra file tĩnh trong `web/dist`; một Worker chỉ có static as
 
 | File | Việc |
 |---|---|
-| `web/wrangler.toml` | tên Worker `kho-tu-toeic`, thư mục `./dist`, `not_found_handling = "single-page-application"` để link sâu (`/vocab/set/…`) mở được |
+| `web/wrangler.toml` | tên Worker `toeic-vocab`, thư mục `./dist`, `not_found_handling = "single-page-application"` để link sâu (`/vocab/set/…`) mở được |
 | `web/package.json` | `npm run build` = chạy test rồi build: test hỏng thì không deploy |
 | `web/.nvmrc` | Node 22 |
 | `web/public/_headers` | cache 1 năm cho file đã băm tên, luôn kiểm tra bản mới của trang/sw.js/vocab.json, header bảo mật |
@@ -36,13 +36,13 @@ Tạo project một lần: dash.cloudflare.com → **Workers & Pages → Create 
 
 | Ô | Giá trị |
 |---|---|
-| Project name | `kho-tu-toeic` (phải trùng `name` trong `wrangler.toml`) |
+| Project name | `toeic-vocab` (phải trùng `name` trong `wrangler.toml`) |
 | Build command | `npm ci` (chỉ cài thư viện; test + build do `wrangler deploy` tự chạy qua `[build]` trong `wrangler.toml`) |
 | Deploy command | `npx wrangler deploy` |
 | Non-production branch deploy command (nếu có) | `npx wrangler versions upload` |
 | Path / Root directory (trong Advanced settings) | `web` |
 
-Mỗi lần code vào `main` là tự deploy. Link mặc định dạng `kho-tu-toeic.<tên-tài-khoản>.workers.dev`; đổi `APP_URL` trong `web/src/brand.js`, `chuyen-nha.html` và `NEW_APP` trong `app/index.html` cho đúng link thật. Khóa bí mật (giai đoạn 2) thêm ở **Settings → Variables and Secrets**.
+Mỗi lần code vào `main` là tự deploy. Link mặc định dạng `toeic-vocab.gioitv-dev.workers.dev`; đổi `APP_URL` trong `web/src/brand.js`, `chuyen-nha.html` và `NEW_APP` trong `app/index.html` cho đúng link thật. Khóa bí mật (giai đoạn 2) thêm ở **Settings → Variables and Secrets**.
 
 Kiểm tra trên máy: `cd web && npm run build && npx wrangler deploy --dry-run` (hoặc `npx wrangler dev` để chạy thử).
 
@@ -69,9 +69,9 @@ Không cần thẻ: gói Spark của Firebase và gói Free của Cloudflare là
 7. **Project settings (bánh răng) → General → Your apps → biểu tượng Web `</>`** → đặt tên, không cần Hosting → **Register app**. Chép 4 giá trị trong `firebaseConfig`: `apiKey`, `projectId`, `appId`, `messagingSenderId`.
 8. **Project settings → Cloud Messaging → Web Push certificates → Generate key pair**. Chép chuỗi khóa (VAPID key).
 9. **Project settings → Service accounts → Generate new private key** → tải về một file `.json`. Giữ kín file này.
-10. **Authentication → Settings → Authorized domains → Add domain**: tên miền của app trên Cloudflare (ví dụ `kho-tu-toeic.<tên-tài-khoản>.workers.dev`).
+10. **Authentication → Settings → Authorized domains → Add domain**: tên miền của app trên Cloudflare (`toeic-vocab.gioitv-dev.workers.dev`).
 
-**B. Dán khóa vào Cloudflare** (Workers & Pages → `kho-tu-toeic` → **Settings → Variables and Secrets → Add**)
+**B. Dán khóa vào Cloudflare** (Workers & Pages → `toeic-vocab` → **Settings → Variables and Secrets → Add**)
 
 | Tên | Kiểu | Giá trị |
 |---|---|---|
