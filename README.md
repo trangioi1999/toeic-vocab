@@ -36,7 +36,8 @@ Tiến độ cũ nằm trong trình duyệt theo từng địa chỉ web, nên p
 1. Mở trang cũ `https://trangioi1999.github.io/toeic-vocab/` (có dải thông báo ở đầu) hoặc thẳng `.../chuyen-nha.html`.
 2. Bấm **Chuyển sang app mới**. App mới mở trang `/import`, gộp dữ liệu (không ghi đè thứ đã có) rồi báo đã chuyển xong.
 3. Nếu nút không mở được: bấm **Sao chép mã**, mở app mới → Cài đặt → **Nhập dữ liệu từ bản cũ**, dán vào.
-4. Chuyển xong trên mọi máy thì tắt GitHub Pages: repo → Settings → Pages → Source: **None**.
+4. iPhone/iPad: app đã thêm vào màn hình chính có dữ liệu riêng, tách khỏi Safari. Hãy mở trang chuyển dữ liệu từ đúng nơi bạn đã học (icon trên màn hình chính hay Safari). Nếu cài app mới lên màn hình chính, vào Cài đặt → Nhập dữ liệu từ bản cũ trong chính app đó.
+5. Chuyển xong trên mọi máy thì tắt GitHub Pages: repo → Settings → Pages → Source: **None**.
 
 ### Phát triển
 
