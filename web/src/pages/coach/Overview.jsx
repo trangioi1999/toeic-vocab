@@ -49,6 +49,7 @@ export default function Overview() {
         <span className="sub">{weekdayName(today)}, {dmy(today)}</span>
         <h1>Chào bạn</h1>
       </div>
+      <div className="coach-top">
       <Link className="hero-status" to={'/coach/day/' + today}>
         <span className="mini" style={{ '--p': Math.round(frac * 100) + '%' }}><span>{check ? '✓' : work ? `${done}/${day.tasks.length}` : `${cards}`}</span></span>
         <span className="tx">
@@ -64,6 +65,7 @@ export default function Overview() {
         <div><b>{past.length ? <>{pastDone}<small>/{past.length}</small></> : '–'}</b><span>{past.length ? 'buổi đã hoàn thành' : 'lộ trình chưa bắt đầu'}</span></div>
         <div><b>{last ? last.v : '–'}</b><span>{last ? `điểm đề gần nhất${prev ? (last.v >= prev.v ? `, tăng ${last.v - prev.v}` : `, giảm ${prev.v - last.v}`) : ''}` : 'chưa có điểm đề'}</span></div>
         <div><b>{known.toLocaleString('vi-VN')}</b><span>thẻ từ đã thuộc</span></div>
+      </div>
       </div>
       <div className="t-grid">
         <div className="t-col">

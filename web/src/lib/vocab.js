@@ -54,7 +54,7 @@ export function searchItems(all, q, limit = 300) {
 let promise = null;
 export function loadVocab() {
   if (!promise) {
-    promise = fetch('../vocab.json').then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); }).then(prepare);
+    promise = fetch('/vocab.json').then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); }).then(prepare);
     promise.catch(() => { promise = null; });
   }
   return promise;

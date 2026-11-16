@@ -39,7 +39,7 @@ export default function Today() {
   const finish = () => {
     const now = todayISO();
     if (now !== today) { window.dispatchEvent(new Event('focus')); toast('Đã sang ngày mới. Trang vừa được cập nhật, hãy kiểm tra lại rồi bấm Hoàn thành.'); return; }
-    try { completeDay(now, { note }); setNote(''); toast('Đã hoàn thành hôm nay. Cô sẽ nhận được thông báo.'); }
+    try { completeDay(now, { note }); setNote(''); toast('Đã hoàn thành hôm nay. Người kèm sẽ nhận được thông báo.'); }
     catch (e) { toast(e.message); }
   };
 
@@ -51,7 +51,8 @@ export default function Today() {
         <h1>{title}</h1>
       </div>
 
-      <section className="streak" aria-label={`Chuỗi ${st} ngày học liên tiếp`}>
+      <div className="today-grid">
+      <section className="streak tg-streak" aria-label={`Chuỗi ${st} ngày học liên tiếp`}>
         <div className="n"><b className="num">{st}</b><span>ngày liên tiếp</span></div>
         <div className="week7">
           {last7.map(d => <span key={'l' + d} className={'l' + (d === today ? ' t' : '')}>{SHORT[weekdayName(d)]}</span>)}
@@ -60,13 +61,13 @@ export default function Today() {
       </section>
 
       {day && day.kind !== 'off' && (
-        <section className="sheet" style={{ padding: '16px 16px 4px' }}>
+        <section className="sheet tg-tasks" style={{ padding: '16px 16px 4px' }}>
           <div className="section-head"><h2>Việc hôm nay</h2><span className="num" style={{ color: 'var(--soft)', fontWeight: 600 }}>{done}/{day.tasks.length}</span></div>
           <PlanTasks day={day} entry={entry} onToggle={(i, v) => { if (todayISO() === today) setPlanTask(today, i, v); else { window.dispatchEvent(new Event('focus')); toast('Đã sang ngày mới. Trang vừa được cập nhật.'); } }} readOnly={!!check} />
         </section>
       )}
 
-      <section className="cards-today">
+      <section className="cards-today tg-cards">
         <div className="section-head"><h2>Thẻ đã ôn hôm nay</h2><span className="num" style={{ fontWeight: 600 }}>{cards}<span style={{ color: 'var(--faint)' }}> / {REQUIRED_CARDS}</span></span></div>
         <div className="segs" role="img" aria-label={`Đã ôn ${cards} trên ${REQUIRED_CARDS} thẻ`}>
           {Array.from({ length: REQUIRED_CARDS }, (_, i) => <i key={i} className={i < cards ? 'on' : ''} />)}
@@ -74,9 +75,10 @@ export default function Today() {
         <Link className="btn" style={{ alignSelf: 'flex-start' }} to="/vocab">{cards < REQUIRED_CARDS ? `Ôn tiếp ${REQUIRED_CARDS - cards} thẻ` : 'Ôn thêm thẻ'}</Link>
       </section>
 
+      <div className="tg-finish">
       {!check && (
-        <label className="field" style={{ font: '600 17px var(--display)' }}>Ghi chú gửi cô
-          <textarea className="input" rows={3} value={note} onChange={e => setNote(e.target.value)} placeholder="Hôm nay mình sai nhiều ở phần nào, có gì muốn hỏi cô…" />
+        <label className="field" style={{ font: '600 17px var(--display)' }}>Ghi chú cho người kèm
+          <textarea className="input" rows={3} value={note} onChange={e => setNote(e.target.value)} placeholder="Hôm nay mình sai nhiều ở phần nào, có gì muốn hỏi người kèm…" />
         </label>
       )}
 
@@ -90,17 +92,19 @@ export default function Today() {
           {check ? (
             <>
               <b>Đã hoàn thành lúc {timeHM(check.at)}</b>
-              <span>Cô sẽ nhận được thông báo kèm ghi chú của bạn.</span>
+              <span>Người kèm sẽ nhận được thông báo kèm ghi chú của bạn.</span>
               {check.note && <span className="sent-note">“{check.note}”</span>}
               <button type="button" className="btn quiet" style={{ alignSelf: 'flex-start', marginTop: 4 }} onClick={() => undoCheckin(today)}>Hoàn tác</button>
             </>
           ) : can.ok ? (
-            <><b>Đủ rồi, tô ô này thôi</b><span>Bấm để báo cô là hôm nay bạn đã học xong.</span></>
+            <><b>Đủ rồi, tô ô này thôi</b><span>Bấm để báo người kèm là hôm nay bạn đã học xong.</span></>
           ) : (
-            <><b>{can.reason}</b><span>Tô xong ô này, cô sẽ nhận được thông báo kèm ghi chú của bạn.</span></>
+            <><b>{can.reason}</b><span>Tô xong ô này, người kèm sẽ nhận được thông báo kèm ghi chú của bạn.</span></>
           )}
         </div>
       </section>
+      </div>
+      </div>
     </div>
   );
 }
