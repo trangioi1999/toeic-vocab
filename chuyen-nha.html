@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chuyển sang app mới · Kho Từ TOEIC</title>
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;600&display=swap">
+<style>
+:root { --paper:#F3F5F1; --sheet:#FFFFFF; --ink:#1B2220; --soft:#56625D; --rule:#DAE0DB; --primary:#2347D6; --primary-hover:#1A36A8; --guide:#C93A66; --guide-strong:#A82C53; --known:#1D7F53; color-scheme: light; }
+@media (prefers-color-scheme: dark) { :root { --paper:#121715; --sheet:#1A201E; --ink:#E8EEEA; --soft:#A3AFA9; --rule:#2C3532; --primary:#8AA1FF; --primary-hover:#A9BAFF; --guide:#F07B9B; --guide-strong:#F59AB3; --known:#4FD394; color-scheme: dark; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 "Be Vietnam Pro", system-ui, sans-serif; }
+main { max-width: 560px; margin: 0 auto; padding: 40px 20px 56px; display: flex; flex-direction: column; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 600 17px Lexend, sans-serif; }
+.logo { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--paper); display: grid; place-items: center; font: 700 14px Lexend, sans-serif; }
+h1 { margin: 0; font: 700 30px/1.2 Lexend, sans-serif; letter-spacing: -0.02em; }
+p { margin: 0; }
+.sub { color: var(--soft); }
+.card { background: var(--sheet); border: 1px solid var(--rule); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+.btn { display: flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 22px; border-radius: 999px; border: 1px solid var(--ink); background: var(--sheet); color: var(--ink); font: 600 16px Lexend, sans-serif; text-decoration: none; cursor: pointer; }
+.btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.btn.primary:hover { background: var(--primary-hover); }
+.btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.count { font: 600 15px Lexend, sans-serif; }
+ol { margin: 0; padding-left: 20px; color: var(--soft); }
+textarea { width: 100%; min-height: 84px; border-radius: 12px; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); padding: 10px 12px; font: 13px/1.4 ui-monospace, monospace; word-break: break-all; }
+.ok { color: var(--known); font-weight: 600; }
+.warn { color: var(--guide-strong); }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand"><span class="logo">T</span>Kho Từ TOEIC</div>
+  <h1>App đã chuyển sang địa chỉ mới</h1>
+  <p class="sub">Tiến độ học đang nằm trong trình duyệt này. Bấm nút dưới đây để mang toàn bộ sang app mới. Làm một lần trên mỗi máy bạn từng học.</p>
+
+  <section class="card">
+    <span class="count" id="count">Đang đọc dữ liệu…</span>
+    <a class="btn primary" id="go" href="#">Chuyển sang app mới</a>
+    <span class="sub" id="addr"></span>
+  </section>
+
+  <section class="card">
+    <b>Nút trên không mở được?</b>
+    <ol>
+      <li>Bấm “Sao chép mã”.</li>
+      <li>Mở app mới, đăng nhập, vào <b>Cài đặt</b>.</li>
+      <li>Dán vào ô “Nhập dữ liệu từ bản cũ” rồi bấm Nhập.</li>
+    </ol>
+    <textarea id="code" readonly aria-label="Mã dữ liệu"></textarea>
+    <button class="btn" type="button" id="copy">Sao chép mã</button>
+    <span id="copied" role="status"></span>
+  </section>
+</main>
+<script>
+// Same format as web/src/lib/migrate.js (encodeData): base64url of UTF-8 JSON {v:1, data:{key: rawString}}.
+var APP_URL = 'https://kho-tu-toeic.pages.dev';
+var KEYS = ['status', 'known', 'pref', 'toeic700-v3', 'activity', 'checkins', 'settings'];
+var data = {};
+KEYS.forEach(function (k) { try { var v = localStorage.getItem(k); if (v != null) data[k] = v; } catch (e) {} });
+var bytes = new TextEncoder().encode(JSON.stringify({ v: 1, data: data }));
+var bin = ''; for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+var code = btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+var known = 0, days = 0;
+try { var st = JSON.parse(data.status || '{}'); for (var key in st) if (st[key] === 2) known++; } catch (e) {}
+try { days = Object.keys(JSON.parse(data['toeic700-v3'] || '{}')).length; } catch (e) {}
+var count = document.getElementById('count');
+if (!Object.keys(data).length) { count.textContent = 'Trình duyệt này chưa có tiến độ nào để chuyển.'; count.className = 'warn'; }
+else count.textContent = 'Tìm thấy ' + known + ' thẻ đã thuộc và ' + days + ' ngày trong lộ trình.';
+
+document.getElementById('go').href = APP_URL + '/import#d=' + code;
+document.getElementById('addr').textContent = 'Địa chỉ mới: ' + APP_URL.replace('https://', '');
+document.getElementById('code').value = code;
+document.getElementById('copy').addEventListener('click', function () {
+  var box = document.getElementById('code'), out = document.getElementById('copied');
+  var done = function () { out.textContent = 'Đã sao chép.'; out.className = 'ok'; };
+  if (navigator.clipboard) navigator.clipboard.writeText(code).then(done, function () { box.select(); document.execCommand('copy'); done(); });
+  else { box.select(); document.execCommand('copy'); done(); }
+});
+</script>
+</body>
+</html>

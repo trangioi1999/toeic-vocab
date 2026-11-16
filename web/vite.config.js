@@ -22,8 +22,8 @@ const serveRepoRoot = {
 };
 
 export default defineConfig({
-  base: './',
+  base: '/',
   plugins: [react(), serveRepoRoot],
-  build: { outDir: '../app', emptyOutDir: true },
+  build: { outDir: 'dist', emptyOutDir: true },
   test: { environment: 'jsdom' },
 });

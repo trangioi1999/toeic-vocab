@@ -53,3 +53,5 @@
 .who-card .tx { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 .who-card .tx b { font: 600 15px var(--display); }
 .who-card .tx span { font-size: 13px; color: var(--soft); overflow-wrap: anywhere; }
+.import-box { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.import-box .field { width: 100%; }

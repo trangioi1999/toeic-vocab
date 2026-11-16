@@ -4,6 +4,7 @@ import { ToastProvider } from './components/Toast.jsx';
 import AppShell from './components/AppShell.jsx';
 import { homeOf } from './lib/roles.js';
 import Landing from './pages/landing/Landing.jsx';
+import ImportPage from './pages/ImportPage.jsx';
 import Today from './pages/student/Today.jsx';
 import Settings from './pages/student/Settings.jsx';
 import VocabHome from './pages/vocab/VocabHome.jsx';
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/" element={<PublicFront />} />
           <Route path="/login" element={<PublicFront />} />
           <Route path="/signup" element={<PublicFront />} />
+          <Route path="/import" element={<ImportPage />} />
           <Route element={<RequireRole role="student" />}>
             <Route path="/today" element={<Today />} />
             <Route path="/vocab" element={<VocabHome />} />
