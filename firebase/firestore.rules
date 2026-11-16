@@ -1,0 +1,53 @@
+rules_version = '2';
+// Kho Từ TOEIC — paste into Firebase console → Firestore → Rules → Publish.
+// users/{uid} (role, learnerUid, name) is edited by hand in the console: no client can write it.
+// The Cloudflare Worker uses a service account, which is not subject to these rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function profile() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
+    function isLearner(uid) { return signedIn() && request.auth.uid == uid && profile().role == 'student'; }
+    function isCoachOf(uid) { return signedIn() && profile().role in ['coach', 'teacher'] && profile().learnerUid == uid; }
+    function rawDoc() {
+      return request.resource.data.keys().hasOnly(['raw', 'updatedAt'])
+        && request.resource.data.raw is string
+        && request.resource.data.raw.size() < 900000;
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Learner progress: the learner reads and writes; their coach only reads.
+    match /learners/{learner}/data/{key} {
+      allow read: if isLearner(learner) || isCoachOf(learner);
+      allow create, update: if isLearner(learner)
+        && key in ['status', 'known', 'pref', 'toeic700-v3', 'activity', 'checkins']
+        && rawDoc();
+      allow delete: if false;
+    }
+
+    // Each account's own settings (reminder time, coach alerts).
+    match /userSettings/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create, update: if signedIn() && request.auth.uid == uid
+        && exists(/databases/$(database)/documents/users/$(uid)) && rawDoc();
+      allow delete: if false;
+    }
+
+    // Devices that receive push notifications.
+    match /pushTokens/{uid} {
+      allow read, delete: if signedIn() && request.auth.uid == uid;
+      allow create, update: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['tokens', 'updatedAt'])
+        && request.resource.data.tokens is list
+        && request.resource.data.tokens.size() <= 20;
+    }
+
+    // Written by the Worker only.
+    match /notifyLog/{uid} {
+      allow read, write: if false;
+    }
+  }
+}
