@@ -37,7 +37,7 @@ Tạo project một lần: dash.cloudflare.com → **Workers & Pages → Create 
 | Ô | Giá trị |
 |---|---|
 | Project name | `kho-tu-toeic` (phải trùng `name` trong `wrangler.toml`) |
-| Build command | `npm run build` |
+| Build command | `npm ci` (chỉ cài thư viện; test + build do `wrangler deploy` tự chạy qua `[build]` trong `wrangler.toml`) |
 | Deploy command | `npx wrangler deploy` |
 | Non-production branch deploy command (nếu có) | `npx wrangler versions upload` |
 | Path / Root directory (trong Advanced settings) | `web` |

@@ -1,7 +1,11 @@
 # Cloudflare Workers (static assets) configuration. The Workers Builds project's root directory is "web",
-# so this file lives here. Dashboard: Build command "npm run build", Deploy command "npx wrangler deploy".
+# so this file lives here. Dashboard: Deploy command "npx wrangler deploy" (Build command may stay empty:
+# wrangler runs [build] below before every deploy, so dist/ always exists).
 name = "kho-tu-toeic"
 compatibility_date = "2026-11-01"
+
+[build]
+command = "npm run build"
 
 [assets]
 directory = "./dist"
