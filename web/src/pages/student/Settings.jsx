@@ -16,7 +16,7 @@ export function AccountCard() {
     <section className="sheet who-card">
       <span className="av" aria-hidden="true">{user.name.charAt(0)}</span>
       <span className="tx"><b>{user.name}</b><span>{user.email}</span></span>
-      <button type="button" className="btn danger" onClick={async () => { await logout(); navigate('/login', { replace: true }); }}>Đăng xuất</button>
+      <button type="button" className="btn danger" onClick={async () => { await logout(); navigate('/', { replace: true }); }}>Đăng xuất</button>
     </section>
   );
 }

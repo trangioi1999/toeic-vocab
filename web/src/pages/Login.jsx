@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Icon from '../components/Icon.jsx';
 import { useAuth } from '../hooks/useAuth.js';
-import { DEMO_ACCOUNTS } from '../services/auth.js';
+import { safeNext } from '../lib/roles.js';
 import './Login.css';
 
-export const homeOf = role => (role === 'teacher' ? '/teacher' : '/');
 
 function OmrStrip() {
   const rows = [['T2', 2], ['T3', 0], ['T4', -1]];
@@ -47,15 +46,12 @@ export default function Login() {
     setBusy(true); setError('');
     try {
       const u = await login(e, p);
-      const next = params.get('next');
-      const okNext = next && next.startsWith('/') && !next.startsWith('/login') && (u.role === 'teacher') === next.startsWith('/teacher');
-      navigate(okNext ? next : homeOf(u.role), { replace: true });
+      navigate(safeNext(params.get('next'), u.role), { replace: true });
     } catch (err) {
       setError(err.message);
     } finally { setBusy(false); }
   };
   const submit = e => { e.preventDefault(); go(email, password); };
-  const fill = acc => { setEmail(acc.email); setPassword(acc.password); go(acc.email, acc.password); };
 
   return (
     <div className="login">
@@ -64,7 +60,7 @@ export default function Login() {
         <OmrStrip />
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <h1>Mỗi ngày tô thêm một ô.</h1>
-          <p className="sub" style={{ fontSize: 15 }}>Đăng nhập để học và ghi lại ngày học. Cô giáo theo dõi tiến độ của bạn ở cùng một nơi.</p>
+          <p className="sub" style={{ fontSize: 15 }}>Đăng nhập để học và ghi lại ngày học. Người kèm theo dõi tiến độ của bạn ở cùng một nơi.</p>
         </div>
         <form onSubmit={submit} noValidate>
           <label className="field">Email
@@ -81,16 +77,8 @@ export default function Login() {
           </label>
           {error && <p className="form-error" role="alert">{error}. Kiểm tra lại rồi thử lần nữa.</p>}
           <button className="btn primary block" type="submit" disabled={busy}>{busy ? 'Đang đăng nhập…' : 'Đăng nhập'}</button>
-          <p className="hint">Quên mật khẩu? Nhắn cô để được đặt lại.</p>
+          <p className="hint">Quên mật khẩu? Nhắn người quản lý để được đặt lại.</p>
         </form>
-        <div className="demo">
-          <span>Bản dùng thử: chọn một tài khoản để xem</span>
-          <div className="demo-row">
-            {DEMO_ACCOUNTS.map(a => (
-              <button key={a.email} type="button" className="btn" onClick={() => fill(a)}>{a.role === 'teacher' ? 'Cô giáo' : 'Học viên'}</button>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

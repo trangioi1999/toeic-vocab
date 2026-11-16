@@ -2,18 +2,19 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink, Link, Outlet, useNavigate } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { useAuth } from '../hooks/useAuth.js';
+import { APP_NAME } from '../brand.js';
 import './AppShell.css';
 
 const NAV = {
   student: [
-    { to: '/', end: true, label: 'Hôm nay', icon: 'today' },
+    { to: '/today', end: true, label: 'Hôm nay', icon: 'today' },
     { to: '/vocab', label: 'Kho từ', icon: 'vocab' },
     { to: '/plan', label: 'Lộ trình', icon: 'plan' },
     { to: '/settings', label: 'Cài đặt', icon: 'bell' },
   ],
-  teacher: [
-    { to: '/teacher', end: true, label: 'Tổng quan', icon: 'plan' },
-    { to: '/teacher/settings', label: 'Cài đặt', icon: 'bell' },
+  coach: [
+    { to: '/coach', end: true, label: 'Tổng quan', icon: 'plan' },
+    { to: '/coach/settings', label: 'Cài đặt', icon: 'bell' },
   ],
 };
 
@@ -47,12 +48,12 @@ export default function AppShell() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const items = NAV[user.role];
-  const doLogout = async () => { await logout(); navigate('/login', { replace: true }); };
+  const doLogout = async () => { await logout(); navigate('/', { replace: true }); };
   return (
     <div className="shell">
       <header className="topbar">
         <div className="wrap">
-          <Link className="brand" to={items[0].to}><span className="logo">T</span>Kho Từ TOEIC</Link>
+          <Link className="brand" to={items[0].to}><span className="logo">T</span>{APP_NAME}</Link>
           <nav className="topnav" aria-label="Điều hướng chính">
             {items.map(it => (
               <NavLink key={it.to} to={it.to} end={it.end}><Icon name={it.icon} size={18} />{it.label}</NavLink>

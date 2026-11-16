@@ -9,10 +9,10 @@ import { dayOf } from '../lib/plan.js';
 import { canComplete, ticksOf } from '../lib/progress.js';
 
 const K = { status: 'status', known: 'known', pref: 'pref', plan: 'toeic700-v3', activity: 'activity', checkins: 'checkins', settings: 'settings' };
-const READ_ONLY = 'Tài khoản cô giáo chỉ được xem';
+const READ_ONLY = 'Tài khoản người kèm chỉ được xem';
 const DEFAULT_SETTINGS = {
   student: { reminder: true, reminderTime: '20:00' },
-  teacher: { notifyDone: true, notifyMissed: true },
+  coach: { notifyDone: true, notifyMissed: true },
 };
 const DEFAULT_PREFS = { front: 'en', auto: false };
 

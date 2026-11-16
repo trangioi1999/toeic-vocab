@@ -21,17 +21,17 @@ describe('card status', () => {
   });
 });
 
-describe('teacher is read-only', () => {
+describe('coach is read-only', () => {
   it('refuses student writes but allows own settings', async () => {
     await logout(); await login('co@demo.vn', '123456');
-    expect(() => store.setCardStatus('1:1', 2)).toThrow('Tài khoản cô giáo chỉ được xem');
-    expect(() => store.setPlanTask('2026-11-16', 0, true)).toThrow('Tài khoản cô giáo chỉ được xem');
-    expect(() => store.completeDay(todayISO(), {})).toThrow('Tài khoản cô giáo chỉ được xem');
-    store.setSettings('teacher', { notifyMissed: false });
-    expect(store.getSettings('teacher')).toEqual({ notifyDone: true, notifyMissed: false });
+    expect(() => store.setCardStatus('1:1', 2)).toThrow('Tài khoản người kèm chỉ được xem');
+    expect(() => store.setPlanTask('2026-11-16', 0, true)).toThrow('Tài khoản người kèm chỉ được xem');
+    expect(() => store.completeDay(todayISO(), {})).toThrow('Tài khoản người kèm chỉ được xem');
+    store.setSettings('coach', { notifyMissed: false });
+    expect(store.getSettings('coach')).toEqual({ notifyDone: true, notifyMissed: false });
   });
-  it('students cannot change teacher settings', () => {
-    expect(() => store.setSettings('teacher', { notifyDone: false })).toThrow();
+  it('students cannot change coach settings', () => {
+    expect(() => store.setSettings('coach', { notifyDone: false })).toThrow();
   });
 });
 

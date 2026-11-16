@@ -8,7 +8,7 @@ import { getCheckins, getPlanState, getActivity, getCardStatus } from '../../ser
 import { dayOf, DAYS, PLAN_START, PLAN_END, shortTest } from '../../lib/plan.js';
 import { streak, dayStatus, planStats, isWorkDay, tasksDone, REQUIRED_CARDS } from '../../lib/progress.js';
 import { todayISO, addDays, dmy, weekdayName, timeHM, dm } from '../../lib/dates.js';
-import './teacher.css';
+import './coach.css';
 
 const monthKey = iso => +iso.slice(0, 4) * 12 + (+iso.slice(5, 7) - 1);
 
@@ -44,18 +44,18 @@ export default function Overview() {
   }
 
   return (
-    <div className="wrap teacher-page">
+    <div className="wrap coach-page">
       <div className="page-head" style={{ display: 'flex', flexDirection: 'column' }}>
         <span className="sub">{weekdayName(today)}, {dmy(today)}</span>
         <h1>Chào bạn</h1>
       </div>
-      <Link className="hero-status" to={'/teacher/day/' + today}>
+      <Link className="hero-status" to={'/coach/day/' + today}>
         <span className="mini" style={{ '--p': Math.round(frac * 100) + '%' }}><span>{check ? '✓' : work ? `${done}/${day.tasks.length}` : `${cards}`}</span></span>
         <span className="tx">
           {check ? (
-            <><b>Hôm nay học viên đã hoàn thành lúc {timeHM(check.at)}</b><span>{check.note ? `“${check.note}”` : `${day ? day.title + '. ' : ''}Đã ôn ${check.cards} thẻ.`}</span></>
+            <><b>Hôm nay người học đã hoàn thành lúc {timeHM(check.at)}</b><span>{check.note ? `“${check.note}”` : `${day ? day.title + '. ' : ''}Đã ôn ${check.cards} thẻ.`}</span></>
           ) : (
-            <><b>Hôm nay học viên chưa hoàn thành</b><span>{day && day.kind !== 'off' ? `${day.title}. ${work ? `Đã làm ${done}/${day.tasks.length} việc và ` : ''}` : ''}ôn {cards} thẻ.</span></>
+            <><b>Hôm nay người học chưa hoàn thành</b><span>{day && day.kind !== 'off' ? `${day.title}. ${work ? `Đã làm ${done}/${day.tasks.length} việc và ` : ''}` : ''}ôn {cards} thẻ.</span></>
           )}
         </span>
       </Link>
@@ -69,7 +69,7 @@ export default function Overview() {
         <div className="t-col">
           <section className="sheet sheet-pad">
             <MonthCalendar year={Math.floor(m / 12)} month0={m % 12} today={today} statusOf={statusOf}
-              onPick={iso => navigate('/teacher/day/' + iso)} canPrev={m > min} canNext={m < max} onPrev={() => setM(m - 1)} onNext={() => setM(m + 1)} />
+              onPick={iso => navigate('/coach/day/' + iso)} canPrev={m > min} canNext={m < max} onPrev={() => setM(m - 1)} onNext={() => setM(m + 1)} />
             <p className="sub" style={{ fontSize: 12, marginTop: 6 }}>Bấm vào một ngày để xem chi tiết.</p>
           </section>
         </div>
@@ -81,12 +81,12 @@ export default function Overview() {
           </section>
           <section className="feed">
             <h2>Gần đây</h2>
-            {!feed.length && <p className="empty" style={{ padding: 20 }}>Chưa có ngày học nào được ghi lại. Khi học viên bấm Hoàn thành, ngày đó sẽ hiện ở đây.</p>}
+            {!feed.length && <p className="empty" style={{ padding: 20 }}>Chưa có ngày học nào được ghi lại. Khi người học bấm Hoàn thành, ngày đó sẽ hiện ở đây.</p>}
             {feed.map(({ d, s }) => {
               const c = checkins[d], dd = dayOf(d), p = plan[d] || {};
               const sum = dd && dd.kind === 'test' && +p.l > 0 && +p.r > 0 ? +p.l + +p.r : null;
               return (
-                <Link key={d} to={'/teacher/day/' + d}>
+                <Link key={d} to={'/coach/day/' + d}>
                   <span className={'bubble' + (s === 'done' ? ' filled' : '')} style={{ marginTop: 2 }} aria-hidden="true" />
                   <span className="tx">
                     <b>{weekdayName(d)}, {dm(d)}, {s === 'done' ? `xong lúc ${timeHM(c.at)}` : 'bỏ buổi'}</b>

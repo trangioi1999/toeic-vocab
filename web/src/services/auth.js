@@ -2,12 +2,13 @@
  * Mock authentication (phase 1). Phase 2 replaces the body of these functions with Firebase Auth;
  * the exported API stays the same.
  */
+import { normalizeRole } from '../lib/roles.js';
+
 const KEY = 'auth-session';
 const ACCOUNTS = [
   { email: 'hocvien@demo.vn', password: '123456', user: { uid: 'student-1', email: 'hocvien@demo.vn', name: 'Học viên', role: 'student' } },
-  { email: 'co@demo.vn', password: '123456', user: { uid: 'teacher-1', email: 'co@demo.vn', name: 'Cô giáo', role: 'teacher' } },
+  { email: 'co@demo.vn', password: '123456', user: { uid: 'coach-1', email: 'co@demo.vn', name: 'Người kèm', role: 'coach' } },
 ];
-export const DEMO_ACCOUNTS = ACCOUNTS.map(a => ({ email: a.email, password: a.password, role: a.user.role }));
 
 const listeners = new Set();
 let cached = { raw: undefined, user: null };
@@ -18,6 +19,8 @@ export function currentUser() {
   if (raw !== cached.raw) {
     let user = null;
     try { user = raw ? JSON.parse(raw) : null; } catch (e) { user = null; }
+    const role = user && normalizeRole(user.role);
+    user = role ? { ...user, role } : null;
     cached = { raw, user };
   }
   return cached.user;

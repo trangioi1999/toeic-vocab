@@ -40,9 +40,9 @@ describe('cleanScore', () => {
 });
 
 describe('prefs are student-only', () => {
-  it('teacher cannot change the shared study prefs', async () => {
+  it('coach cannot change the shared study prefs', async () => {
     await logout(); await login('co@demo.vn', '123456');
-    expect(() => store.setPrefs({ front: 'vi' })).toThrow('Tài khoản cô giáo chỉ được xem');
+    expect(() => store.setPrefs({ front: 'vi' })).toThrow('Tài khoản người kèm chỉ được xem');
   });
 });
 

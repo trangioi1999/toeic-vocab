@@ -1,8 +1,9 @@
-import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth.js';
 import { ToastProvider } from './components/Toast.jsx';
 import AppShell from './components/AppShell.jsx';
-import Login, { homeOf } from './pages/Login.jsx';
+import { homeOf } from './lib/roles.js';
+import Login from './pages/Login.jsx';
 import Today from './pages/student/Today.jsx';
 import Settings from './pages/student/Settings.jsx';
 import VocabHome from './pages/vocab/VocabHome.jsx';
@@ -11,9 +12,9 @@ import SetPage from './pages/vocab/SetPage.jsx';
 import Search from './pages/vocab/Search.jsx';
 import Session from './pages/vocab/Session.jsx';
 import Plan from './pages/plan/Plan.jsx';
-import Overview from './pages/teacher/Overview.jsx';
-import DayDetail from './pages/teacher/DayDetail.jsx';
-import TeacherSettings from './pages/teacher/TeacherSettings.jsx';
+import Overview from './pages/coach/Overview.jsx';
+import DayDetail from './pages/coach/DayDetail.jsx';
+import CoachSettings from './pages/coach/CoachSettings.jsx';
 
 function RequireRole({ role }) {
   const { user } = useAuth();
@@ -22,19 +23,21 @@ function RequireRole({ role }) {
   if (user.role !== role) return <Navigate to={homeOf(user.role)} replace />;
   return <AppShell />;
 }
-function LoginRoute() {
+function PublicFront() {
   const { user } = useAuth();
   return user ? <Navigate to={homeOf(user.role)} replace /> : <Login />;
 }
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ToastProvider>
         <Routes>
-          <Route path="/login" element={<LoginRoute />} />
+          <Route path="/" element={<PublicFront />} />
+          <Route path="/login" element={<PublicFront />} />
+          <Route path="/signup" element={<PublicFront />} />
           <Route element={<RequireRole role="student" />}>
-            <Route path="/" element={<Today />} />
+            <Route path="/today" element={<Today />} />
             <Route path="/vocab" element={<VocabHome />} />
             <Route path="/vocab/g/:gid" element={<Group />} />
             <Route path="/vocab/set/:sid" element={<SetPage />} />
@@ -43,14 +46,14 @@ export default function App() {
             <Route path="/plan" element={<Plan />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
-          <Route element={<RequireRole role="teacher" />}>
-            <Route path="/teacher" element={<Overview />} />
-            <Route path="/teacher/day/:date" element={<DayDetail />} />
-            <Route path="/teacher/settings" element={<TeacherSettings />} />
+          <Route element={<RequireRole role="coach" />}>
+            <Route path="/coach" element={<Overview />} />
+            <Route path="/coach/day/:date" element={<DayDetail />} />
+            <Route path="/coach/settings" element={<CoachSettings />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </ToastProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
