@@ -3,7 +3,7 @@ import { useAuth } from './hooks/useAuth.js';
 import { ToastProvider } from './components/Toast.jsx';
 import AppShell from './components/AppShell.jsx';
 import { homeOf } from './lib/roles.js';
-import Login from './pages/Login.jsx';
+import Landing from './pages/landing/Landing.jsx';
 import Today from './pages/student/Today.jsx';
 import Settings from './pages/student/Settings.jsx';
 import VocabHome from './pages/vocab/VocabHome.jsx';
@@ -25,7 +25,7 @@ function RequireRole({ role }) {
 }
 function PublicFront() {
   const { user } = useAuth();
-  return user ? <Navigate to={homeOf(user.role)} replace /> : <Login />;
+  return user ? <Navigate to={homeOf(user.role)} replace /> : <Landing />;
 }
 
 export default function App() {
