@@ -102,3 +102,93 @@ describe('firstUpload', () => {
     expect(kv.getItem('checkins')).toBe(null);
   });
 });
+
+describe('review fixes: sync safety', () => {
+  function docs2() {
+    const listeners = new Map(); const writes = [];
+    return {
+      writes, listeners,
+      listen(path, cb) { listeners.set(path, cb); return () => listeners.delete(path); },
+      write(path, raw) { writes.push([path, raw]); return Promise.resolve(); },
+      server(path, raw) { listeners.get(path)(raw, { fromCache: false }); },
+      cache(path, raw) { listeners.get(path)(raw, { fromCache: true }); },
+    };
+  }
+  it('merges a write made before the first server answer instead of replacing cloud data', async () => {
+    vi.useFakeTimers();
+    const docs = docs2();
+    const kv = createCloudKv({ ...ids, docs });
+    kv.start();
+    kv.setItem('status', '{"b:2":1}');                       // fresh browser, nothing known yet
+    docs.server('learners/u1/data/status', '{"a:1":2}');      // phone's progress arrives late
+    expect(JSON.parse(kv.getItem('status'))).toEqual({ 'a:1': 2, 'b:2': 1 });
+    await vi.advanceTimersByTimeAsync(350);
+    expect(JSON.parse(docs.writes.at(-1)[1])).toEqual({ 'a:1': 2, 'b:2': 1 });
+  });
+  it('runs the first upload only after every key had a server answer', async () => {
+    const docs = docs2();
+    const kv = createCloudKv({ ...ids, docs });
+    kv.start();
+    let synced = false;
+    kv.whenSynced().then(() => { synced = true; });
+    const paths = [...docs.listeners.keys()];
+    paths.slice(1).forEach(p => docs.server(p, null));
+    docs.cache(paths[0], null);
+    await Promise.resolve();
+    expect(synced).toBe(false);
+    docs.server(paths[0], null);
+    await Promise.resolve(); await Promise.resolve();
+    expect(synced).toBe(true);
+  });
+  it('ignores a cached "missing" snapshot instead of wiping the offline copy', () => {
+    localStorage.setItem('cloud:u1:checkins', '{"d":1}');
+    const docs = docs2();
+    const kv = createCloudKv({ ...ids, docs });
+    kv.start();
+    docs.cache('learners/u1/data/checkins', null);
+    expect(kv.getItem('checkins')).toBe('{"d":1}');
+  });
+  it('flush(key) writes at once and resolves when the write is done', async () => {
+    vi.useFakeTimers();
+    let release; const docs = docs2();
+    docs.write = (path, raw) => { docs.writes.push([path, raw]); return new Promise(r => { release = r; }); };
+    const kv = createCloudKv({ ...ids, docs });
+    kv.setItem('checkins', '{"2026-11-16":{}}');
+    let done = false;
+    kv.flush('checkins').then(() => { done = true; });
+    expect(docs.writes).toEqual([['learners/u1/data/checkins', '{"2026-11-16":{}}']]);
+    await Promise.resolve();
+    expect(done).toBe(false);
+    release(); await Promise.resolve(); await Promise.resolve();
+    expect(done).toBe(true);
+  });
+  it('flushAll sends every pending key (used when the app is hidden)', async () => {
+    const docs = docs2();
+    const kv = createCloudKv({ ...ids, docs });
+    kv.setItem('pref', '{}'); kv.setItem('status', '{}');
+    kv.flushAll();
+    expect(docs.writes.map(w => w[0]).sort()).toEqual(['learners/u1/data/pref', 'learners/u1/data/status']);
+  });
+});
+
+describe('afterWrite', () => {
+  it('runs the follow-up only after the write is acknowledged', async () => {
+    const { afterWrite } = await import('../src/services/cloudKv.js');
+    let release; const order = [];
+    const w = new Promise(r => { release = r; }).then(() => order.push('write'));
+    const p = afterWrite(w, async () => order.push('notify'), 5000);
+    await Promise.resolve();
+    expect(order).toEqual([]);
+    release(); await p;
+    expect(order).toEqual(['write', 'notify']);
+  });
+  it('still runs the follow-up when the write never acknowledges (offline)', async () => {
+    vi.useFakeTimers();
+    const { afterWrite } = await import('../src/services/cloudKv.js');
+    let ran = false;
+    const p = afterWrite(new Promise(() => {}), async () => { ran = true; }, 8000);
+    await vi.advanceTimersByTimeAsync(8100);
+    await p;
+    expect(ran).toBe(true);
+  });
+});

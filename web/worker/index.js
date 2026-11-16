@@ -18,6 +18,8 @@ const configured = env => !!(env.FIREBASE_API_KEY && env.FIREBASE_PROJECT_ID && 
 function serviceAccount(env) {
   try { const sa = JSON.parse(env.FIREBASE_SERVICE_ACCOUNT || ''); return sa.client_email && sa.private_key ? sa : null; } catch (e) { return null; }
 }
+/** Push payloads must stay under 4 KB; Vietnamese is ~3 bytes per character. */
+const clip = (t, n = 180) => (t.length > n ? t.slice(0, n - 1).trimEnd() + '…' : t);
 const parse = raw => { try { return JSON.parse(raw); } catch (e) { return null; } };
 
 /** Firebase ID token → uid. Throws when invalid, expired or for another project. */
@@ -77,7 +79,7 @@ async function notifyDone(request, env, deps) {
     if (((await settingsOf(g, coach.id)).coach || {}).notifyDone === false) continue;
     sent += await pushTo(g, coach.id, {
       title: `${name} đã học xong hôm nay`,
-      body: c.note ? `“${c.note}”` : `${c.planTitle || 'Ôn từ vựng'} · ôn ${c.cards || 0} thẻ`,
+      body: clip(c.note ? `“${c.note}”` : `${c.planTitle || 'Ôn từ vựng'} · ôn ${c.cards || 0} thẻ`),
       url: `/coach/day/${body.date}`,
     });
   }
@@ -95,7 +97,16 @@ export async function handle(request, env, deps) {
     });
   }
   if (url.pathname === '/vocab.json') {
-    if (configured(env) && !(await uidFrom(request, env, deps))) return json({ error: 'unauthorized' }, 401);
+    if (configured(env)) {
+      const uid = await uidFrom(request, env, deps);
+      if (!uid) return json({ error: 'unauthorized' }, 401);
+      // A valid token is not enough (anyone can sign up with the public API key): the account needs a role.
+      const g = google(env, deps);
+      if (g) {
+        const me = await g.db.get(`users/${uid}`).catch(() => undefined);
+        if (me !== undefined && !(me && normalizeRole(me.role))) return json({ error: 'forbidden' }, 403);
+      }
+    }
     return env.ASSETS.fetch(request);
   }
   if (url.pathname === '/api/notify-done' && request.method === 'POST') return notifyDone(request, env, deps);

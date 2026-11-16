@@ -16,6 +16,14 @@ export function pathOf(key, { uid, learnerUid }) {
   return null;
 }
 
+/** Merge one key's local value into the remote one with the import rules (never downgrade, existing wins). */
+function mergeRaw(key, remote, local) {
+  if (remote == null) return local;
+  const tmp = new Map([[key, remote]]);
+  mergeInto({ getItem: k => (tmp.has(k) ? tmp.get(k) : null), setItem: (k, v) => tmp.set(k, v) }, { [key]: local });
+  return tmp.get(key);
+}
+
 export function createCloudKv({ uid, learnerUid, docs, cache = localStorage, debounceMs = 300, startTimeoutMs = 4000 }) {
   const ids = { uid, learnerUid };
   const keys = [...LEARNER_KEYS, 'settings'];
@@ -23,8 +31,11 @@ export function createCloudKv({ uid, learnerUid, docs, cache = localStorage, deb
   const mem = new Map();
   const subs = new Set();
   const pending = new Map(); // key → timer
+  const confirmed = new Set(); // keys the server has answered at least once
   const offs = [];
   const emit = () => subs.forEach(cb => cb());
+  let syncedResolve;
+  const synced = new Promise(r => { syncedResolve = r; });
 
   for (const k of keys) {
     try { const v = cache.getItem(cacheKey(k)); if (v != null) mem.set(k, v); } catch (e) { /* ignore */ }
@@ -38,32 +49,60 @@ export function createCloudKv({ uid, learnerUid, docs, cache = localStorage, deb
     pending.delete(k);
     return docs.write(pathOf(k, ids), mem.get(k)).catch(() => {});
   };
+  const schedule = k => {
+    clearTimeout(pending.get(k));
+    pending.set(k, setTimeout(() => send(k), debounceMs));
+  };
+  const current = k => (mem.has(k) ? mem.get(k) : null);
+
+  /** A snapshot for key k. Before the server's first answer, local edits are merged into it, not replacing it. */
+  function onSnapshot(k, raw, meta = {}) {
+    const fromServer = !meta.fromCache;
+    if (pending.has(k)) {
+      if (fromServer && !confirmed.has(k)) {
+        const merged = mergeRaw(k, raw, current(k));
+        if (merged !== current(k)) { remember(k, merged); emit(); }
+        schedule(k);
+      }
+    } else if (!(raw == null && !fromServer) && raw !== current(k)) {
+      remember(k, raw);
+      emit();
+    }
+    if (fromServer && !confirmed.has(k)) {
+      confirmed.add(k);
+      if (confirmed.size === keys.length) syncedResolve();
+    }
+  }
 
   return {
-    getItem: k => (mem.has(k) ? mem.get(k) : null),
+    getItem: current,
     setItem(k, v) {
       const path = pathOf(k, ids);
       if (!path) { mem.set(k, v); emit(); return; }
       remember(k, v);
       emit();
-      clearTimeout(pending.get(k));
-      pending.set(k, setTimeout(() => send(k), debounceMs));
+      schedule(k);
     },
     subscribe(cb) { subs.add(cb); return () => subs.delete(cb); },
-    /** Listen to every document; resolves once each has answered (or after a timeout when offline). */
+    /** Listen to every document; resolves once each has answered (cache or server) or after a timeout offline. */
     start() {
       return new Promise(resolve => {
         const waiting = new Set(keys);
         const timer = setTimeout(resolve, startTimeoutMs);
         for (const k of keys) {
-          offs.push(docs.listen(pathOf(k, ids), raw => {
-            if (!pending.has(k) && raw !== (mem.has(k) ? mem.get(k) : null)) { remember(k, raw); emit(); }
+          offs.push(docs.listen(pathOf(k, ids), (raw, meta) => {
+            onSnapshot(k, raw, meta);
             waiting.delete(k);
             if (!waiting.size) { clearTimeout(timer); resolve(); }
           }));
         }
       });
     },
+    /** Resolves once the server has answered for every key (never on a timeout). */
+    whenSynced: () => synced,
+    /** Write a key now; resolves when the write is acknowledged. */
+    flush: k => (pending.has(k) ? send(k) : Promise.resolve()),
+    flushAll() { return Promise.all([...pending.keys()].map(send)); },
     async stop() {
       offs.splice(0).forEach(off => off());
       await Promise.all([...pending.keys()].map(send));
@@ -103,4 +142,10 @@ export function authError(code) {
     case 'auth/user-disabled': return 'Tài khoản này đã bị khoá';
     default: return 'Không đăng nhập được. Thử lại sau';
   }
+}
+
+/** Run fn after `write` settles, or after `ms` if it never does (offline), so a follow-up sees the data. */
+export async function afterWrite(write, fn, ms) {
+  await Promise.race([Promise.resolve(write).catch(() => {}), new Promise(r => setTimeout(r, ms))]);
+  return fn();
 }

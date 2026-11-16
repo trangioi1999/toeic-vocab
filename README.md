@@ -54,6 +54,7 @@ Không cần thẻ: gói Spark của Firebase và gói Free của Cloudflare là
 
 1. **Add project**, đặt tên (ví dụ `kho-tu-toeic`). Google Analytics: tắt cũng được.
 2. **Build → Authentication → Get started → Sign-in method → Email/Password → Enable → Save.**
+   Rồi **Authentication → Settings → User actions → bỏ chọn "Enable create (sign-up)" → Save**, để người lạ không tự tạo được tài khoản.
 3. **Authentication → Users → Add user**: tạo tài khoản cho bạn và cho người kèm (email + mật khẩu). Chép lại **User UID** của từng người.
 4. **Build → Firestore Database → Create database**, vị trí `asia-southeast1` (Singapore), chọn **Production mode**.
 5. **Firestore → Rules**: xóa hết, dán nội dung file `firebase/firestore.rules` trong repo, bấm **Publish**.
@@ -95,7 +96,7 @@ Thông báo tự động (máy chủ Cloudflare kiểm tra 10 phút một lần,
 Sự cố hay gặp:
 - **"Tài khoản chưa được cấp quyền"**: thiếu document `users/<UID>` hoặc sai `role` / `learnerUid` (bước A6).
 - **Đăng nhập báo lỗi tên miền**: chưa thêm tên miền ở bước A10.
-- **Không nhận thông báo**: chưa bật ở Cài đặt trên máy đó, hoặc thiếu `FIREBASE_VAPID_KEY` / `FIREBASE_SERVICE_ACCOUNT`.
+- **Không nhận thông báo**: chưa bật ở Cài đặt trên máy đó, hoặc thiếu `FIREBASE_VAPID_KEY` / `FIREBASE_SERVICE_ACCOUNT`. Trên máy tính, mở DevTools → Application → Service Workers: phải thấy `sw.js` ở trạng thái *activated*.
 - Muốn quay lại chế độ giả lập: xóa các biến `FIREBASE_*` rồi deploy lại.
 
 ### Chuyển dữ liệu từ GitHub Pages

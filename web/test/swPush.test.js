@@ -54,3 +54,12 @@ describe('service worker push', () => {
     expect(sw.opened).toEqual([]);
   });
 });
+
+describe('service worker install', () => {
+  it('does not precache the gated word list (a 401 would break the install)', async () => {
+    const src = fs.readFileSync(new URL('../public/sw.js', import.meta.url), 'utf8');
+    const core = JSON.parse(src.match(/const CORE = (\[[^\]]*\])/)[1].replace(/'/g, '"'));
+    expect(core).not.toContain('/vocab.json');
+    expect(core).toContain('/');
+  });
+});

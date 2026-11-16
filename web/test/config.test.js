@@ -51,3 +51,17 @@ describe('word list request', () => {
     vi.unstubAllGlobals();
   });
 });
+
+describe('word list request offline', () => {
+  it('still requests the list (served from the offline cache) when the token cannot refresh', async () => {
+    vi.resetModules();
+    const auth = await import('../src/services/auth.js');
+    auth.setAuthBackend({ ...auth.mockBackend, getIdToken: async () => { throw new Error('auth/network-request-failed'); } });
+    const calls = [];
+    vi.stubGlobal('fetch', async (url, init) => { calls.push([url, init]); return { ok: true, json: async () => [] }; });
+    const { loadVocab } = await import('../src/lib/vocab.js');
+    await loadVocab();
+    expect(calls).toHaveLength(1);
+    vi.unstubAllGlobals();
+  });
+});

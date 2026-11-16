@@ -75,6 +75,32 @@ describe('/vocab.json', () => {
   });
 });
 
+describe('review fixes', () => {
+  const saEnv = () => ({ ...ENV, FIREBASE_SERVICE_ACCOUNT: JSON.stringify(sa), ASSETS: assets });
+  it('/vocab.json refuses a signed-in account that has no role (self-signup)', async () => {
+    const g = google({ 'users/u1': { role: 'student' } });
+    const stranger = await handle(req('/vocab.json', { headers: { Authorization: 'Bearer ' + await idToken('x9') } }), saEnv(), deps(g));
+    expect(stranger.status).toBe(403);
+    const learner = await handle(req('/vocab.json', { headers: { Authorization: 'Bearer ' + await idToken('u1') } }), saEnv(), deps(g));
+    expect(await learner.text()).toBe('asset:/vocab.json');
+  });
+  it('shortens a long note so the push stays under the FCM size limit', async () => {
+    const note = 'Hôm nay khó quá '.repeat(400);
+    const g = google({
+      'users/u1': { role: 'student', name: 'Giỏi' }, 'users/c1': { role: 'coach', learnerUid: 'u1' },
+      'learners/u1/data/checkins': { raw: JSON.stringify({ '2026-11-16': { at: 'x', note } }) }, 'pushTokens/c1': { tokens: ['t1'] },
+    });
+    const r = await handle(req('/api/notify-done', { method: 'POST', headers: { Authorization: 'Bearer ' + await idToken('u1') }, body: '{"date":"2026-11-16"}' }), saEnv(), deps(g));
+    expect(await r.json()).toEqual({ sent: 1 });
+    expect(g.sent[0].webpush.data.body.length).toBeLessThanOrEqual(200);
+  });
+  it('keeps tokens when FCM rejects the message itself (INVALID_ARGUMENT)', async () => {
+    const { sendPush } = await import('../worker/google.js');
+    const bad = async () => Response.json({ error: { status: 'INVALID_ARGUMENT', details: [{ errorCode: 'INVALID_ARGUMENT' }] } }, { status: 400 });
+    expect(await sendPush(PID, async () => 'at', bad, 't1', { title: 'a', body: 'b', url: '/' })).toBe('error');
+  });
+});
+
 describe('verifyIdToken', () => {
   it('accepts a token for this project and rejects expired or foreign ones', async () => {
     expect(await verifyIdToken(await idToken('u1'), PID, jwks)).toBe('u1');

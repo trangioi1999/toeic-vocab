@@ -55,7 +55,7 @@ export function searchItems(all, q, limit = 300) {
 let promise = null;
 export function loadVocab() {
   if (!promise) {
-    promise = getIdToken()
+    promise = getIdToken().catch(() => null) // offline with an expired token: let the service worker answer
       .then(t => fetch('/vocab.json', t ? { headers: { Authorization: 'Bearer ' + t } } : undefined))
       .then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); }).then(prepare);
     promise.catch(() => { promise = null; });

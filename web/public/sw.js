@@ -1,7 +1,7 @@
 // Offline cache for the app (scope: /). Network first, cache as fallback; offline page loads get the app shell at '/'.
-const VERSION = 'app-v4';
+const VERSION = 'app-v5';
 // No '/index.html': Cloudflare answers it with a redirect, and a redirected response can't serve a page load.
-const CORE = ['/', '/manifest.webmanifest', '/icon-192.png', '/vocab.json'];
+const CORE = ['/', '/manifest.webmanifest', '/icon-192.png']; // vocab.json may need a login: cached on first fetch
 self.addEventListener('install', e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('app-') && k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim()));

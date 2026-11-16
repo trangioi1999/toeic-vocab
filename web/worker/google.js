@@ -84,6 +84,6 @@ export async function sendPush(projectId, getToken, fetchFn, token, { title, bod
   let j = {};
   try { j = await r.json(); } catch (e) { /* ignore */ }
   const codes = ((j.error && j.error.details) || []).map(d => d.errorCode);
-  if (r.status === 404 || codes.includes('UNREGISTERED') || codes.includes('INVALID_ARGUMENT')) return 'dead';
+  if (r.status === 404 || codes.includes('UNREGISTERED')) return 'dead'; // INVALID_ARGUMENT may be the message, not the token
   return 'error';
 }

@@ -14,7 +14,7 @@ import {
 } from 'firebase/firestore';
 import { setAuthBackend } from './auth.js';
 import { setBackend, localBackend } from './kv.js';
-import { createCloudKv, firstUpload, toUser, authError, NOT_ALLOWED } from './cloudKv.js';
+import { createCloudKv, firstUpload, toUser, authError, afterWrite, NOT_ALLOWED } from './cloudKv.js';
 
 let auth, db, vapidKey;
 let user = null;
@@ -24,7 +24,8 @@ const emit = () => listeners.forEach(cb => cb(user));
 const profileKey = uid => `profile:${uid}`;
 
 const docs = {
-  listen: (path, cb) => onSnapshot(doc(db, path), s => cb(s.exists() && typeof s.data().raw === 'string' ? s.data().raw : null), () => cb(null)),
+  // A listener error (e.g. permission denied) keeps the cached copy instead of reporting "missing".
+  listen: (path, cb) => onSnapshot(doc(db, path), s => cb(s.exists() && typeof s.data().raw === 'string' ? s.data().raw : null, { fromCache: s.metadata.fromCache }), () => {}),
   write: (path, raw) => setDoc(doc(db, path), { raw, updatedAt: serverTimestamp() }),
 };
 
@@ -50,7 +51,8 @@ async function enter(u) {
   cloud = createCloudKv({ uid: u.uid, learnerUid: u.learnerUid, docs });
   setBackend(cloud);
   await cloud.start();
-  if (u.role === 'student') firstUpload(cloud, localStorage, u.uid);
+  // Move this browser's progress up only once the server has answered for every key (never on a timeout).
+  if (u.role === 'student') { const c = cloud; c.whenSynced().then(() => { if (cloud === c) firstUpload(c, localStorage, u.uid); }); }
   user = u;
   emit();
 }
@@ -82,11 +84,22 @@ const backend = {
   },
   async getIdToken() { return auth.currentUser ? fbIdToken(auth.currentUser) : null; },
   async afterCheckin(date) {
-    const t = await this.getIdToken();
-    if (!t) return;
-    await fetch('/api/notify-done', { method: 'POST', headers: { Authorization: 'Bearer ' + t, 'Content-Type': 'application/json' }, body: JSON.stringify({ date }) });
+    if (!cloud) return;
+    // The Worker reads the check-in from Firestore: send it first (it is otherwise debounced).
+    await afterWrite(cloud.flush('checkins'), async () => {
+      const t = await this.getIdToken().catch(() => null);
+      if (!t) return;
+      await fetch('/api/notify-done', { method: 'POST', headers: { Authorization: 'Bearer ' + t, 'Content-Type': 'application/json' }, body: JSON.stringify({ date }) });
+    }, 8000);
   },
 };
+
+// Closing or hiding the app: send debounced edits now so the last tap is not lost.
+if (typeof document !== 'undefined') {
+  const flush = () => { if (cloud) cloud.flushAll(); };
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
+  window.addEventListener('pagehide', flush);
+}
 
 export async function start(cfg) {
   const app = initializeApp(cfg.firebase);
