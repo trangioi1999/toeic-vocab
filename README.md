@@ -21,13 +21,26 @@ Chạy trên Cloudflare Pages, link gọn: `https://kho-tu-toeic.pages.dev` (tê
 - Bản này **chưa có máy chủ**: đăng nhập và dữ liệu là giả lập, lưu trong trình duyệt. Giai đoạn 2 nối Firebase (tài khoản thật, ô `role` đặt tay trong Firebase là `student` hoặc `coach`, dữ liệu dùng chung, thông báo).
 - Tên sản phẩm và địa chỉ app nằm ở `web/src/brand.js`. Đổi địa chỉ thì sửa cả `APP_URL` trong `chuyen-nha.html` và `NEW_APP` trong `app/index.html`. Nút "Đồng bộ TOEIC" (study4) cũ vẫn chạy nhờ `app/index.html` chuyển tiếp, nhưng nên kéo lại nút mới từ trang Lộ trình.
 
-### Cài Cloudflare Pages (làm một lần, miễn phí)
+### Deploy lên Cloudflare Pages
 
-1. Tạo tài khoản ở dash.cloudflare.com, vào **Workers & Pages → Create → Pages → Connect to Git**, chọn repo `toeic-vocab`.
-2. Project name: `kho-tu-toeic` (thành `kho-tu-toeic.pages.dev`). Production branch: `main`.
-3. Build settings: Framework preset **None**, Root directory **`web`**, Build command **`npm run build`**, Build output directory **`dist`**.
-4. Bấm Deploy. Từ đó mỗi lần đẩy code lên `main`, Cloudflare tự build và đăng.
-5. Khóa bí mật (Firebase…) sau này đặt ở **Settings → Variables and Secrets** của project, không để trong repo.
+Cấu hình nằm trong repo:
+
+| File | Việc |
+|---|---|
+| `web/wrangler.toml` | tên project `kho-tu-toeic`, thư mục kết quả `dist`, biến công khai `[vars]` |
+| `web/package.json` | `npm run build` = chạy test rồi build: test hỏng thì Cloudflare không deploy |
+| `web/.nvmrc` | Node 22 cho máy build của Cloudflare |
+| `web/public/_headers` | cache 1 năm cho file đã băm tên, luôn kiểm tra bản mới của trang/sw.js/vocab.json, header bảo mật |
+
+Link sâu (`/vocab/set/…`) chạy nhờ chế độ SPA của Cloudflare, chế độ này bật khi bản build không có `404.html`: đừng thêm file đó.
+
+Tạo project một lần (miễn phí):
+
+1. dash.cloudflare.com → **Workers & Pages → Create → Pages → Connect to Git** → chọn repo `toeic-vocab`.
+2. Project name **`kho-tu-toeic`** (phải trùng `name` trong `wrangler.toml`), production branch **`main`**.
+3. Chỉ điền 2 ô mà Cloudflare không đọc từ file: **Root directory `web`**, **Build command `npm run build`**. Các ô khác để trống, Cloudflare lấy từ `wrangler.toml`.
+4. **Save and Deploy**. Từ đó mỗi lần code vào `main` là tự deploy; nhánh khác có link xem thử riêng.
+5. Khóa bí mật (giai đoạn 2) thêm ở **Settings → Variables and Secrets**, không để trong repo.
 
 ### Chuyển dữ liệu từ GitHub Pages
 
@@ -46,7 +59,8 @@ cd web
 npm install
 npm run dev      # http://localhost:5173
 npm test         # kiểm thử logic
-npm run build    # ra web/dist (Cloudflare tự chạy lệnh này, không commit dist)
+npm run build    # test + build ra web/dist (Cloudflare chạy đúng lệnh này)
+npm run build:only  # build không chạy test
 npm run preview  # xem bản build ở http://localhost:4173
 ```
 

@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vitest run && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "extract-plan": "node scripts/extract-plan.mjs"
+    "extract-plan": "node scripts/extract-plan.mjs",
+    "build:only": "vite build"
   },
   "dependencies": {
     "react": "18.3.1",
@@ -20,5 +21,8 @@
     "jsdom": "25.0.1",
     "vite": "5.4.11",
     "vitest": "2.1.8"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

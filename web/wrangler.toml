@@ -1,0 +1,12 @@
+# Cloudflare Pages configuration (the project's root directory is "web", so this file lives here).
+# Cloudflare reads it on every build; settings below become read-only in the dashboard.
+# The build command ("npm run build") and root directory ("web") are the only two settings
+# that must be entered once in the dashboard: Pages does not read them from this file.
+name = "kho-tu-toeic"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-11-01"
+
+# Public, non-secret settings go in [vars]. Secrets (Firebase admin keys in phase 2) are added in the
+# dashboard under Settings → Variables and Secrets, never here.
+[vars]
+APP_ENV = "production"

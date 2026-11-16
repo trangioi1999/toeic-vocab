@@ -1,0 +1,22 @@
+# Cloudflare Pages response headers. Deep links (/vocab/set/…) are served by Pages' SPA fallback,
+# which applies because the build has no 404.html: never add one.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Hashed bundles never change: cache for a year.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Always check for a new app shell, service worker and word list.
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/sw.js
+  Cache-Control: no-cache
+/vocab.json
+  Cache-Control: no-cache

@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 
-// vocab.json stays at the repo root (the old pages read it too). Serve it in dev, copy it into dist on build.
+// vocab.json stays at the repo root (the old pages read it too). Serve it in dev, copy it into the build output.
 const serveRepoRoot = {
   name: 'serve-repo-root',
   configureServer(server) {
@@ -21,10 +21,12 @@ const serveRepoRoot = {
   },
 };
 
+let outDir = 'dist';
 const copyVocab = {
   name: 'copy-vocab',
   apply: 'build',
-  closeBundle() { fs.copyFileSync(path.join(repoRoot, 'vocab.json'), path.join(repoRoot, 'web', 'dist', 'vocab.json')); },
+  configResolved(c) { outDir = path.resolve(c.root, c.build.outDir); },
+  closeBundle() { fs.copyFileSync(path.join(repoRoot, 'vocab.json'), path.join(outDir, 'vocab.json')); },
 };
 
 export default defineConfig({
