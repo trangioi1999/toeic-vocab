@@ -13,7 +13,7 @@ Chạy cục bộ: `python3 -m http.server` rồi mở http://localhost:8000
 
 ## App mới (React, giai đoạn 1: giao diện)
 
-Chạy trên Cloudflare Pages, link gọn: `https://kho-tu-toeic.pages.dev` (tên thật tùy tên project bạn đặt trên Cloudflare).
+Chạy trên Cloudflare Workers (static assets), link gọn dạng `https://kho-tu-toeic.<tên-tài-khoản>.workers.dev` hoặc tên miền riêng.
 
 - `/` là trang giới thiệu. `/login` và `/signup` mở hộp thoại đăng nhập / đăng ký (đăng ký đang khóa, mở bằng `SIGNUP_OPEN` trong `web/src/brand.js`).
 - Vai trò đi theo tài khoản: **người học** vào `/today`, `/vocab`, `/plan`, `/settings`; **người kèm** vào `/coach`, `/coach/day/<ngày>`, `/coach/settings`. Không có nút chọn vai trò.
@@ -21,26 +21,30 @@ Chạy trên Cloudflare Pages, link gọn: `https://kho-tu-toeic.pages.dev` (tê
 - Bản này **chưa có máy chủ**: đăng nhập và dữ liệu là giả lập, lưu trong trình duyệt. Giai đoạn 2 nối Firebase (tài khoản thật, ô `role` đặt tay trong Firebase là `student` hoặc `coach`, dữ liệu dùng chung, thông báo).
 - Tên sản phẩm và địa chỉ app nằm ở `web/src/brand.js`. Đổi địa chỉ thì sửa cả `APP_URL` trong `chuyen-nha.html` và `NEW_APP` trong `app/index.html`. Nút "Đồng bộ TOEIC" (study4) cũ vẫn chạy nhờ `app/index.html` chuyển tiếp, nhưng nên kéo lại nút mới từ trang Lộ trình.
 
-### Deploy lên Cloudflare Pages
+### Deploy lên Cloudflare Workers
 
-Cấu hình nằm trong repo:
+App React build ra file tĩnh trong `web/dist`; một Worker chỉ có static assets phát các file đó.
 
 | File | Việc |
 |---|---|
-| `web/wrangler.toml` | tên project `kho-tu-toeic`, thư mục kết quả `dist`, biến công khai `[vars]` |
-| `web/package.json` | `npm run build` = chạy test rồi build: test hỏng thì Cloudflare không deploy |
-| `web/.nvmrc` | Node 22 cho máy build của Cloudflare |
+| `web/wrangler.toml` | tên Worker `kho-tu-toeic`, thư mục `./dist`, `not_found_handling = "single-page-application"` để link sâu (`/vocab/set/…`) mở được |
+| `web/package.json` | `npm run build` = chạy test rồi build: test hỏng thì không deploy |
+| `web/.nvmrc` | Node 22 |
 | `web/public/_headers` | cache 1 năm cho file đã băm tên, luôn kiểm tra bản mới của trang/sw.js/vocab.json, header bảo mật |
 
-Link sâu (`/vocab/set/…`) chạy nhờ chế độ SPA của Cloudflare, chế độ này bật khi bản build không có `404.html`: đừng thêm file đó.
+Tạo project một lần: dash.cloudflare.com → **Workers & Pages → Create → Import a repository** → chọn `toeic-vocab`, rồi điền:
 
-Tạo project một lần (miễn phí):
+| Ô | Giá trị |
+|---|---|
+| Project name | `kho-tu-toeic` (phải trùng `name` trong `wrangler.toml`) |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Non-production branch deploy command (nếu có) | `npx wrangler versions upload` |
+| Path / Root directory (trong Advanced settings) | `web` |
 
-1. dash.cloudflare.com → **Workers & Pages → Create → Pages → Connect to Git** → chọn repo `toeic-vocab`.
-2. Project name **`kho-tu-toeic`** (phải trùng `name` trong `wrangler.toml`), production branch **`main`**.
-3. Chỉ điền 2 ô mà Cloudflare không đọc từ file: **Root directory `web`**, **Build command `npm run build`**. Các ô khác để trống, Cloudflare lấy từ `wrangler.toml`.
-4. **Save and Deploy**. Từ đó mỗi lần code vào `main` là tự deploy; nhánh khác có link xem thử riêng.
-5. Khóa bí mật (giai đoạn 2) thêm ở **Settings → Variables and Secrets**, không để trong repo.
+Mỗi lần code vào `main` là tự deploy. Link mặc định dạng `kho-tu-toeic.<tên-tài-khoản>.workers.dev`; đổi `APP_URL` trong `web/src/brand.js`, `chuyen-nha.html` và `NEW_APP` trong `app/index.html` cho đúng link thật. Khóa bí mật (giai đoạn 2) thêm ở **Settings → Variables and Secrets**.
+
+Kiểm tra trên máy: `cd web && npm run build && npx wrangler deploy --dry-run` (hoặc `npx wrangler dev` để chạy thử).
 
 ### Chuyển dữ liệu từ GitHub Pages
 

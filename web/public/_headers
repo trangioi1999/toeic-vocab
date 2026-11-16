@@ -1,5 +1,5 @@
-# Cloudflare Pages response headers. Deep links (/vocab/set/…) are served by Pages' SPA fallback,
-# which applies because the build has no 404.html: never add one.
+# Cloudflare static-asset response headers. Deep links (/vocab/set/…) are served by the SPA fallback
+# set in wrangler.toml (not_found_handling = "single-page-application").
 
 /*
   X-Content-Type-Options: nosniff
