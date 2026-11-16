@@ -4,6 +4,7 @@ import NotifyCard from '../../components/NotifyCard.jsx';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useStore } from '../../hooks/useStore.js';
 import { getSettings, setSettings } from '../../services/store.js';
+import { kv } from '../../services/kv.js';
 import { decodeData, mergeInto } from '../../lib/migrate.js';
 import './student.css';
 
@@ -30,7 +31,7 @@ export function ImportBox({ after }) {
   const run = e => {
     e.preventDefault();
     try {
-      mergeInto(localStorage, decodeData(code));
+      mergeInto(kv, decodeData(code));
       location.assign(after || location.pathname);
     } catch (err) { setError(err.message); }
   };

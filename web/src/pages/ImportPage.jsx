@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { APP_NAME } from '../brand.js';
+import { kv } from '../services/kv.js';
 import { decodeData, mergeInto } from '../lib/migrate.js';
 import { ImportBox } from './student/Settings.jsx';
 import './landing/landing.css';
@@ -15,7 +16,7 @@ export default function ImportPage() {
     history.replaceState(null, '', '/import');
     if (!hash.startsWith('#d=')) { setState({ step: 'paste' }); return; }
     try {
-      const { added } = mergeInto(localStorage, decodeData(hash));
+      const { added } = mergeInto(kv, decodeData(hash));
       setState({ step: 'done', added });
     } catch (e) {
       setState({ step: 'error', message: e.message });

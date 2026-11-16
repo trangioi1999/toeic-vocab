@@ -1,9 +1,10 @@
 /*
- * Mock data store (phase 1): everything lives in this browser's localStorage, using the same keys
- * as the old pages (status, known, pref, toeic700-v3) so old and new stay in sync.
- * Phase 2 swaps the internals for Firestore; the exported API stays the same.
+ * Data store: synchronous getters/setters over the key-value layer (services/kv.js). Keys match the old
+ * pages (status, known, pref, toeic700-v3). Mock mode keeps them in localStorage; Firebase mode swaps the
+ * kv backend for a Firestore-synced cache. Getters return the same object until the stored string changes.
  */
 import { currentUser } from './auth.js';
+import { kv } from './kv.js';
 import { todayISO, nowLocalISO } from '../lib/dates.js';
 import { dayOf } from '../lib/plan.js';
 import { canComplete, ticksOf } from '../lib/progress.js';
@@ -19,7 +20,7 @@ const DEFAULT_PREFS = { front: 'en', auto: false };
 const listeners = new Set();
 const cache = new Map();
 
-function readRaw(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+function readRaw(key) { return kv.getItem(key); }
 /** Parsed value of a key; the same object is returned until the stored string changes. */
 function read(key, fallback) {
   const raw = readRaw(key);
@@ -30,18 +31,15 @@ function read(key, fallback) {
   cache.set(key, { raw, value });
   return value;
 }
-function write(key, value) {
-  try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* storage full or blocked */ }
-  emit();
-}
+function write(key, value) { kv.setItem(key, JSON.stringify(value)); }
 function emit() { listeners.forEach(cb => cb()); }
+kv.subscribe(emit);
 function assertStudent() {
   const u = currentUser();
   if (!u || u.role !== 'student') throw new Error(READ_ONLY);
 }
 
 export function subscribe(cb) { listeners.add(cb); return () => listeners.delete(cb); }
-if (typeof window !== 'undefined') window.addEventListener('storage', () => emit());
 
 /* ---------- cards ---------- */
 const EMPTY = Object.freeze({});
