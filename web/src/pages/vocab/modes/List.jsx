@@ -4,6 +4,7 @@ import { setCardStatus } from '../../../services/store.js';
 import { enVi, ipaOf } from '../../../lib/vocab.js';
 import { useVocab } from '../../../hooks/useVocab.js';
 import { ST_LABEL, ST_CLS } from './shared.js';
+import Example from '../Example.jsx';
 
 export default function List({ items, status, showFrom, empty }) {
   const { say } = useSpeech();
@@ -22,7 +23,7 @@ export default function List({ items, status, showFrom, empty }) {
               {it.c[2] && <div className="ipa sm">{ipaOf(it)}</div>}
               {showFrom && data && <span className="from">{data.setMap.get(it.sid) && data.setMap.get(it.sid).title}</span>}
             </div>
-            <div className="m">{vi}</div>
+            <div className="m">{vi}<Example it={it} compact /></div>
             <div className="acts">
               <button className="icon-btn bare" type="button" aria-label="Nghe tiếng Anh" onClick={() => say(en, 'en')}><Icon name="speaker" size={18} /></button>
               <button className="icon-btn bare vi-btn" type="button" aria-label="Đọc tiếng Việt" onClick={() => say(vi, 'vi')}>VI</button>

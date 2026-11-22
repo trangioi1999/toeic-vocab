@@ -5,6 +5,7 @@ import { useSpeech } from '../../../hooks/useSpeech.js';
 import { setCardStatus } from '../../../services/store.js';
 import { enVi, ipaOf } from '../../../lib/vocab.js';
 import { frontOf, backOf, lg, ST_LABEL, ST_CLS } from './shared.js';
+import Example from '../Example.jsx';
 
 function Face({ side, it, prefs, st, say, sayBoth }) {
   const f = frontOf(it, prefs), b = backOf(it, prefs), ipa = ipaOf(it);
@@ -21,6 +22,7 @@ function Face({ side, it, prefs, st, say, sayBoth }) {
         <div className={(s.lang === 'en' ? 'word' : 'mean') + lg(s.t)}>{s.t || '—'}</div>
         {s.lang === 'en' && ipa && <div className="ipa">{ipa}</div>}
         {side === 'back' && <div className="small-term">{f.t}{f.lang === 'en' && ipa ? <> <span className="ipa sm">{ipa}</span></> : null}</div>}
+        {side === 'back' && <Example it={it} onSay={t => say(t, 'en')} />}
         <div className="say">
           {side === 'front'
             ? <button className="sbtn" type="button" data-say onClick={stop(() => say(s.t, s.lang))}><Icon name="speaker" size={16} />{s.lang === 'en' ? 'Nghe' : 'Đọc'}</button>

@@ -1,7 +1,7 @@
 /*
  * Cloudflare Worker in front of the static app (wrangler.toml: run_worker_first for /api/* and /vocab.json).
  *  GET  /api/config       public Firebase web config from variables, or null → the app runs in mock mode
- *  GET  /vocab.json       needs a Firebase ID token once Firebase is configured
+ *  GET  /vocab.json, /examples.json  need a Firebase ID token (and a role) once Firebase is configured
  *  POST /api/notify-done  learner finished today → push to their coach
  *  cron (every 10 min)    20:00 reminder to the learner, 23:00 missed-day alert to the coach
  * Without the Firebase variables every route degrades to phase-1 behaviour.
@@ -96,7 +96,7 @@ export async function handle(request, env, deps) {
       vapidKey: env.FIREBASE_VAPID_KEY || null,
     });
   }
-  if (url.pathname === '/vocab.json') {
+  if (url.pathname === '/vocab.json' || url.pathname === '/examples.json') {
     if (configured(env)) {
       const uid = await uidFrom(request, env, deps);
       if (!uid) return json({ error: 'unauthorized' }, 401);

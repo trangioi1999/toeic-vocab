@@ -101,6 +101,16 @@ describe('review fixes', () => {
   });
 });
 
+describe('/examples.json', () => {
+  it('is gated like the word list', async () => {
+    const env = { ...ENV, ASSETS: assets };
+    expect((await handle(req('/examples.json'), env, deps(google({})))).status).toBe(401);
+    const ok = await idToken('u1');
+    expect(await (await handle(req('/examples.json', { headers: { Authorization: 'Bearer ' + ok } }), env, deps(google({})))).text()).toBe('asset:/examples.json');
+    expect(await (await handle(req('/examples.json'), { ASSETS: assets }, deps(google({})))).text()).toBe('asset:/examples.json');
+  });
+});
+
 describe('verifyIdToken', () => {
   it('accepts a token for this project and rejects expired or foreign ones', async () => {
     expect(await verifyIdToken(await idToken('u1'), PID, jwks)).toBe('u1');

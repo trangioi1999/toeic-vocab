@@ -23,11 +23,18 @@ export const enVi = it => (isEn(it.c[0]) || !isEn(it.c[1]) ? [it.c[0], it.c[1]] 
 export const ipaOf = it => (it.c[2] ? `/${it.c[2]}/` : '');
 export const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
-/** Shape vocab.json: sets with items keyed "setId:index" (same keys as the old page's progress). */
-export function prepare(raw) {
+/** Key of examples.json: the term lower-cased with single spaces. */
+export const exampleKey = t => String(t || '').trim().toLowerCase().replace(/\s+/g, ' ');
+
+const bare = t => exampleKey(t).replace(/[.!?]+$/, '');
+/** No example when it only repeats the card (picture-description cards are sentences already). */
+const usefulExample = (term, ex) => (Array.isArray(ex) && ex[0] && bare(ex[0]) !== bare(term) ? ex : undefined);
+
+/** Shape vocab.json: sets with items keyed "setId:index" (same keys as the old page's progress); `ex` = [en, vi] example. */
+export function prepare(raw, examples = {}) {
   const sets = raw.filter(s => s.cards && s.cards.length).map(s => {
     const id = String(s.id);
-    return { id, title: s.title, k: sortKey(s.title), group: GROUPS.find(g => g.test(s.title)), items: s.cards.map((c, i) => ({ c, sid: id, i, key: id + ':' + i })) };
+    return { id, title: s.title, k: sortKey(s.title), group: GROUPS.find(g => g.test(s.title)), items: s.cards.map((c, i) => ({ c, sid: id, i, key: id + ':' + i, ex: usefulExample(c[0], examples[exampleKey(c[0])]) })) };
   });
   const setMap = new Map(sets.map(s => [s.id, s]));
   const groups = new Map();
@@ -52,12 +59,37 @@ export function searchItems(all, q, limit = 300) {
   return all.filter(it => norm(it.c[0]).includes(n) || norm(it.c[1]).includes(n)).slice(0, limit);
 }
 
+const PLACEHOLDER = /^(sb|sth|smb|someone|something|somebody|vo|v|v-ing|ving|to-v|n|adj|adv|o|\.\.\.|\+|…)$/i;
+const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const stem = w => (w.length > 4 ? w.replace(/(e|y)$/, '') : w);
+
+/** Split an example sentence around the card's term: [before, term, after], or [sentence] if not found. */
+export function markTerm(sentence, term) {
+  const head = String(term || '').split(/[=/]/)[0].replace(/\([^)]*\)/g, ' ');
+  const words = head.toLowerCase().split(/\s+/).filter(w => w && !PLACEHOLDER.test(w));
+  const tries = [];
+  if (words.length > 1) tries.push(words, words[0] === 'be' || words[0] === 'to' ? words.slice(1) : null);
+  tries.push([words.find(w => w.length > 2 && w !== 'be' && w !== 'to') || words[0]]);
+  for (const ws of tries) {
+    if (!ws || !ws.length || !ws[0]) continue;
+    const re = new RegExp('\\b' + esc(stem(ws[0])) + '\\w*' + ws.slice(1).map(w => '\\s+' + esc(w)).join('') + '\\b', 'i');
+    const m = re.exec(sentence);
+    if (m) return [sentence.slice(0, m.index), m[0], sentence.slice(m.index + m[0].length)];
+  }
+  return [sentence];
+}
+
+const authFetch = (url, t) => fetch(url, t ? { headers: { Authorization: 'Bearer ' + t } } : undefined);
+
 let promise = null;
 export function loadVocab() {
   if (!promise) {
     promise = getIdToken().catch(() => null) // offline with an expired token: let the service worker answer
-      .then(t => fetch('/vocab.json', t ? { headers: { Authorization: 'Bearer ' + t } } : undefined))
-      .then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); }).then(prepare);
+      .then(t => Promise.all([
+        authFetch('/vocab.json', t).then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); }),
+        authFetch('/examples.json', t).then(r => (r.ok ? r.json() : {})).catch(() => ({})),
+      ]))
+      .then(([raw, ex]) => prepare(raw, ex));
     promise.catch(() => { promise = null; });
   }
   return promise;

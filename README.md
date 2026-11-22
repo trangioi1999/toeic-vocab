@@ -9,7 +9,7 @@ Chạy cục bộ: `python3 -m http.server` rồi mở http://localhost:8000
 
 ## Lộ trình ôn thi
 
-`lo-trinh.html` – lộ trình TOEIC 700 (16/11/2026 → 03/2027): một ngày làm đề full trên study4, một ngày chữa đề, kèm link thẻ từ vựng cho từng ngày. Mở tại https://trangioi1999.github.io/toeic-vocab/lo-trinh.html
+`lo-trinh.html` – lộ trình TOEIC 700 (23/11/2026 → 03/2027): một ngày làm đề full trên study4, một ngày chữa đề, kèm link thẻ từ vựng cho từng ngày. Mở tại https://trangioi1999.github.io/toeic-vocab/lo-trinh.html
 
 ## App mới (React)
 
@@ -19,6 +19,7 @@ Chạy trên Cloudflare Workers (static assets), link gọn dạng `https://toei
 - Vai trò đi theo tài khoản: **người học** vào `/today`, `/vocab`, `/plan`, `/settings`; **người kèm** vào `/coach`, `/coach/day/<ngày>`, `/coach/settings`. Không có nút chọn vai trò.
 - Tài khoản dùng thử (không hiện trên trang): `hocvien@demo.vn` và `co@demo.vn`, mật khẩu `123456`.
 - Hai chế độ, tự chọn lúc mở app: **chưa có khóa Firebase** trên Cloudflare thì dùng tài khoản giả lập, dữ liệu trong trình duyệt; **có khóa** thì dùng tài khoản Firebase thật, dữ liệu chung trên Firestore, có thông báo. Không cần sửa code hay build lại. Cách bật: mục *Bật Firebase* bên dưới.
+- Mỗi từ có một câu ví dụ ngắn kèm nghĩa (file `web/public/examples.json`, khóa theo từ viết thường), hiện ở mặt sau thẻ và trong chế độ Danh sách. Khi bật Firebase, file này cũng chỉ tải được khi đã đăng nhập.
 - Tên sản phẩm và địa chỉ app nằm ở `web/src/brand.js`. Đổi địa chỉ thì sửa cả `APP_URL` trong `chuyen-nha.html` và `NEW_APP` trong `app/index.html`. Nút "Đồng bộ TOEIC" (study4) cũ vẫn chạy nhờ `app/index.html` chuyển tiếp, nhưng nên kéo lại nút mới từ trang Lộ trình.
 
 ### Deploy lên Cloudflare Workers

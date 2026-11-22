@@ -15,7 +15,7 @@ binding = "ASSETS"
 # Deep links (/vocab/set/…) get index.html; the React router takes it from there.
 not_found_handling = "single-page-application"
 # The Worker answers these itself; every other path is a static file served without running the Worker.
-run_worker_first = ["/api/*", "/vocab.json"]
+run_worker_first = ["/api/*", "/vocab.json", "/examples.json"]
 
 [triggers]
 # Every 10 minutes: 20:00 reminder to the learner, 23:00 missed-day alert to the coach (see worker/decide.js).

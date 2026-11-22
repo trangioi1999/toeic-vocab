@@ -46,8 +46,8 @@ describe('word list request', () => {
     vi.stubGlobal('fetch', async (url, init) => { calls.push([url, init]); return { ok: true, json: async () => [] }; });
     const { loadVocab } = await import('../src/lib/vocab.js');
     await loadVocab();
-    expect(calls[0][0]).toBe('/vocab.json');
-    expect(calls[0][1].headers.Authorization).toBe('Bearer tok');
+    expect(calls.map(c => c[0]).sort()).toEqual(['/examples.json', '/vocab.json']);
+    expect(calls.every(c => c[1].headers.Authorization === 'Bearer tok')).toBe(true);
     vi.unstubAllGlobals();
   });
 });
@@ -61,7 +61,8 @@ describe('word list request offline', () => {
     vi.stubGlobal('fetch', async (url, init) => { calls.push([url, init]); return { ok: true, json: async () => [] }; });
     const { loadVocab } = await import('../src/lib/vocab.js');
     await loadVocab();
-    expect(calls).toHaveLength(1);
+    expect(calls.map(c => c[0])).toContain('/vocab.json');
+    expect(calls.every(c => !c[1])).toBe(true);
     vi.unstubAllGlobals();
   });
 });

@@ -63,7 +63,7 @@
 .stage::before, .stage::after { content: ""; position: absolute; background: var(--sheet); border: 1px solid var(--rule); border-radius: 22px; }
 .stage::before { inset: 16px 14px -16px; opacity: .5; }
 .stage::after { inset: 8px 7px -8px; opacity: .8; }
-.flip { position: relative; z-index: 1; height: clamp(270px, 44vh, 420px); transform-style: preserve-3d; transition: transform .45s cubic-bezier(.3, .7, .2, 1); cursor: pointer; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.flip { position: relative; z-index: 1; height: clamp(300px, 52vh, 460px); transform-style: preserve-3d; transition: transform .45s cubic-bezier(.3, .7, .2, 1); cursor: pointer; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
 .flip.on { transform: rotateY(180deg); }
 .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--sheet); border: 1px solid var(--rule); border-radius: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; padding: 18px; }
 .face.back { transform: rotateY(180deg); }
@@ -129,3 +129,14 @@
   .vitem .m { grid-column: 2; grid-row: 2; color: var(--soft); }
   .vitem .acts { grid-column: 3; grid-row: 1 / 3; flex-direction: column; align-self: center; }
 }
+
+/* example sentence: the term is marked like a pencil-filled answer */
+.ex { max-width: 30rem; display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 2px; padding-top: 10px; border-top: 1px dashed var(--guide-rule); }
+.ex p { margin: 0; }
+.ex-en { font: 500 16px/1.45 var(--body); color: var(--ink); }
+.ex-en mark { background: none; color: inherit; font-weight: 700; text-decoration: underline 2px var(--guide); text-underline-offset: 3px; }
+.ex-vi { font-size: 14px; line-height: 1.45; color: var(--soft); }
+.ex .sbtn { margin-top: 4px; }
+.ex.sm { align-items: flex-start; margin-top: 6px; padding-top: 6px; gap: 2px; }
+.ex.sm .ex-en { font-size: 14px; }
+.ex.sm .ex-vi { font-size: 13px; }

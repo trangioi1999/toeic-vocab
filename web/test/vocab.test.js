@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { prepare, sortKey, enVi, counts, norm, searchItems } from '../src/lib/vocab.js';
 
 const sample = [
@@ -40,5 +40,40 @@ describe('helpers', () => {
   it('searchItems matches either side without accents', () => {
     expect(searchItems(v.all, 'hoa don').map(i => i.key)).toEqual(['3:0']);
     expect(searchItems(v.all, '   ')).toEqual([]);
+  });
+});
+
+describe('example sentences', () => {
+  it('attaches the example to every card of the same term, whatever its case or spacing', async () => {
+    const { prepare: prep, exampleKey } = await import('../src/lib/vocab.js');
+    const raw = [{ id: 1, title: 'TỪ VỰNG TOEIC - THẺ 1', cards: [['Invoice', 'hoá đơn', 'x'], ['Key  factor', 'yếu tố chính']] }, { id: 2, title: 'ETS 2020 TEST 1', cards: [['invoice', 'hoá đơn']] }];
+    const ex = { [exampleKey('invoice')]: ['Please send the invoice by Friday.', 'Vui lòng gửi hoá đơn trước thứ Sáu.'] };
+    const d = prep(raw, ex);
+    expect(d.itemMap.get('1:0').ex).toEqual(ex.invoice);
+    expect(d.itemMap.get('2:0').ex).toEqual(ex.invoice);
+    expect(d.itemMap.get('1:1').ex).toBe(undefined);
+    expect(exampleKey('  Key  Factor ')).toBe('key factor');
+  });
+  it('marks the term inside the sentence', async () => {
+    const { markTerm } = await import('../src/lib/vocab.js');
+    expect(markTerm('Please send the invoice by Friday.', 'Invoice')).toEqual(['Please send the ', 'invoice', ' by Friday.']);
+    expect(markTerm('She was able to finish early.', 'Be able to')).toEqual(['She was ', 'able to', ' finish early.']);
+    expect(markTerm('The new system enables staff to work from home.', 'Enable sb to Vo')).toEqual(['The new system ', 'enables', ' staff to work from home.']);
+    expect(markTerm('We face many problems.', 'Face = encounter')).toEqual(['We ', 'face', ' many problems.']);
+    expect(markTerm('Nothing here matches.', 'Invoice')).toEqual(['Nothing here matches.']);
+  });
+  it('loads the examples with the word list and keeps working without them', async () => {
+    vi.resetModules();
+    const calls = [];
+    vi.stubGlobal('fetch', async url => {
+      calls.push(url);
+      if (url === '/examples.json') return { ok: false, status: 404 };
+      return { ok: true, json: async () => [{ id: 1, title: 'TỪ VỰNG TOEIC - THẺ 1', cards: [['Invoice', 'hoá đơn']] }] };
+    });
+    const { loadVocab } = await import('../src/lib/vocab.js');
+    const d = await loadVocab();
+    expect(calls.sort()).toEqual(['/examples.json', '/vocab.json']);
+    expect(d.all).toHaveLength(1);
+    vi.unstubAllGlobals();
   });
 });
