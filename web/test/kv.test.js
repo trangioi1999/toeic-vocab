@@ -24,9 +24,9 @@ describe('kv', () => {
     expect(kv.getItem('pref')).toBe('{"front":"vi"}');
   });
   it('routes reads and writes to a swapped backend', () => {
-    const b = fakeBackend({ checkins: '{"2026-11-16":{"at":"x"}}' });
+    const b = fakeBackend({ checkins: '{"2026-11-23":{"at":"x"}}' });
     setBackend(b);
-    expect(store.getCheckins()).toEqual({ '2026-11-16': { at: 'x' } });
+    expect(store.getCheckins()).toEqual({ '2026-11-23': { at: 'x' } });
     kv.setItem('pref', '{}');
     expect(b.data.pref).toBe('{}');
     expect(localStorage.getItem('pref')).toBe(null);

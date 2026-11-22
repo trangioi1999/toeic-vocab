@@ -93,11 +93,11 @@ describe('firstUpload', () => {
     for (const path of docs.listeners.keys()) docs.remote(path, null);
     docs.remote('learners/u1/data/status', '{"a:1":2}');
     localStorage.setItem('status', '{"a:1":1,"b:2":1}');
-    localStorage.setItem('toeic700-v3', '{"2026-11-16":{"done":true}}');
+    localStorage.setItem('toeic700-v3', '{"2026-11-23":{"done":true}}');
     expect(firstUpload(kv, localStorage, 'u1')).toBeGreaterThan(0);
     expect(JSON.parse(kv.getItem('status'))).toEqual({ 'a:1': 2, 'b:2': 1 });
-    expect(kv.getItem('toeic700-v3')).toBe('{"2026-11-16":{"done":true}}');
-    localStorage.setItem('checkins', '{"2026-11-17":{"at":"x"}}');
+    expect(kv.getItem('toeic700-v3')).toBe('{"2026-11-23":{"done":true}}');
+    localStorage.setItem('checkins', '{"2026-11-24":{"at":"x"}}');
     expect(firstUpload(kv, localStorage, 'u1')).toBe(0);
     expect(kv.getItem('checkins')).toBe(null);
   });
@@ -153,10 +153,10 @@ describe('review fixes: sync safety', () => {
     let release; const docs = docs2();
     docs.write = (path, raw) => { docs.writes.push([path, raw]); return new Promise(r => { release = r; }); };
     const kv = createCloudKv({ ...ids, docs });
-    kv.setItem('checkins', '{"2026-11-16":{}}');
+    kv.setItem('checkins', '{"2026-11-23":{}}');
     let done = false;
     kv.flush('checkins').then(() => { done = true; });
-    expect(docs.writes).toEqual([['learners/u1/data/checkins', '{"2026-11-16":{}}']]);
+    expect(docs.writes).toEqual([['learners/u1/data/checkins', '{"2026-11-23":{}}']]);
     await Promise.resolve();
     expect(done).toBe(false);
     release(); await Promise.resolve(); await Promise.resolve();

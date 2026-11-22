@@ -37,10 +37,10 @@ describe('service worker push', () => {
   });
   it('opens the page from the notification', async () => {
     const sw = loadSw();
-    const e = event({ notification: { data: { url: '/coach/day/2026-11-16' }, close() {} } });
+    const e = event({ notification: { data: { url: '/coach/day/2026-11-23' }, close() {} } });
     sw.listeners.notificationclick(e);
     await e.done;
-    expect(sw.opened).toEqual(['/coach/day/2026-11-16']);
+    expect(sw.opened).toEqual(['/coach/day/2026-11-23']);
   });
   it('focuses an open app window instead of opening another', async () => {
     const sw = loadSw();

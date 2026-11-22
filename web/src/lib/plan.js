@@ -8,7 +8,7 @@ function titleOf(d) {
   if (d.kind === 'test') return (d.note === 'Điểm đầu vào' ? 'Đề đầu vào: ' : 'Làm đề ') + d.test;
   if (d.kind === 'fixr') return 'Chữa Reading của ' + d.test;
   if (d.kind === 'fixl') return 'Chữa Listening của ' + d.test;
-  if (d.kind === 'review') return d.date === '2027-01-31' ? 'Tổng kết trước Tết' : d.note === 'Giảm tải' ? 'Ôn nhẹ trước ngày thi' : 'Chủ nhật: ôn từ vựng và sổ lỗi sai';
+  if (d.kind === 'review') return d.note === 'Nghỉ Tết từ mai' ? 'Tổng kết trước Tết' : d.note === 'Giảm tải' ? 'Ôn nhẹ trước ngày thi' : 'Chủ nhật: ôn từ vựng và sổ lỗi sai';
   return d.phase === 'Nghỉ Tết' ? 'Nghỉ Tết' : (d.note || 'Nghỉ ngơi');
 }
 

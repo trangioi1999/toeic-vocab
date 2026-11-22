@@ -12,21 +12,21 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 beforeEach(async () => { localStorage.clear(); await logout(); await login('hocvien@demo.vn', '123456'); });
 
 describe('done wins over a partial tasks list', () => {
-  const d16 = dayOf('2026-11-16');
+  const d16 = dayOf('2026-11-23');
   it('ticksOf shows every task ticked when the day is done', () => {
     expect(ticksOf(d16, { tasks: [true, false, false], done: true })).toEqual([true, true, true]);
     expect(ticksOf(d16, { tasks: [true, false, false] })).toEqual([true, false, false]);
     expect(tasksDone(d16, { tasks: [true, false, false], done: true })).toBe(3);
   });
   it('ticking a task on a done day keeps it done', () => {
-    localStorage.setItem('toeic700-v3', JSON.stringify({ '2026-11-16': { tasks: [true, false, false], done: true } }));
-    store.setPlanTask('2026-11-16', 1, true);
-    expect(store.getPlanState()['2026-11-16']).toMatchObject({ tasks: [true, true, true], done: true });
+    localStorage.setItem('toeic700-v3', JSON.stringify({ '2026-11-23': { tasks: [true, false, false], done: true } }));
+    store.setPlanTask('2026-11-23', 1, true);
+    expect(store.getPlanState()['2026-11-23']).toMatchObject({ tasks: [true, true, true], done: true });
   });
   it('unticking a task on a done day reopens only that task', () => {
-    localStorage.setItem('toeic700-v3', JSON.stringify({ '2026-11-16': { tasks: [true, false, false], done: true } }));
-    store.setPlanTask('2026-11-16', 1, false);
-    expect(store.getPlanState()['2026-11-16']).toMatchObject({ tasks: [true, false, true], done: false });
+    localStorage.setItem('toeic700-v3', JSON.stringify({ '2026-11-23': { tasks: [true, false, false], done: true } }));
+    store.setPlanTask('2026-11-23', 1, false);
+    expect(store.getPlanState()['2026-11-23']).toMatchObject({ tasks: [true, false, true], done: false });
   });
 });
 

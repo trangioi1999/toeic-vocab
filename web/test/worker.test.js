@@ -88,9 +88,9 @@ describe('review fixes', () => {
     const note = 'Hôm nay khó quá '.repeat(400);
     const g = google({
       'users/u1': { role: 'student', name: 'Giỏi' }, 'users/c1': { role: 'coach', learnerUid: 'u1' },
-      'learners/u1/data/checkins': { raw: JSON.stringify({ '2026-11-16': { at: 'x', note } }) }, 'pushTokens/c1': { tokens: ['t1'] },
+      'learners/u1/data/checkins': { raw: JSON.stringify({ '2026-11-23': { at: 'x', note } }) }, 'pushTokens/c1': { tokens: ['t1'] },
     });
-    const r = await handle(req('/api/notify-done', { method: 'POST', headers: { Authorization: 'Bearer ' + await idToken('u1') }, body: '{"date":"2026-11-16"}' }), saEnv(), deps(g));
+    const r = await handle(req('/api/notify-done', { method: 'POST', headers: { Authorization: 'Bearer ' + await idToken('u1') }, body: '{"date":"2026-11-23"}' }), saEnv(), deps(g));
     expect(await r.json()).toEqual({ sent: 1 });
     expect(g.sent[0].webpush.data.body.length).toBeLessThanOrEqual(200);
   });
@@ -113,17 +113,17 @@ describe('/api/notify-done', () => {
   const db = () => ({
     'users/u1': { role: 'student', name: 'Giỏi' },
     'users/c1': { role: 'coach', learnerUid: 'u1' },
-    'learners/u1/data/checkins': { raw: JSON.stringify({ '2026-11-16': { at: '2026-11-16T21:47', cards: 24, note: 'Part 6 khó', planTitle: 'Chữa Reading' } }) },
+    'learners/u1/data/checkins': { raw: JSON.stringify({ '2026-11-23': { at: '2026-11-23T21:47', cards: 24, note: 'Part 6 khó', planTitle: 'Chữa Reading' } }) },
     'pushTokens/c1': { tokens: ['t1', 'dead'] },
   });
   const env = () => ({ ...ENV, FIREBASE_SERVICE_ACCOUNT: JSON.stringify(sa), ASSETS: assets });
-  const post = async (uid, body = { date: '2026-11-16' }) => req('/api/notify-done', { method: 'POST', headers: { Authorization: 'Bearer ' + await idToken(uid) }, body: JSON.stringify(body) });
+  const post = async (uid, body = { date: '2026-11-23' }) => req('/api/notify-done', { method: 'POST', headers: { Authorization: 'Bearer ' + await idToken(uid) }, body: JSON.stringify(body) });
 
   it('pushes the check-in to the coach and drops dead tokens', async () => {
     const g = google(db());
     const r = await handle(await post('u1'), env(), deps(g));
     expect(await r.json()).toEqual({ sent: 1 });
-    expect(g.sent[0]).toMatchObject({ token: 't1', webpush: { data: { url: '/coach/day/2026-11-16' } } });
+    expect(g.sent[0]).toMatchObject({ token: 't1', webpush: { data: { url: '/coach/day/2026-11-23' } } });
     expect(g.sent[0].webpush.data.title).toContain('Giỏi');
     expect(g.sent[0].webpush.data.body).toContain('Part 6 khó');
     expect(g.patched).toEqual([['pushTokens/c1', expect.objectContaining({ fields: expect.anything() })]]);
@@ -131,7 +131,7 @@ describe('/api/notify-done', () => {
   it('refuses a coach, a missing check-in, and a bad date', async () => {
     const g = google(db());
     expect((await handle(await post('c1'), env(), deps(g))).status).toBe(403);
-    expect((await handle(await post('u1', { date: '2026-11-17' }), env(), deps(g))).status).toBe(409);
+    expect((await handle(await post('u1', { date: '2026-11-24' }), env(), deps(g))).status).toBe(409);
     expect((await handle(await post('u1', { date: 'x' }), env(), deps(g))).status).toBe(400);
     expect(g.sent).toEqual([]);
   });
@@ -157,7 +157,7 @@ describe('cron', () => {
       'learners/u1/data/checkins': { raw: '{}' },
       'pushTokens/u1': { tokens: ['t9'] },
     });
-    await runCron({ ...ENV, FIREBASE_SERVICE_ACCOUNT: JSON.stringify(sa) }, deps(g, new Date('2026-11-16T13:05:00Z')));
+    await runCron({ ...ENV, FIREBASE_SERVICE_ACCOUNT: JSON.stringify(sa) }, deps(g, new Date('2026-11-23T13:05:00Z')));
     expect(g.sent.map(m => m.token)).toEqual(['t9']);
     expect(g.patched.find(([p]) => p === 'notifyLog/u1')).toBeTruthy();
   });

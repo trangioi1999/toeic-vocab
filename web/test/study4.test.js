@@ -9,9 +9,9 @@ describe('mergeStudy4', () => {
   it('prefers the full test and fills the plan day', () => {
     const before = {};
     const res = mergeStudy4(before, list);
-    expect(res.state['2026-11-16']).toEqual({ done: true, l: '400', r: '350', parts: { 1: [5, 6] } });
+    expect(res.state['2026-11-23']).toEqual({ done: true, l: '400', r: '350', parts: { 1: [5, 6] } });
     expect(res.ok).toHaveLength(1);
-    expect(res.firstDate).toBe('2026-11-16');
+    expect(res.firstDate).toBe('2026-11-23');
     expect(before).toEqual({});
   });
   it('skips tests that are not in the plan', () => {
@@ -19,7 +19,7 @@ describe('mergeStudy4', () => {
   });
   it('a newer part practice does not beat an older full test', () => {
     const res = mergeStudy4({}, [list[1], { ...list[0], rid: 9 }]);
-    expect(res.state['2026-11-16'].l).toBe('400');
+    expect(res.state['2026-11-23'].l).toBe('400');
   });
 });
 

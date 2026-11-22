@@ -5,7 +5,7 @@ beforeEach(() => { localStorage.clear(); });
 
 describe('encode/decode', () => {
   it('round-trips Vietnamese text', () => {
-    const data = { checkins: JSON.stringify({ '2026-11-16': { note: 'Part 7 khó quá, đoán 8 câu' } }) };
+    const data = { checkins: JSON.stringify({ '2026-11-23': { note: 'Part 7 khó quá, đoán 8 câu' } }) };
     expect(decodeData(encodeData(data))).toEqual(data);
   });
   it('produces a URL-safe code', () => {
@@ -47,14 +47,14 @@ describe('mergeInto', () => {
     expect(JSON.parse(localStorage.getItem('status'))).toEqual({ 'a:1': 2 });
   });
   it('keeps existing plan days and adds new ones', () => {
-    localStorage.setItem('toeic700-v3', JSON.stringify({ '2026-11-16': { done: true } }));
-    mergeInto(localStorage, { 'toeic700-v3': JSON.stringify({ '2026-11-16': { done: false }, '2026-11-17': { l: '300' } }) });
-    expect(JSON.parse(localStorage.getItem('toeic700-v3'))).toEqual({ '2026-11-16': { done: true }, '2026-11-17': { l: '300' } });
+    localStorage.setItem('toeic700-v3', JSON.stringify({ '2026-11-23': { done: true } }));
+    mergeInto(localStorage, { 'toeic700-v3': JSON.stringify({ '2026-11-23': { done: false }, '2026-11-24': { l: '300' } }) });
+    expect(JSON.parse(localStorage.getItem('toeic700-v3'))).toEqual({ '2026-11-23': { done: true }, '2026-11-24': { l: '300' } });
   });
   it('unions the cards reviewed on the same day', () => {
-    localStorage.setItem('activity', JSON.stringify({ '2026-11-16': ['a:1'] }));
-    mergeInto(localStorage, { activity: JSON.stringify({ '2026-11-16': ['a:1', 'b:2'] }) });
-    expect(JSON.parse(localStorage.getItem('activity'))).toEqual({ '2026-11-16': ['a:1', 'b:2'] });
+    localStorage.setItem('activity', JSON.stringify({ '2026-11-23': ['a:1'] }));
+    mergeInto(localStorage, { activity: JSON.stringify({ '2026-11-23': ['a:1', 'b:2'] }) });
+    expect(JSON.parse(localStorage.getItem('activity'))).toEqual({ '2026-11-23': ['a:1', 'b:2'] });
   });
   it('unions the legacy known list', () => {
     localStorage.setItem('known', JSON.stringify(['x']));
@@ -85,8 +85,8 @@ describe('legacy known list', () => {
 
 describe('same-day records', () => {
   it('keeps existing fields and adds the missing ones from the old site', () => {
-    localStorage.setItem('toeic700-v3', JSON.stringify({ '2026-11-16': { tasks: [true, false, false] } }));
-    mergeInto(localStorage, { 'toeic700-v3': JSON.stringify({ '2026-11-16': { tasks: [true, true, true], done: true, l: '340', r: '280' } }) });
-    expect(JSON.parse(localStorage.getItem('toeic700-v3'))).toEqual({ '2026-11-16': { tasks: [true, false, false], done: true, l: '340', r: '280' } });
+    localStorage.setItem('toeic700-v3', JSON.stringify({ '2026-11-23': { tasks: [true, false, false] } }));
+    mergeInto(localStorage, { 'toeic700-v3': JSON.stringify({ '2026-11-23': { tasks: [true, true, true], done: true, l: '340', r: '280' } }) });
+    expect(JSON.parse(localStorage.getItem('toeic700-v3'))).toEqual({ '2026-11-23': { tasks: [true, false, false], done: true, l: '340', r: '280' } });
   });
 });

@@ -13,7 +13,7 @@ describe('legacyToPath', () => {
   it('maps hash-router links of the first React app', () => {
     expect(legacyToPath('#/plan')).toBe('/plan');
     expect(legacyToPath('#/')).toBe('/today');
-    expect(legacyToPath('#/teacher/day/2026-12-01')).toBe('/coach/day/2026-12-01');
+    expect(legacyToPath('#/teacher/day/2026-12-08')).toBe('/coach/day/2026-12-08');
     expect(legacyToPath('#/teacher')).toBe('/coach');
   });
   it('leaves empty and in-page anchors alone', () => {

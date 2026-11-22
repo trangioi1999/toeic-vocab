@@ -20,11 +20,11 @@ describe('roles', () => {
 describe('safeNext', () => {
   it('keeps a page inside the role area', () => {
     expect(safeNext('/vocab/set/a', 'student')).toBe('/vocab/set/a');
-    expect(safeNext('/coach/day/2026-12-01', 'coach')).toBe('/coach/day/2026-12-01');
+    expect(safeNext('/coach/day/2026-12-08', 'coach')).toBe('/coach/day/2026-12-08');
     expect(safeNext('/today?x=1', 'student')).toBe('/today?x=1');
   });
   it('ignores the other role area', () => {
-    expect(safeNext('/coach/day/2026-12-01', 'student')).toBe('/today');
+    expect(safeNext('/coach/day/2026-12-08', 'student')).toBe('/today');
     expect(safeNext('/vocab', 'coach')).toBe('/coach');
   });
   it('ignores the landing, auth and import pages', () => {

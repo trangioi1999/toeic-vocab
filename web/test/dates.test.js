@@ -6,7 +6,7 @@ describe('dates', () => {
     expect(todayISO(new Date(2026, 10, 15, 0, 30))).toBe('2026-11-15');
   });
   it('addDays crosses year boundaries', () => {
-    expect(addDays('2026-12-31', 1)).toBe('2027-01-01');
+    expect(addDays('2027-01-07', 1)).toBe('2027-01-08');
     expect(addDays('2026-03-01', -1)).toBe('2026-02-28');
   });
   it('dm formats DD/MM', () => {

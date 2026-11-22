@@ -133,7 +133,7 @@ export default function Plan() {
     <div className="wrap plan-page">
       <div className="page-head" style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         <h1>Lộ trình TOEIC 700</h1>
-        <p className="sub">16/11/2026 đến 28/02/2027, dự phòng tới 07/03. Làm đề, chữa Reading, chữa Listening, lặp lại. {lead}</p>
+        <p className="sub">23/11/2026 đến 07/03/2027, dự phòng tới 14/03. Làm đề, chữa Reading, chữa Listening, lặp lại. {lead}</p>
       </div>
       <div className="tally">
         <div><b>{stats.done}<small>/{stats.work}</small></b><span>buổi đã xong</span></div>

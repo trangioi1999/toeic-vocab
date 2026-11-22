@@ -25,7 +25,7 @@ describe('coach is read-only', () => {
   it('refuses student writes but allows own settings', async () => {
     await logout(); await login('co@demo.vn', '123456');
     expect(() => store.setCardStatus('1:1', 2)).toThrow('Tài khoản người kèm chỉ được xem');
-    expect(() => store.setPlanTask('2026-11-16', 0, true)).toThrow('Tài khoản người kèm chỉ được xem');
+    expect(() => store.setPlanTask('2026-11-23', 0, true)).toThrow('Tài khoản người kèm chỉ được xem');
     expect(() => store.completeDay(todayISO(), {})).toThrow('Tài khoản người kèm chỉ được xem');
     store.setSettings('coach', { notifyMissed: false });
     expect(store.getSettings('coach')).toEqual({ notifyDone: true, notifyMissed: false });
@@ -37,29 +37,29 @@ describe('coach is read-only', () => {
 
 describe('plan', () => {
   it('ticking every task marks the day done, unticking one reopens it', () => {
-    [0, 1, 2].forEach(i => store.setPlanTask('2026-11-16', i, true));
-    expect(store.getPlanState()['2026-11-16'].done).toBe(true);
-    store.setPlanTask('2026-11-16', 1, false);
-    expect(store.getPlanState()['2026-11-16'].done).toBe(false);
-    expect(JSON.parse(localStorage.getItem('toeic700-v3'))['2026-11-16'].tasks).toEqual([true, false, true]);
+    [0, 1, 2].forEach(i => store.setPlanTask('2026-11-23', i, true));
+    expect(store.getPlanState()['2026-11-23'].done).toBe(true);
+    store.setPlanTask('2026-11-23', 1, false);
+    expect(store.getPlanState()['2026-11-23'].done).toBe(false);
+    expect(JSON.parse(localStorage.getItem('toeic700-v3'))['2026-11-23'].tasks).toEqual([true, false, true]);
   });
   it('setting done from the old checkbox ticks all tasks', () => {
-    store.setPlanEntry('2026-11-17', { done: true });
-    expect(store.getPlanState()['2026-11-17'].tasks).toEqual([true, true, true, true, true]);
+    store.setPlanEntry('2026-11-24', { done: true });
+    expect(store.getPlanState()['2026-11-24'].tasks).toEqual([true, true, true, true, true]);
   });
 });
 
 describe('check-ins', () => {
   it('refuses to complete a day that is not finished', () => {
-    expect(() => store.completeDay('2026-11-16', {})).toThrow('Còn 3 việc trong lộ trình hôm nay');
+    expect(() => store.completeDay('2026-11-23', {})).toThrow('Còn 3 việc trong lộ trình hôm nay');
   });
   it('records the check-in with cards and note, and can undo it', () => {
-    [0, 1, 2].forEach(i => store.setPlanTask('2026-11-16', i, true));
-    const c = store.completeDay('2026-11-16', { note: ' Part 7 khó ' });
+    [0, 1, 2].forEach(i => store.setPlanTask('2026-11-23', i, true));
+    const c = store.completeDay('2026-11-23', { note: ' Part 7 khó ' });
     expect(c).toMatchObject({ note: 'Part 7 khó', cards: 0, planTitle: 'Đề đầu vào: TOEIC LR Collection 1 Test 2' });
-    expect(store.getCheckins()['2026-11-16']).toBeTruthy();
-    store.undoCheckin('2026-11-16');
-    expect(store.getCheckins()['2026-11-16']).toBeUndefined();
+    expect(store.getCheckins()['2026-11-23']).toBeTruthy();
+    store.undoCheckin('2026-11-23');
+    expect(store.getCheckins()['2026-11-23']).toBeUndefined();
   });
 });
 
