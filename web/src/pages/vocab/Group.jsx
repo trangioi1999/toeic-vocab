@@ -26,7 +26,7 @@ export default function Group() {
       <Link className="backlink" to="/vocab"><Icon name="back" />Kho từ</Link>
       <div className="page-head">
         <h1>{g.name}</h1>
-        <p className="sub">{g.sets.length} học phần, {g.items.length} thẻ. Đã thuộc {c[2]}, đang học {c[1]}.</p>
+        <p className="sub">{g.sets.length} học phần, {g.items.length.toLocaleString('vi-VN')} thẻ. Đã thuộc {c[2].toLocaleString('vi-VN')}, đang học {c[1].toLocaleString('vi-VN')}.</p>
       </div>
       <div className="opts">
         <button className="btn primary" type="button" onClick={() => session(g.name + ': cả nhóm', g.items)}>Học cả nhóm</button>
@@ -40,7 +40,7 @@ export default function Group() {
               const sc = counts(s.items, status);
               return (
                 <Link key={s.id} className="setrow" to={'/vocab/set/' + s.id}>
-                  <b>{s.title}</b><SegBar c={sc} thin /><span className="n">{sc[2]}/{s.items.length}</span>
+                  <b>{s.name}</b><SegBar c={sc} thin /><span className="n">{sc[2]}/{s.items.length}</span>
                 </Link>
               );
             })}

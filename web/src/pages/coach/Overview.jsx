@@ -47,7 +47,7 @@ export default function Overview() {
     <div className="wrap coach-page">
       <div className="page-head" style={{ display: 'flex', flexDirection: 'column' }}>
         <span className="sub">{weekdayName(today)}, {dmy(today)}</span>
-        <h1>Chào bạn</h1>
+        <h1>Tổng quan</h1>
       </div>
       <div className="coach-top">
       <Link className="hero-status" to={'/coach/day/' + today}>
@@ -62,8 +62,8 @@ export default function Overview() {
       </Link>
       <div className="stats4">
         <div><b>{st} ngày</b><span>học liên tiếp</span></div>
-        <div><b>{past.length ? <>{pastDone}<small>/{past.length}</small></> : '–'}</b><span>{past.length ? 'buổi đã hoàn thành' : 'lộ trình chưa bắt đầu'}</span></div>
-        <div><b>{last ? last.v : '–'}</b><span>{last ? `điểm đề gần nhất${prev ? (last.v >= prev.v ? `, tăng ${last.v - prev.v}` : `, giảm ${prev.v - last.v}`) : ''}` : 'chưa có điểm đề'}</span></div>
+        <div><b>{past.length ? <>{pastDone}<small>/{past.length}</small></> : 0}</b><span>{past.length ? 'buổi đã hoàn thành' : 'lộ trình chưa bắt đầu'}</span></div>
+        <div><b>{last ? last.v : <small>chưa có</small>}</b><span>điểm đề gần nhất{last && prev ? (last.v >= prev.v ? `, tăng ${last.v - prev.v}` : `, giảm ${prev.v - last.v}`) : ''}</span></div>
         <div><b>{known.toLocaleString('vi-VN')}</b><span>thẻ từ đã thuộc</span></div>
       </div>
       </div>
@@ -72,13 +72,13 @@ export default function Overview() {
           <section className="sheet sheet-pad">
             <MonthCalendar year={Math.floor(m / 12)} month0={m % 12} today={today} statusOf={statusOf}
               onPick={iso => navigate('/coach/day/' + iso)} canPrev={m > min} canNext={m < max} onPrev={() => setM(m - 1)} onNext={() => setM(m + 1)} />
-            <p className="sub" style={{ fontSize: 12, marginTop: 6 }}>Bấm vào một ngày để xem chi tiết.</p>
+            <p className="sub" style={{ fontSize: 12, marginTop: 6 }}>Bấm vào một ngày để xem chi tiết</p>
           </section>
         </div>
         <div className="t-col">
           <section className="sheet sheet-pad">
             <div className="section-head"><h2>Điểm qua từng đề</h2><span style={{ fontSize: 12, color: 'var(--guide)' }}>Mục tiêu 700</span></div>
-            {!pts.length && <p className="sub" style={{ fontSize: 13, marginTop: 6 }}>Chưa có điểm đề nào.</p>}
+            {!pts.length && <p className="sub" style={{ fontSize: 13, marginTop: 6 }}>Chưa có điểm đề nào</p>}
             <ScoreChart points={pts} />
           </section>
           <section className="feed">

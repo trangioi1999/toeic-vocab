@@ -138,7 +138,7 @@ export default function Plan() {
       <div className="tally">
         <div><b>{stats.done}<small>/{stats.work}</small></b><span>buổi đã xong</span></div>
         <div><b>{stats.testsDone}<small>/{stats.tests}</small></b><span>đề đã làm</span></div>
-        <div className="dark"><b>{stats.best || '–'}</b><span>điểm cao nhất</span></div>
+        <div className="dark"><b>{stats.best || <small>chưa có</small>}</b><span>điểm cao nhất</span></div>
       </div>
       <div className="plan-duo">
         <section className="sheet sheet-pad">
@@ -157,7 +157,7 @@ export default function Plan() {
           </div>
           <div className="key">
             <span className="k-test"><i />Làm đề</span><span className="k-fixr"><i />Chữa Reading</span><span className="k-fixl"><i />Chữa Listening</span>
-            <span className="k-review"><i />Chủ nhật ôn tập</span><span><i className="ring" />Bỏ lỡ</span>
+            <span className="k-review"><i />Chủ nhật ôn tập</span><span><i className="ring" />Bỏ lỡ</span><span><i className="ring todo" />Chưa tới</span>
           </div>
         </section>
       </div>

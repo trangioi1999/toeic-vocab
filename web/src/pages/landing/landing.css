@@ -15,8 +15,6 @@
 .lp-hero { display: grid; gap: 40px; align-items: center; padding-top: 32px; padding-bottom: 48px; }
 @media (min-width: 1000px) { .lp-hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; padding-top: 72px; padding-bottom: 64px; } }
 .lp-hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
-.lp-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; padding: 0 14px; border-radius: 999px; background: var(--guide-tint); color: var(--guide-strong); font: 600 14px var(--display); }
-.lp-chip i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid currentColor; }
 .lp-hero h1 { font: 700 clamp(2.4rem, 6vw, 4rem)/1.05 var(--display); letter-spacing: -0.035em; }
 .lp-lead { max-width: 34rem; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.6; color: var(--ink-soft); }
 .lp-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }

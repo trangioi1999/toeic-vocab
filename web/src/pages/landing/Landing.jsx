@@ -106,9 +106,8 @@ export default function Landing() {
         <main>
           <section className="lp-wrap lp-hero">
             <div className="lp-hero-copy">
-              <span className="lp-chip"><i />Lộ trình TOEIC 700+ trong 16 tuần</span>
               <h1>Mỗi ngày tô thêm một ô.</h1>
-              <p className="lp-lead">Kho từ vựng TOEIC, việc cần làm cho từng ngày, và một người kèm luôn biết hôm nay bạn đã học xong chưa.</p>
+              <p className="lp-lead">Lộ trình TOEIC 700+ trong 16 tuần: kho từ vựng, việc cần làm cho từng ngày, và một người kèm luôn biết hôm nay bạn đã học xong chưa.</p>
               <div className="lp-cta">
                 <Link className="btn primary lp-big" to="/login" onClick={remember}>Đăng nhập</Link>
                 <a className="btn lp-big" href="#cach-dung">Xem cách dùng<Icon name="next" size={18} /></a>
@@ -121,7 +120,7 @@ export default function Landing() {
           <section className="lp-wrap" aria-label="Con số">
             <dl className="lp-facts">
               <div><dt>6.580</dt><dd>thẻ từ vựng</dd></div>
-              <div><dt>12</dt><dd>nhóm chủ đề</dd></div>
+              <div><dt>13</dt><dd>nhóm chủ đề</dd></div>
               <div><dt>112</dt><dd>ngày lộ trình</dd></div>
               <div><dt>0đ</dt><dd>miễn phí</dd></div>
             </dl>
