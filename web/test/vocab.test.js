@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { prepare, sortKey, enVi, counts, norm, searchItems } from '../src/lib/vocab.js';
+import { niceTitle } from '../src/lib/vocab.js';
 
 const sample = [
   { id: 1, title: 'Thẻ 10', cards: [['apple', 'quả táo']] },
@@ -75,5 +76,15 @@ describe('example sentences', () => {
     expect(calls.sort()).toEqual(['/examples.json', '/vocab.json']);
     expect(d.all).toHaveLength(1);
     vi.unstubAllGlobals();
+  });
+});
+
+describe('niceTitle', () => {
+  it('turns typed capitals into sentence case and keeps acronyms', () => {
+    expect(niceTitle('TỪ VỰNG TOEIC - THẺ 1')).toBe('Từ vựng TOEIC, Thẻ 1');
+    expect(niceTitle('TỪ VỰNG TOEIC - THẺ 5 (bản 2)')).toBe('Từ vựng TOEIC, Thẻ 5 (bản 2)');
+    expect(niceTitle('ETS2024-TEST4-P7.3')).toBe('ETS2024, Test4, P7.3');
+    expect(niceTitle('ECONOMY -TEST 4- LISTENING - THẺ 2 (cuối)')).toBe('Economy, Test 4, Listening, Thẻ 2 (cuối)');
+    expect(niceTitle('Lesson 1: Basic Nouns part 1')).toBe('Lesson 1: Basic Nouns part 1');
   });
 });

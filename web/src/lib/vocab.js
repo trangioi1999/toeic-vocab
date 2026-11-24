@@ -23,6 +23,21 @@ export const enVi = it => (isEn(it.c[0]) || !isEn(it.c[1]) ? [it.c[0], it.c[1]] 
 export const ipaOf = it => (it.c[2] ? `/${it.c[2]}/` : '');
 export const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
+const KEEP = { toeic: 'TOEIC', ets: 'ETS', ybm: 'YBM', tnc: 'TNC', economy: 'Economy' };
+const capFirst = s => s.charAt(0).toLocaleUpperCase('vi') + s.slice(1);
+/**
+ * Display name of a set: the class titles are typed in capitals with dashes ("TỪ VỰNG TOEIC - THẺ 1");
+ * shown in sentence case with commas ("Từ vựng TOEIC, Thẻ 1"). Mixed-case parts stay as typed.
+ */
+export function niceTitle(t) {
+  return String(t).split(/\s*-\s*|\s+=\s+/).filter(Boolean).map(part => {
+    const bare = part.replace(/\([^)]*\)/g, '');
+    if (bare !== bare.toLocaleUpperCase('vi')) return part;
+    const low = part.toLocaleLowerCase('vi').replace(/[a-z]+/g, w => KEEP[w] || w).replace(/\bp(\d)/g, 'P$1');
+    return capFirst(low);
+  }).join(', ');
+}
+
 /** Key of examples.json: the term lower-cased with single spaces. */
 export const exampleKey = t => String(t || '').trim().toLowerCase().replace(/\s+/g, ' ');
 
@@ -34,7 +49,7 @@ const usefulExample = (term, ex) => (Array.isArray(ex) && ex[0] && bare(ex[0]) !
 export function prepare(raw, examples = {}) {
   const sets = raw.filter(s => s.cards && s.cards.length).map(s => {
     const id = String(s.id);
-    return { id, title: s.title, k: sortKey(s.title), group: GROUPS.find(g => g.test(s.title)), items: s.cards.map((c, i) => ({ c, sid: id, i, key: id + ':' + i, ex: usefulExample(c[0], examples[exampleKey(c[0])]) })) };
+    return { id, title: s.title, name: niceTitle(s.title), k: sortKey(s.title), group: GROUPS.find(g => g.test(s.title)), items: s.cards.map((c, i) => ({ c, sid: id, i, key: id + ':' + i, ex: usefulExample(c[0], examples[exampleKey(c[0])]) })) };
   });
   const setMap = new Map(sets.map(s => [s.id, s]));
   const groups = new Map();

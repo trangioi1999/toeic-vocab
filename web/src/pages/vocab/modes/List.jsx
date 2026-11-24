@@ -21,7 +21,7 @@ export default function List({ items, status, showFrom, empty }) {
             <div>
               <div className="t">{en}</div>
               {it.c[2] && <div className="ipa sm">{ipaOf(it)}</div>}
-              {showFrom && data && <span className="from">{data.setMap.get(it.sid) && data.setMap.get(it.sid).title}</span>}
+              {showFrom && data && <span className="from">{data.setMap.get(it.sid) && data.setMap.get(it.sid).name}</span>}
             </div>
             <div className="m">{vi}<Example it={it} compact /></div>
             <div className="acts">

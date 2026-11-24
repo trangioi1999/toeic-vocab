@@ -3,12 +3,37 @@ import Icon from '../../components/Icon.jsx';
 import PlanTasks from '../../components/PlanTasks.jsx';
 import PartBars, { worstPart } from '../../components/PartBars.jsx';
 import { useStore } from '../../hooks/useStore.js';
+import { useVocab } from '../../hooks/useVocab.js';
 import { useToday } from '../../hooks/useToday.js';
 import { getCheckins, getPlanState, getActivity } from '../../services/store.js';
 import { dayOf, KIND, shortTest } from '../../lib/plan.js';
-import { dayStatus, tasksDone } from '../../lib/progress.js';
+import { dayStatus, dayProgress } from '../../lib/progress.js';
+import { recallFor, recallPassed } from '../../lib/recall.js';
+import { enVi } from '../../lib/vocab.js';
 import { todayISO, dmy, weekdayName, timeHM } from '../../lib/dates.js';
 import './coach.css';
+
+/** Score of the check on the previous study day's cards, and the words the learner got wrong. */
+function RecallBox({ due, rec }) {
+  const { data } = useVocab();
+  const wrong = (rec && rec.wrong) || [];
+  return (
+    <section className="sheet sheet-pad" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div className="section-head">
+        <h2>Kiểm tra bài cũ</h2>
+        <span className="num" style={{ fontWeight: 600, color: recallPassed(rec) ? 'var(--known)' : 'var(--guide-strong)' }}>{rec ? `${rec.right}/${rec.total}` : 'Chưa làm'}</span>
+      </div>
+      <p style={{ fontSize: 14, color: 'var(--soft)', margin: 0 }}>
+        {due.sets.map(x => x.name).join(', ')} của {weekdayName(due.from)} {dmy(due.from)}.{rec ? ` ${recallPassed(rec) ? 'Đạt' : 'Chưa đạt'}, làm ${rec.tries || 1} lần, giữ lần cao nhất.` : ''}
+      </p>
+      {wrong.length > 0 && (
+        <ul className="recall-wrong" aria-label="Từ trả lời sai">
+          {wrong.map(k => { const it = data && data.itemMap.get(k); if (!it) return null; const [en, vi] = enVi(it); return <li key={k}><b>{en}</b><span>{vi}</span></li>; })}
+        </ul>
+      )}
+    </section>
+  );
+}
 
 const STATUS = { done: 'Đã hoàn thành', missed: 'Bỏ buổi', rest: 'Ngày nghỉ, không bắt buộc', pending: 'Chưa hoàn thành', future: 'Chưa tới ngày', none: 'Ngoài lộ trình' };
 
@@ -20,6 +45,7 @@ export default function DayDetail() {
   const today = useToday();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date || '')) return <Navigate to="/coach" replace />;
   const day = dayOf(date), c = checkins[date], p = plan[date] || {};
+  const prog = dayProgress(day, p);
   const s = dayStatus(date, { checkins, today });
   const cards = c ? c.cards : (activity[date] || []).length;
   const sum = +p.l > 0 && +p.r > 0 ? +p.l + +p.r : null;
@@ -43,9 +69,10 @@ export default function DayDetail() {
           {worst && <p style={{ fontSize: 14, color: 'var(--guide-strong)' }}>Part {worst.n} đúng thấp nhất: {worst.c}/{worst.t} câu.</p>}
         </section>
       )}
+      {recallFor(date) && (p.recall || date <= today) && <RecallBox due={recallFor(date)} rec={p.recall} />}
       {day && day.kind !== 'off' && (
         <section className="sheet" style={{ padding: '14px 16px 4px' }}>
-          <div className="section-head"><h2>Việc trong lộ trình</h2><span className="num" style={{ fontWeight: 600, color: tasksDone(day, p) === day.tasks.length ? 'var(--known)' : 'var(--soft)' }}>{tasksDone(day, p)}/{day.tasks.length}</span></div>
+          <div className="section-head"><h2>Việc trong lộ trình</h2><span className="num" style={{ fontWeight: 600, color: prog.done === prog.total ? 'var(--known)' : 'var(--soft)' }}>{prog.done}/{prog.total}</span></div>
           <PlanTasks day={day} entry={p} readOnly noLinks />
         </section>
       )}

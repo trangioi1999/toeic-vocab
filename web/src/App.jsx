@@ -12,6 +12,7 @@ import Group from './pages/vocab/Group.jsx';
 import SetPage from './pages/vocab/SetPage.jsx';
 import Search from './pages/vocab/Search.jsx';
 import Session from './pages/vocab/Session.jsx';
+import Recall from './pages/vocab/Recall.jsx';
 import Plan from './pages/plan/Plan.jsx';
 import Overview from './pages/coach/Overview.jsx';
 import DayDetail from './pages/coach/DayDetail.jsx';
@@ -45,6 +46,7 @@ export default function App() {
             <Route path="/vocab/set/:sid" element={<SetPage />} />
             <Route path="/vocab/search" element={<Search />} />
             <Route path="/vocab/session" element={<Session />} />
+            <Route path="/recall" element={<Recall />} />
             <Route path="/plan" element={<Plan />} />
             <Route path="/settings" element={<Settings />} />
           </Route>

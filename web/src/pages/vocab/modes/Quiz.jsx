@@ -8,7 +8,8 @@ import Finish from './Finish.jsx';
 
 const newSession = items => ({ o: shuffle([...items]), i: 0, g: 0, r: 0, right: [] });
 
-export default function Quiz({ items, pool, prefs, status, empty }) {
+/** onFinish(S) runs once when the last question is passed; renderFinish(S, again) replaces the result screen. */
+export default function Quiz({ items, pool, prefs, status, empty, onFinish, renderFinish }) {
   const [S, setS] = useState(() => newSession(items));
   const [picked, setPicked] = useState(null);
   const { say } = useSpeech();
@@ -24,7 +25,10 @@ export default function Quiz({ items, pool, prefs, status, empty }) {
   useEffect(() => { if (picked !== null && nextRef.current) nextRef.current.focus(); }, [picked]);
 
   if (!S.o.length) return <p className="empty">{empty}</p>;
-  if (S.i >= S.o.length) return <Finish S={S} again={() => { setS(newSession(items)); setPicked(null); }} />;
+  if (S.i >= S.o.length) {
+    const again = () => { setS(newSession(items)); setPicked(null); };
+    return renderFinish ? renderFinish(S, again) : <Finish S={S} again={again} />;
+  }
   const f = frontOf(it, prefs), ans = backOf(it, prefs).t, ipa = ipaOf(it);
   const choose = j => {
     if (picked !== null) return;
@@ -48,7 +52,7 @@ export default function Quiz({ items, pool, prefs, status, empty }) {
         })}
       </div>
       {picked !== null && (
-        <div className="qact"><button ref={nextRef} className="btn primary" type="button" onClick={() => { setS(s => ({ ...s, i: s.i + 1 })); setPicked(null); }}>Câu tiếp</button></div>
+        <div className="qact"><button ref={nextRef} className="btn primary" type="button" onClick={() => { const n = { ...S, i: S.i + 1 }; setS(n); setPicked(null); if (n.i >= n.o.length && onFinish) onFinish(n); }}>Câu tiếp</button></div>
       )}
     </div>
   );

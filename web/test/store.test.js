@@ -91,3 +91,23 @@ describe('settings snapshot', () => {
     expect(b.reminderTime).toBe('21:00');
   });
 });
+
+describe('kiểm tra bài cũ', () => {
+  it('saves the best attempt on the plan entry and copies the score into the check-in', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date(2026, 10, 24, 20, 0));
+    try {
+      const d = '2026-11-24';
+      [0, 1, 2, 3, 4].forEach(i => store.setPlanTask(d, i, true));
+      expect(() => store.completeDay(d, {})).toThrow(/bài cũ/);
+      store.saveRecall(d, { from: '2026-11-23', right: 25, total: 40, wrong: ['a'] });
+      expect(() => store.completeDay(d, {})).toThrow(/bài cũ/);
+      store.saveRecall(d, { from: '2026-11-23', right: 34, total: 40, wrong: ['b'] });
+      store.saveRecall(d, { from: '2026-11-23', right: 30, total: 40, wrong: ['c'] });
+      const r = store.getPlanState()[d].recall;
+      expect(r).toMatchObject({ right: 34, total: 40, wrong: ['b'], tries: 3 });
+      expect(store.getPlanState()[d].done).toBe(true);
+      expect(store.completeDay(d, {}).recall).toEqual({ right: 34, total: 40 });
+    } finally { vi.useRealTimers(); }
+  });
+});

@@ -9,7 +9,7 @@ import { useStore } from '../../hooks/useStore.js';
 import { useToday } from '../../hooks/useToday.js';
 import { getPlanState, setPlanEntry, setPlanTask, replacePlanState } from '../../services/store.js';
 import { DAYS, KIND, DOW, weeks, weekName, weekIndexOf, currentWeekIndex, testDay, shortTest, PLAN_START, cleanScore } from '../../lib/plan.js';
-import { planStats, isWorkDay, tasksDone } from '../../lib/progress.js';
+import { planStats, isWorkDay, dayProgress } from '../../lib/progress.js';
 import { todayISO, dm, daysBetween } from '../../lib/dates.js';
 import { decodeS4, mergeStudy4, bookmarkletHref, bookmarkletCode, SYNC_URL } from '../../lib/study4.js';
 import './plan.css';
@@ -30,7 +30,7 @@ function DayCard({ d, s, today, open, onToggle }) {
   const parts = src ? (getPlanState()[src.date] || {}).parts : null;
   const want = d.kind === 'fixr' ? [5, 6, 7] : d.kind === 'fixl' ? [1, 2, 3, 4] : [1, 2, 3, 4, 5, 6, 7];
   const worst = d.kind !== 'test' ? worstPart(parts, want) : null;
-  const done = tasksDone(d, s);
+  const { done, total } = dayProgress(d, s);
   const score = (k, v) => setPlanEntry(d.date, { [k]: cleanScore(v) });
   return (
     <article id={'d-' + d.date} className={`day k-${d.kind}${s.done ? ' done' : ''}${d.date === today ? ' is-today' : ''}`}>
@@ -38,7 +38,7 @@ function DayCard({ d, s, today, open, onToggle }) {
         <span className="b" aria-hidden="true" />
         <span className="tt">
           <b>{d.title}</b>
-          <span>{d.date === today ? 'Hôm nay' : DOW[d.dow]}, {dm(d.date)}{d.kind !== 'off' ? `. ${KIND[d.kind]}, ${d.hours}` : ''}{!s.done && done && d.kind !== 'off' ? `. Đã làm ${done}/${d.tasks.length}` : ''}</span>
+          <span>{d.date === today ? 'Hôm nay' : DOW[d.dow]}, {dm(d.date)}{d.kind !== 'off' ? `. ${KIND[d.kind]}, ${d.hours}` : ''}{!s.done && done && d.kind !== 'off' ? `. Đã làm ${done}/${total}` : ''}</span>
         </span>
         {sum ? <span className="right">{sum}</span> : s.done ? <span className="right ok">Xong</span> : null}
         <Icon name="next" size={18} />
@@ -138,7 +138,7 @@ export default function Plan() {
       <div className="tally">
         <div><b>{stats.done}<small>/{stats.work}</small></b><span>buổi đã xong</span></div>
         <div><b>{stats.testsDone}<small>/{stats.tests}</small></b><span>đề đã làm</span></div>
-        <div className="dark"><b>{stats.best || '–'}</b><span>điểm cao nhất</span></div>
+        <div className="dark"><b>{stats.best || <small>chưa có</small>}</b><span>điểm cao nhất</span></div>
       </div>
       <div className="plan-duo">
         <section className="sheet sheet-pad">
@@ -157,7 +157,7 @@ export default function Plan() {
           </div>
           <div className="key">
             <span className="k-test"><i />Làm đề</span><span className="k-fixr"><i />Chữa Reading</span><span className="k-fixl"><i />Chữa Listening</span>
-            <span className="k-review"><i />Chủ nhật ôn tập</span><span><i className="ring" />Bỏ lỡ</span>
+            <span className="k-review"><i />Chủ nhật ôn tập</span><span><i className="ring" />Bỏ lỡ</span><span><i className="ring todo" />Chưa tới</span>
           </div>
         </section>
       </div>

@@ -16,7 +16,7 @@ export function SearchBar({ initial = '' }) {
   return (
     <form className="searchbar" role="search" onSubmit={e => { e.preventDefault(); if (q.trim()) navigate('/vocab/search?q=' + encodeURIComponent(q.trim())); }}>
       <Icon name="search" size={18} />
-      <input className="input" type="search" enterKeyHint="search" value={q} onChange={e => setQ(e.target.value)} placeholder="Tìm từ tiếng Anh hoặc nghĩa tiếng Việt" aria-label="Tìm từ" />
+      <input className="input" type="search" enterKeyHint="search" value={q} onChange={e => setQ(e.target.value)} placeholder="Tìm từ hoặc nghĩa" aria-label="Tìm từ" />
     </form>
   );
 }
@@ -52,10 +52,10 @@ export default function VocabHome() {
           </div>
         </div>
         <div className="acts">
-          <button className="btn primary" type="button" disabled={!learning.length} onClick={() => session('Ôn thẻ đang học', shuffle([...learning]).slice(0, 30))}>
-            Ôn {Math.min(30, learning.length)} thẻ đang học
+          <button className={'btn' + (learning.length ? ' primary' : ' quiet')} type="button" disabled={!learning.length} onClick={() => session('Ôn thẻ đang học', shuffle([...learning]).slice(0, 30))}>
+            {learning.length ? `Ôn ${Math.min(30, learning.length)} thẻ đang học` : 'Chưa có thẻ đang học'}
           </button>
-          <button className="btn" type="button" disabled={!fresh.length} onClick={() => session('Học 20 thẻ mới', shuffle([...fresh]).slice(0, 20))}>Học 20 thẻ mới</button>
+          <button className={'btn' + (learning.length ? '' : ' primary')} type="button" disabled={!fresh.length} onClick={() => session('Học 20 thẻ mới', shuffle([...fresh]).slice(0, 20))}>Học 20 thẻ mới</button>
         </div>
       </section>
       <h2>Nhóm học phần</h2>

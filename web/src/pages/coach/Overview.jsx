@@ -6,7 +6,7 @@ import { useStore } from '../../hooks/useStore.js';
 import { useToday } from '../../hooks/useToday.js';
 import { getCheckins, getPlanState, getActivity, getCardStatus } from '../../services/store.js';
 import { dayOf, DAYS, PLAN_START, PLAN_END, shortTest } from '../../lib/plan.js';
-import { streak, dayStatus, planStats, isWorkDay, tasksDone, REQUIRED_CARDS } from '../../lib/progress.js';
+import { streak, dayStatus, planStats, isWorkDay, dayProgress, REQUIRED_CARDS } from '../../lib/progress.js';
 import { todayISO, addDays, dmy, weekdayName, timeHM, dm } from '../../lib/dates.js';
 import './coach.css';
 
@@ -28,8 +28,8 @@ export default function Overview() {
   const check = checkins[today];
   const cards = (activity[today] || []).length;
   const work = isWorkDay(day);
-  const done = tasksDone(day, plan[today]);
-  const frac = check ? 1 : work ? done / day.tasks.length : Math.min(1, cards / REQUIRED_CARDS);
+  const { done, total } = dayProgress(day, plan[today]);
+  const frac = check ? 1 : work ? done / total : Math.min(1, cards / REQUIRED_CARDS);
   const st = streak(checkins, today);
   const past = DAYS.filter(d => d.date < today && isWorkDay(d));
   const pastDone = past.filter(d => checkins[d.date]).length;
@@ -47,23 +47,23 @@ export default function Overview() {
     <div className="wrap coach-page">
       <div className="page-head" style={{ display: 'flex', flexDirection: 'column' }}>
         <span className="sub">{weekdayName(today)}, {dmy(today)}</span>
-        <h1>Chào bạn</h1>
+        <h1>Tổng quan</h1>
       </div>
       <div className="coach-top">
       <Link className="hero-status" to={'/coach/day/' + today}>
-        <span className="mini" style={{ '--p': Math.round(frac * 100) + '%' }}><span>{check ? '✓' : work ? `${done}/${day.tasks.length}` : `${cards}`}</span></span>
+        <span className="mini" style={{ '--p': Math.round(frac * 100) + '%' }}><span>{check ? '✓' : work ? `${done}/${total}` : `${cards}`}</span></span>
         <span className="tx">
           {check ? (
             <><b>Hôm nay người học đã hoàn thành lúc {timeHM(check.at)}</b><span>{check.note ? `“${check.note}”` : `${day ? day.title + '. ' : ''}Đã ôn ${check.cards} thẻ.`}</span></>
           ) : (
-            <><b>Hôm nay người học chưa hoàn thành</b><span>{day && day.kind !== 'off' ? `${day.title}. ${work ? `Đã làm ${done}/${day.tasks.length} việc và ` : ''}` : ''}ôn {cards} thẻ.</span></>
+            <><b>Hôm nay người học chưa hoàn thành</b><span>{day && day.kind !== 'off' ? `${day.title}. ${work ? `Đã làm ${done}/${total} việc và ` : ''}` : ''}ôn {cards} thẻ.</span></>
           )}
         </span>
       </Link>
       <div className="stats4">
         <div><b>{st} ngày</b><span>học liên tiếp</span></div>
-        <div><b>{past.length ? <>{pastDone}<small>/{past.length}</small></> : '–'}</b><span>{past.length ? 'buổi đã hoàn thành' : 'lộ trình chưa bắt đầu'}</span></div>
-        <div><b>{last ? last.v : '–'}</b><span>{last ? `điểm đề gần nhất${prev ? (last.v >= prev.v ? `, tăng ${last.v - prev.v}` : `, giảm ${prev.v - last.v}`) : ''}` : 'chưa có điểm đề'}</span></div>
+        <div><b>{past.length ? <>{pastDone}<small>/{past.length}</small></> : 0}</b><span>{past.length ? 'buổi đã hoàn thành' : 'lộ trình chưa bắt đầu'}</span></div>
+        <div><b>{last ? last.v : <small>chưa có</small>}</b><span>điểm đề gần nhất{last && prev ? (last.v >= prev.v ? `, tăng ${last.v - prev.v}` : `, giảm ${prev.v - last.v}`) : ''}</span></div>
         <div><b>{known.toLocaleString('vi-VN')}</b><span>thẻ từ đã thuộc</span></div>
       </div>
       </div>
@@ -72,13 +72,13 @@ export default function Overview() {
           <section className="sheet sheet-pad">
             <MonthCalendar year={Math.floor(m / 12)} month0={m % 12} today={today} statusOf={statusOf}
               onPick={iso => navigate('/coach/day/' + iso)} canPrev={m > min} canNext={m < max} onPrev={() => setM(m - 1)} onNext={() => setM(m + 1)} />
-            <p className="sub" style={{ fontSize: 12, marginTop: 6 }}>Bấm vào một ngày để xem chi tiết.</p>
+            <p className="sub" style={{ fontSize: 12, marginTop: 6 }}>Bấm vào một ngày để xem chi tiết</p>
           </section>
         </div>
         <div className="t-col">
           <section className="sheet sheet-pad">
             <div className="section-head"><h2>Điểm qua từng đề</h2><span style={{ fontSize: 12, color: 'var(--guide)' }}>Mục tiêu 700</span></div>
-            {!pts.length && <p className="sub" style={{ fontSize: 13, marginTop: 6 }}>Chưa có điểm đề nào.</p>}
+            {!pts.length && <p className="sub" style={{ fontSize: 13, marginTop: 6 }}>Chưa có điểm đề nào</p>}
             <ScoreChart points={pts} />
           </section>
           <section className="feed">

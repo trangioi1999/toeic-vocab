@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { canComplete, streak, dayStatus, planStats, REQUIRED_CARDS } from '../src/lib/progress.js';
+import { canComplete, streak, dayStatus, planStats, dayProgress, REQUIRED_CARDS } from '../src/lib/progress.js';
 import { dayOf, DAYS, weeks } from '../src/lib/plan.js';
 
 const ck = (...dates) => Object.fromEntries(dates.map(d => [d, { at: d + 'T21:00:00' }]));
@@ -81,5 +81,15 @@ describe('planStats', () => {
     expect(s.best).toBe(545);
     expect(s.points).toEqual([{ date: '2026-11-23', v: 545 }]);
     expect(s.work).toBe(DAYS.filter(d => d.kind !== 'off').length);
+  });
+});
+
+describe('dayProgress', () => {
+  it('counts the recall check as one more task', () => {
+    const d = dayOf('2026-11-24');
+    expect(dayProgress(d, {})).toMatchObject({ done: 0, total: 6, recallOk: false });
+    expect(dayProgress(d, { tasks: [true, true, false, false, false], recall: { right: 33, total: 40 } })).toMatchObject({ done: 3, total: 6, recallOk: true });
+    expect(dayProgress(dayOf('2026-11-23'), {}).total).toBe(3);
+    expect(canComplete({ day: d, planEntry: {} }).reason).toBe('Còn 6 việc trong lộ trình hôm nay');
   });
 });

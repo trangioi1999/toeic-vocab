@@ -6,7 +6,7 @@ import { useStore } from '../../hooks/useStore.js';
 import { useToday } from '../../hooks/useToday.js';
 import { getPlanState, getCheckins, getActivity, setPlanTask, completeDay, undoCheckin } from '../../services/store.js';
 import { dayOf, KIND, PLAN_START, PLAN_END } from '../../lib/plan.js';
-import { canComplete, streak, dayStatus, tasksDone, isWorkDay, REQUIRED_CARDS } from '../../lib/progress.js';
+import { canComplete, streak, dayStatus, dayProgress, isWorkDay, REQUIRED_CARDS } from '../../lib/progress.js';
 import { todayISO, addDays, dmy, weekdayName, daysBetween, timeHM } from '../../lib/dates.js';
 import './student.css';
 
@@ -26,8 +26,8 @@ export default function Today() {
   const check = checkins[today];
   const can = canComplete({ day, planEntry: entry, cardsToday: cards });
   const work = isWorkDay(day);
-  const done = tasksDone(day, entry);
-  const progress = check ? 1 : work ? done / day.tasks.length : Math.min(1, cards / REQUIRED_CARDS);
+  const { done, total } = dayProgress(day, entry);
+  const progress = check ? 1 : work ? done / total : Math.min(1, cards / REQUIRED_CARDS);
   const st = streak(checkins, today);
   const last7 = Array.from({ length: 7 }, (_, i) => addDays(today, i - 6));
 
@@ -62,7 +62,7 @@ export default function Today() {
 
       {day && day.kind !== 'off' && (
         <section className="sheet tg-tasks" style={{ padding: '16px 16px 4px' }}>
-          <div className="section-head"><h2>Việc hôm nay</h2><span className="num" style={{ color: 'var(--soft)', fontWeight: 600 }}>{done}/{day.tasks.length}</span></div>
+          <div className="section-head"><h2>Việc hôm nay</h2><span className="num" style={{ color: 'var(--soft)', fontWeight: 600 }}>{done}/{total}</span></div>
           <PlanTasks day={day} entry={entry} onToggle={(i, v) => { if (todayISO() === today) setPlanTask(today, i, v); else { window.dispatchEvent(new Event('focus')); toast('Đã sang ngày mới. Trang vừa được cập nhật.'); } }} readOnly={!!check} />
         </section>
       )}
