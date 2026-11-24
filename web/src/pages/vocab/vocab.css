@@ -140,3 +140,7 @@
 .ex.sm { align-items: flex-start; margin-top: 6px; padding-top: 6px; gap: 2px; }
 .ex.sm .ex-en { font-size: 14px; }
 .ex.sm .ex-vi { font-size: 13px; }
+
+/* Kiểm tra bài cũ: result verdict and the words answered wrong. */
+.recall-verdict { max-width: 46ch; font-size: 15px; line-height: 1.5; color: var(--guide-strong); }
+.recall-verdict.ok { color: var(--known); }

@@ -79,7 +79,7 @@ async function notifyDone(request, env, deps) {
     if (((await settingsOf(g, coach.id)).coach || {}).notifyDone === false) continue;
     sent += await pushTo(g, coach.id, {
       title: `${name} đã học xong hôm nay`,
-      body: clip(c.note ? `“${c.note}”` : `${c.planTitle || 'Ôn từ vựng'} · ôn ${c.cards || 0} thẻ`),
+      body: clip((c.recall ? `Bài cũ ${c.recall.right}/${c.recall.total} · ` : '') + (c.note ? `“${c.note}”` : `${c.planTitle || 'Ôn từ vựng'} · ôn ${c.cards || 0} thẻ`)),
       url: `/coach/day/${body.date}`,
     });
   }

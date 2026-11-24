@@ -1,5 +1,6 @@
 import { DAYS, dayOf, PLAN_START } from './plan.js';
 import { addDays } from './dates.js';
+import { recallFor, recallPassed } from './recall.js';
 
 export const REQUIRED_CARDS = 20;
 export const isWorkDay = day => !!day && (day.kind === 'test' || day.kind === 'fixr' || day.kind === 'fixl');
@@ -16,6 +17,7 @@ export const tasksDone = (day, planEntry) => ticksOf(day, planEntry).filter(Bool
 
 export function canComplete({ day, planEntry, cardsToday }) {
   if (isWorkDay(day)) {
+    if (recallFor(day.date) && !recallPassed((planEntry || {}).recall)) return { ok: false, reason: 'Làm đạt bài kiểm tra bài cũ trước đã' };
     const left = day.tasks.length - tasksDone(day, planEntry);
     return left <= 0 ? { ok: true, reason: '' } : { ok: false, reason: `Còn ${left} việc trong lộ trình hôm nay` };
   }

@@ -8,6 +8,7 @@ import { kv } from './kv.js';
 import { todayISO, nowLocalISO } from '../lib/dates.js';
 import { dayOf } from '../lib/plan.js';
 import { canComplete, ticksOf } from '../lib/progress.js';
+import { bestRecall } from '../lib/recall.js';
 
 const K = { status: 'status', known: 'known', pref: 'pref', plan: 'toeic700-v3', activity: 'activity', checkins: 'checkins', settings: 'settings' };
 const READ_ONLY = 'Tài khoản người kèm chỉ được xem';
@@ -91,6 +92,13 @@ export function setPlanTask(date, idx, value) {
   tasks[idx] = !!value;
   write(K.plan, { ...state, [date]: { ...cur, tasks, done: tasks.every(Boolean) } });
 }
+/** Result of the check on the previous study day's cards: { from, right, total, wrong: [keys], at }. */
+export function saveRecall(date, result) {
+  assertStudent();
+  const state = getPlanState();
+  const cur = state[date] || {};
+  write(K.plan, { ...state, [date]: { ...cur, recall: bestRecall(cur.recall, { ...result, at: nowLocalISO() }) } });
+}
 export function replacePlanState(state) { assertStudent(); write(K.plan, state); }
 
 /* ---------- check-ins ---------- */
@@ -99,9 +107,11 @@ export function completeDay(date, { note } = {}) {
   assertStudent();
   const day = dayOf(date);
   const cards = cardsReviewed(date);
-  const r = canComplete({ day, planEntry: getPlanState()[date], cardsToday: cards });
+  const entry = getPlanState()[date] || {};
+  const r = canComplete({ day, planEntry: entry, cardsToday: cards });
   if (!r.ok) throw new Error(r.reason);
   const c = { at: nowLocalISO(), cards, note: String(note || '').trim(), planTitle: day ? day.title : '' };
+  if (entry.recall) c.recall = { right: entry.recall.right, total: entry.recall.total };
   write(K.checkins, { ...getCheckins(), [date]: c });
   afterCheckin(date);
   return c;

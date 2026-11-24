@@ -129,6 +129,14 @@ describe('/api/notify-done', () => {
   const env = () => ({ ...ENV, FIREBASE_SERVICE_ACCOUNT: JSON.stringify(sa), ASSETS: assets });
   const post = async (uid, body = { date: '2026-11-23' }) => req('/api/notify-done', { method: 'POST', headers: { Authorization: 'Bearer ' + await idToken(uid) }, body: JSON.stringify(body) });
 
+  it('puts the recall score in front of the note', async () => {
+    const data = db();
+    data['learners/u1/data/checkins'] = { raw: JSON.stringify({ '2026-11-23': { at: '2026-11-23T21:47', cards: 24, note: 'Part 6 khó', recall: { right: 36, total: 40 } } }) };
+    const g = google(data);
+    await handle(await post('u1'), env(), deps(g));
+    expect(g.sent[0].webpush.data.body).toBe('Bài cũ 36/40 · “Part 6 khó”');
+  });
+
   it('pushes the check-in to the coach and drops dead tokens', async () => {
     const g = google(db());
     const r = await handle(await post('u1'), env(), deps(g));
