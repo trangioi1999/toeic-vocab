@@ -6,7 +6,7 @@ import { useStore } from '../../hooks/useStore.js';
 import { useToday } from '../../hooks/useToday.js';
 import { getCheckins, getPlanState, getActivity, getCardStatus } from '../../services/store.js';
 import { dayOf, DAYS, PLAN_START, PLAN_END, shortTest } from '../../lib/plan.js';
-import { streak, dayStatus, planStats, isWorkDay, tasksDone, REQUIRED_CARDS } from '../../lib/progress.js';
+import { streak, dayStatus, planStats, isWorkDay, dayProgress, REQUIRED_CARDS } from '../../lib/progress.js';
 import { todayISO, addDays, dmy, weekdayName, timeHM, dm } from '../../lib/dates.js';
 import './coach.css';
 
@@ -28,8 +28,8 @@ export default function Overview() {
   const check = checkins[today];
   const cards = (activity[today] || []).length;
   const work = isWorkDay(day);
-  const done = tasksDone(day, plan[today]);
-  const frac = check ? 1 : work ? done / day.tasks.length : Math.min(1, cards / REQUIRED_CARDS);
+  const { done, total } = dayProgress(day, plan[today]);
+  const frac = check ? 1 : work ? done / total : Math.min(1, cards / REQUIRED_CARDS);
   const st = streak(checkins, today);
   const past = DAYS.filter(d => d.date < today && isWorkDay(d));
   const pastDone = past.filter(d => checkins[d.date]).length;
@@ -51,12 +51,12 @@ export default function Overview() {
       </div>
       <div className="coach-top">
       <Link className="hero-status" to={'/coach/day/' + today}>
-        <span className="mini" style={{ '--p': Math.round(frac * 100) + '%' }}><span>{check ? '✓' : work ? `${done}/${day.tasks.length}` : `${cards}`}</span></span>
+        <span className="mini" style={{ '--p': Math.round(frac * 100) + '%' }}><span>{check ? '✓' : work ? `${done}/${total}` : `${cards}`}</span></span>
         <span className="tx">
           {check ? (
             <><b>Hôm nay người học đã hoàn thành lúc {timeHM(check.at)}</b><span>{check.note ? `“${check.note}”` : `${day ? day.title + '. ' : ''}Đã ôn ${check.cards} thẻ.`}</span></>
           ) : (
-            <><b>Hôm nay người học chưa hoàn thành</b><span>{day && day.kind !== 'off' ? `${day.title}. ${work ? `Đã làm ${done}/${day.tasks.length} việc và ` : ''}` : ''}ôn {cards} thẻ.</span></>
+            <><b>Hôm nay người học chưa hoàn thành</b><span>{day && day.kind !== 'off' ? `${day.title}. ${work ? `Đã làm ${done}/${total} việc và ` : ''}` : ''}ôn {cards} thẻ.</span></>
           )}
         </span>
       </Link>

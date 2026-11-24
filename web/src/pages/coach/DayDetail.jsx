@@ -7,7 +7,7 @@ import { useVocab } from '../../hooks/useVocab.js';
 import { useToday } from '../../hooks/useToday.js';
 import { getCheckins, getPlanState, getActivity } from '../../services/store.js';
 import { dayOf, KIND, shortTest } from '../../lib/plan.js';
-import { dayStatus, tasksDone } from '../../lib/progress.js';
+import { dayStatus, dayProgress } from '../../lib/progress.js';
 import { recallFor, recallPassed } from '../../lib/recall.js';
 import { enVi } from '../../lib/vocab.js';
 import { todayISO, dmy, weekdayName, timeHM } from '../../lib/dates.js';
@@ -45,6 +45,7 @@ export default function DayDetail() {
   const today = useToday();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date || '')) return <Navigate to="/coach" replace />;
   const day = dayOf(date), c = checkins[date], p = plan[date] || {};
+  const prog = dayProgress(day, p);
   const s = dayStatus(date, { checkins, today });
   const cards = c ? c.cards : (activity[date] || []).length;
   const sum = +p.l > 0 && +p.r > 0 ? +p.l + +p.r : null;
@@ -71,7 +72,7 @@ export default function DayDetail() {
       {recallFor(date) && (p.recall || date <= today) && <RecallBox due={recallFor(date)} rec={p.recall} />}
       {day && day.kind !== 'off' && (
         <section className="sheet" style={{ padding: '14px 16px 4px' }}>
-          <div className="section-head"><h2>Việc trong lộ trình</h2><span className="num" style={{ fontWeight: 600, color: tasksDone(day, p) === day.tasks.length ? 'var(--known)' : 'var(--soft)' }}>{tasksDone(day, p)}/{day.tasks.length}</span></div>
+          <div className="section-head"><h2>Việc trong lộ trình</h2><span className="num" style={{ fontWeight: 600, color: prog.done === prog.total ? 'var(--known)' : 'var(--soft)' }}>{prog.done}/{prog.total}</span></div>
           <PlanTasks day={day} entry={p} readOnly noLinks />
         </section>
       )}

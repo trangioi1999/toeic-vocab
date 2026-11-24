@@ -15,11 +15,21 @@ export function ticksOf(day, planEntry) {
 }
 export const tasksDone = (day, planEntry) => ticksOf(day, planEntry).filter(Boolean).length;
 
+/** The day's to-do count including the "Kiểm tra bài cũ" task (done once the check is passed). */
+export function dayProgress(day, planEntry) {
+  if (!day) return { done: 0, total: 0, recall: null, recallOk: false };
+  const recall = recallFor(day.date);
+  const recallOk = !!recall && recallPassed((planEntry || {}).recall);
+  return { done: tasksDone(day, planEntry) + (recallOk ? 1 : 0), total: day.tasks.length + (recall ? 1 : 0), recall, recallOk };
+}
+
 export function canComplete({ day, planEntry, cardsToday }) {
   if (isWorkDay(day)) {
-    if (recallFor(day.date) && !recallPassed((planEntry || {}).recall)) return { ok: false, reason: 'Làm đạt bài kiểm tra bài cũ trước đã' };
-    const left = day.tasks.length - tasksDone(day, planEntry);
-    return left <= 0 ? { ok: true, reason: '' } : { ok: false, reason: `Còn ${left} việc trong lộ trình hôm nay` };
+    const p = dayProgress(day, planEntry);
+    const left = p.total - p.done;
+    if (left <= 0) return { ok: true, reason: '' };
+    if (left === 1 && p.recall && !p.recallOk) return { ok: false, reason: 'Còn bài kiểm tra bài cũ, cần làm đạt' };
+    return { ok: false, reason: `Còn ${left} việc trong lộ trình hôm nay` };
   }
   const left = REQUIRED_CARDS - (cardsToday || 0);
   return left <= 0 ? { ok: true, reason: '' } : { ok: false, reason: `Ôn thêm ${left} thẻ nữa để hoàn thành` };

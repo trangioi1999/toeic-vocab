@@ -6,8 +6,7 @@ import { useStore } from '../../hooks/useStore.js';
 import { useToday } from '../../hooks/useToday.js';
 import { getPlanState, getCheckins, getActivity, setPlanTask, completeDay, undoCheckin } from '../../services/store.js';
 import { dayOf, KIND, PLAN_START, PLAN_END } from '../../lib/plan.js';
-import { canComplete, streak, dayStatus, tasksDone, isWorkDay, REQUIRED_CARDS } from '../../lib/progress.js';
-import { recallFor, recallPassed, recallNeeded } from '../../lib/recall.js';
+import { canComplete, streak, dayStatus, dayProgress, isWorkDay, REQUIRED_CARDS } from '../../lib/progress.js';
 import { todayISO, addDays, dmy, weekdayName, daysBetween, timeHM } from '../../lib/dates.js';
 import './student.css';
 
@@ -27,11 +26,9 @@ export default function Today() {
   const check = checkins[today];
   const can = canComplete({ day, planEntry: entry, cardsToday: cards });
   const work = isWorkDay(day);
-  const done = tasksDone(day, entry);
-  const progress = check ? 1 : work ? done / day.tasks.length : Math.min(1, cards / REQUIRED_CARDS);
+  const { done, total } = dayProgress(day, entry);
+  const progress = check ? 1 : work ? done / total : Math.min(1, cards / REQUIRED_CARDS);
   const st = streak(checkins, today);
-  const rc = recallFor(today);
-  const rec = entry.recall;
   const last7 = Array.from({ length: 7 }, (_, i) => addDays(today, i - 6));
 
   let tag, title;
@@ -54,7 +51,7 @@ export default function Today() {
         <h1>{title}</h1>
       </div>
 
-      <div className={'today-grid' + (rc ? ' has-recall' : '')}>
+      <div className="today-grid">
       <section className="streak tg-streak" aria-label={`Chuỗi ${st} ngày học liên tiếp`}>
         <div className="n"><b className="num">{st}</b><span>ngày liên tiếp</span></div>
         <div className="week7">
@@ -63,29 +60,9 @@ export default function Today() {
         </div>
       </section>
 
-      {rc && (
-        <section className={'sheet sheet-pad tg-recall recall-card' + (recallPassed(rec) ? ' passed' : rec ? ' failed' : '')}>
-          <div className="section-head"><h2>Kiểm tra bài cũ</h2>{rec && <span className="num" style={{ fontWeight: 600 }}>{rec.right}/{rec.total}</span>}</div>
-          {!rec ? (
-            <p>{rc.sets.map(x => x.name).join(', ')} của {weekdayName(rc.from)} {dmy(rc.from)}. Làm trắc nghiệm trước khi học thẻ mới, cần đúng 80% mới hoàn thành được hôm nay.</p>
-          ) : recallPassed(rec) ? (
-            <p>Đạt. {rec.wrong && rec.wrong.length ? `${rec.wrong.length} từ sai đã chuyển sang Đang học.` : 'Không sai từ nào.'}</p>
-          ) : (
-            <p>Chưa đạt, cần đúng ít nhất {recallNeeded(rec.total)} câu. Ôn lại các từ sai rồi làm lại.</p>
-          )}
-          <div className="acts">
-            {!rec && <Link className="btn primary" to="/recall">Làm bài kiểm tra</Link>}
-            {rec && !recallPassed(rec) && rec.wrong && rec.wrong.length > 0 && (
-              <Link className="btn primary" to="/vocab/session" state={{ title: 'Ôn từ sai của bài cũ', keys: rec.wrong, back: '/today', backLabel: 'Hôm nay' }}>Ôn {rec.wrong.length} từ sai</Link>
-            )}
-            {rec && !check && <Link className={'btn' + (recallPassed(rec) ? ' quiet' : '')} to="/recall">Làm lại</Link>}
-          </div>
-        </section>
-      )}
-
       {day && day.kind !== 'off' && (
         <section className="sheet tg-tasks" style={{ padding: '16px 16px 4px' }}>
-          <div className="section-head"><h2>Việc hôm nay</h2><span className="num" style={{ color: 'var(--soft)', fontWeight: 600 }}>{done}/{day.tasks.length}</span></div>
+          <div className="section-head"><h2>Việc hôm nay</h2><span className="num" style={{ color: 'var(--soft)', fontWeight: 600 }}>{done}/{total}</span></div>
           <PlanTasks day={day} entry={entry} onToggle={(i, v) => { if (todayISO() === today) setPlanTask(today, i, v); else { window.dispatchEvent(new Event('focus')); toast('Đã sang ngày mới. Trang vừa được cập nhật.'); } }} readOnly={!!check} />
         </section>
       )}

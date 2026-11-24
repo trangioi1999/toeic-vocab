@@ -132,3 +132,12 @@ textarea.input:focus { padding: 11px 13px; }
 .recall-wrong li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px dashed var(--rule); font-size: 14px; }
 .recall-wrong b { font-weight: 600; }
 .recall-wrong span { color: var(--soft); text-align: right; }
+
+/* "Kiểm tra bài cũ" row at the top of the day's tasks: filled by passing the check, not by ticking. */
+.ptasks .recall-task .rt { flex: 1; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.5; }
+.ptasks .recall-task.on .lbl { color: var(--soft); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--soft) 60%, transparent); }
+.ptasks .recall-task .rs { font: 600 14px var(--display); color: var(--guide-strong); }
+.ptasks .recall-task .rs.ok { color: var(--known); }
+.ptasks .recall-task .ra { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.btn.sm { min-height: 38px; padding: 0 14px; font-size: 14px; }
+.btn.sm.primary { font-size: 14px; }
